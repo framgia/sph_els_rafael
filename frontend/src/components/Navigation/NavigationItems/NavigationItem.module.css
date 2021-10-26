@@ -22,3 +22,9 @@
 .iconButton:hover {
   filter: brightness(1.2);
 }
+
+.iconButton svg {
+  fill: var(--text-color);
+  width: 20px;
+  height: 20px;
+}

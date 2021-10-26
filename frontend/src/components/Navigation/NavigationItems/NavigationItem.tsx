@@ -1,4 +1,5 @@
-import React, * as react from 'react';
+import {FC,useState} from 'react';
+
 import classes from './NavigationItem.module.css';
 
 interface Props {
@@ -8,12 +9,16 @@ interface Props {
 }
   
 
-const NavigationItem:React.FC<Props> = (props)=>{
+const NavigationItem:FC<Props> = (props)=>{
+    const [open,setOpen] = useState(false);
+
     const { Icon } = props;
     return(
         <li className={classes.navItem}>
-            <a href="#" className={classes.iconButton}>
+            <a href="#" className={classes.iconButton} onClick={()=> setOpen(!open)}>
                <Icon/>
+
+               {open && props.children}
             </a>
         </li>
     )
