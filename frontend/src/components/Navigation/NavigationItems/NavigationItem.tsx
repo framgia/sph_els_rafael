@@ -1,9 +1,9 @@
 import {FC,useState} from 'react';
 
-import classes from './NavigationItem.module.css';
+
 
 interface Props {
-    Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
+    Icon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>> | string;
     width?: number
     height?: number
 }
@@ -14,12 +14,11 @@ const NavigationItem:FC<Props> = (props)=>{
 
     const { Icon } = props;
     return(
-        <li className={classes.navItem}>
-            <a href="#" className={classes.iconButton} onClick={()=> setOpen(!open)}>
-               <Icon/>
-
-               {open && props.children}
+        <li className="nav-item">
+            <a href="#" className="icon-button" onClick={()=> setOpen(!open)}>
+              {Icon && <Icon/>}    
             </a>
+            {open && props.children}
         </li>
     )
 }

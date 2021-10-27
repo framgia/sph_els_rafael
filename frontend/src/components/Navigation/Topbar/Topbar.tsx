@@ -1,13 +1,10 @@
 import {FC} from 'react';
-import classes from './Topbar.module.css';
-
 
  const Topbar:FC = (props) =>{
     return (
         <>
-            <nav className={classes.navbar}>
-                
-                <ul className={classes.navbarNav}>
+            <nav className="navbar">               
+                <ul className="navbar-nav">
                     {props.children}
                 </ul>    
             </nav>

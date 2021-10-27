@@ -1,4 +1,4 @@
-import {FC,useEffect} from "react";
+import {FC} from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Layout from './hoc/Layout/Layout';
 

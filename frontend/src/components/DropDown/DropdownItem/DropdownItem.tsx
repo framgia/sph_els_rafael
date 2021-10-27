@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import classes from './DropdownItem.module.css';
+
 
 interface Props {
     LeftIcon?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>
@@ -10,11 +10,10 @@ interface Props {
 const DropdownItem:FC<Props> = (props) =>{
     const {LeftIcon,RightIcon} = props;
     return(
-        <a href="#" className={classes.menuItem}>
-            <span className={classes.iconButton}>{LeftIcon && <LeftIcon/>}</span>
-            {props.children}
-
-            <span className={classes.iconRight}>{RightIcon && <RightIcon/>}</span>
+        <a href="#" className="menu-item">
+            <span className="icon-button">{LeftIcon && <LeftIcon/>}</span>
+                {props.children}
+            <span className="icon-right">{RightIcon && <RightIcon/>}</span>
         </a>
     );
 };
