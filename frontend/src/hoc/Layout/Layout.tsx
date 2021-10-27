@@ -8,6 +8,7 @@ import Logo from '@components/SVG/Logo';
 import {ReactComponent as CaretIcon} from '@assets/Icons/caret.svg';
 import {ReactComponent as BellIcon} from '@assets/Icons/bell.svg';
 import AdminQuizzes from '@containers/AdminQuizzes/AdminQuizzes';
+import UserCon from '@containers/UsersContainer/UserCon';
 
 const Layout:FC = () =>{
     
@@ -36,7 +37,7 @@ const Layout:FC = () =>{
                 <Switch>             
                     {/* <Route path="/data/:id" exact component={ShippingAgentMore} /> */}
                     <Route path="/" exact component={AdminQuizzes} />
-                    <Route path="/users" exact component={AdminQuizzes} />
+                    <Route path="/users" exact component={UserCon} />
                     {/* <Route path="/arrivals" exact component={ArrivalView} />
                     <Route path="/logout" component={Logout} /> */}
                     <Redirect to="/" />
