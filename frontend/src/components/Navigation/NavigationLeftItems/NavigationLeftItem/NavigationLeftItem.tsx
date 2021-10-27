@@ -16,8 +16,10 @@ const NavigationLeftItem:FC<Props> = (props) =>{
         <li className={classes.NavigationItem}>
             <NavLink 
                 to={props.link}  
-                exact={props.exact} 
-                activeStyle={{color:"#A1A7CA",fontWeight:'bolder',fontSize:"1.5rem"}}>
+                exact={props.exact}
+             
+                activeStyle={{fontWeight:'bolder',fontSize:"1.5rem"}}
+                >
                 {props.children}
             </NavLink>
         </li>

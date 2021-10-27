@@ -8,11 +8,14 @@
 .NavigationItem a:hover,
 .NavigationItem a:active,
 .NavigationItem a.active {
-  @apply bg-gray-800;
+  font-weight: bold;
+  font-size: "1.5rem";
 }
 
 .NavigationItem a:hover,
 .NavigationItem a:active,
 .NavigationItem a.active {
-  @apply bg-gray-800;
+  font-weight: bold;
+  font-size: "1.5rem";
+  text-decoration: underline;
 }

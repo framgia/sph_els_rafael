@@ -19,11 +19,11 @@ const Layout:FC = () =>{
                     <a className="mr-2" href="#">
                         <Logo/>
                     </a>
-                    <h2 className="mr-5 text-white">E-Learning Management | Admin</h2>
-                    <NavigationLeftItems/>
+                    <h2 className="mr-10 text-3xl text-white">E-Learning Management | Admin</h2>
+                  
                 </div>
-                
-                
+               
+                <NavigationLeftItems/>
                 <div className="flex flex-end">
                     <NavigationItem Icon={BellIcon}  />
                     <NavigationItem Icon={CaretIcon} >

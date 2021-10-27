@@ -131,12 +131,10 @@ const columns = [
           </div>    
           <div className="p-5">
             <Table
-                    columns={columns}
-                    data={people}
+                columns={columns}
+                data={people}
               />
           </div>
-           
-               {/* <TableTail/> */}
          </div>
         </>
     )
