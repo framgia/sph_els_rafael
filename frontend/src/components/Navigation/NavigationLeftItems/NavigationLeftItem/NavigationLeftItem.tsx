@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import { NavLink } from "react-router-dom";
-
+import classes from './NavigationLeftItem.module.css';
 
 interface Props {
     link:string,
@@ -13,8 +13,11 @@ interface Props {
 
 const NavigationLeftItem:FC<Props> = (props) =>{
     return(
-        <li className="text-xl mr-2">
-            <NavLink to={props.link}  exact={props.exact}>
+        <li className={classes.NavigationItem}>
+            <NavLink 
+                to={props.link}  
+                exact={props.exact} 
+                activeClassName={classes.active}>
                 {props.children}
             </NavLink>
         </li>

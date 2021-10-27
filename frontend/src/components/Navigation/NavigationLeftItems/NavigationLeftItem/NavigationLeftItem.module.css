@@ -1,0 +1,17 @@
+.NavigationItem {
+  @apply text-xl mr-2;
+}
+
+.NavigationItem a {
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+  @apply bg-gray-800;
+}
