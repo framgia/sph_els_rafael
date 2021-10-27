@@ -32,10 +32,11 @@ const Layout:FC = () =>{
                 </div>
                
             </Topbar>
-            <main className="m-10">
+            <main className="m-10 h-4/5">
                 <Switch>             
                     {/* <Route path="/data/:id" exact component={ShippingAgentMore} /> */}
                     <Route path="/" exact component={AdminQuizzes} />
+                    <Route path="/users" exact component={AdminQuizzes} />
                     {/* <Route path="/arrivals" exact component={ArrivalView} />
                     <Route path="/logout" component={Logout} /> */}
                     <Redirect to="/" />

@@ -1,5 +1,5 @@
 .NavigationItem {
-  @apply text-xl mr-2;
+  @apply text-xl mr-4;
 }
 
 .NavigationItem a {
@@ -8,6 +8,7 @@
 .NavigationItem a:hover,
 .NavigationItem a:active,
 .NavigationItem a.active {
+  @apply bg-gray-800;
 }
 
 .NavigationItem a:hover,

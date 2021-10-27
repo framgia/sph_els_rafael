@@ -5,7 +5,7 @@ import {
     MinusCircleIcon,
     PlusCircleIcon
   } from "@heroicons/react/solid";
-  import Table from '@components/UI/Table/Table';
+import Table from '@components/UI/Table/Table';
 
 
 const QuizList:FC = () =>{
@@ -125,12 +125,18 @@ const columns = [
 
     return(
         <>
- <div className="h-96 bg-gray-800 rounded-lg border-white p-5 m-5">
-            
+        <div className="h-full  bg-gray-700 rounded-lg border-white  m-5"> 
+          <div className="border-t text-white bg-gray-800 p-5">
+            <h2>QUIZZES</h2>
+          </div>    
+          <div className="p-5">
             <Table
-                 columns={columns}
-                 data={people}
-               />
+                    columns={columns}
+                    data={people}
+              />
+          </div>
+           
+               {/* <TableTail/> */}
          </div>
         </>
     )

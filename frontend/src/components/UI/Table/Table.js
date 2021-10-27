@@ -141,11 +141,8 @@ function Table({ columns, data }) {
       {/* table */}
 
       <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table
-          {...getTableProps()}
-          className="min-w-full divide-y divide-gray-50"
-        >
-          <thead className="bg-gray-700">
+        <table {...getTableProps()} className="table-tail">
+          <thead className="bg-gray-800">
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
@@ -153,7 +150,7 @@ function Table({ columns, data }) {
                   // we can add them into the header props
                   <th
                     scope="col"
-                    className="group px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                    className="table-col"
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     <div className="flex items-center justify-between">
@@ -178,7 +175,7 @@ function Table({ columns, data }) {
           </thead>
           <tbody
             {...getTableBodyProps()}
-            className="bg-white divide-y divide-gray-200"
+            className="bg-blue-50 divide-y divide-blue-200"
           >
             {page.map((row, i) => {
               // new
@@ -193,7 +190,7 @@ function Table({ columns, data }) {
                         role="cell"
                       >
                         {cell.column.Cell.name === "defaultRenderer" ? (
-                          <div className="text-sm text-gray-500">
+                          <div className="text-base text-gray-500">
                             {cell.render("Cell")}
                           </div>
                         ) : (
