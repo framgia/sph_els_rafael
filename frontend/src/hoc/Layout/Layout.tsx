@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import { Redirect, Route, Switch } from "react-router-dom";
 import Topbar from '@components/Navigation/Topbar/Topbar'
 import NavigationItem from '@components/Navigation/NavigationItems/NavigationItem'
 import DropdownMenu from '@components/DropDown/DropdownMenu/DropdownMenu'  
@@ -6,6 +7,7 @@ import NavigationLeftItems from '@components/Navigation/NavigationLeftItems/Navi
 import Logo from '@components/SVG/Logo';
 import {ReactComponent as CaretIcon} from '@assets/Icons/caret.svg';
 import {ReactComponent as BellIcon} from '@assets/Icons/bell.svg';
+import AdminQuizzes from '@containers/AdminQuizzes/AdminQuizzes';
 
 const Layout:FC = () =>{
     
@@ -30,8 +32,14 @@ const Layout:FC = () =>{
                 </div>
                
             </Topbar>
-            <main>
-
+            <main className="m-10">
+                <Switch>             
+                    {/* <Route path="/data/:id" exact component={ShippingAgentMore} /> */}
+                    <Route path="/" exact component={AdminQuizzes} />
+                    {/* <Route path="/arrivals" exact component={ArrivalView} />
+                    <Route path="/logout" component={Logout} /> */}
+                    <Redirect to="/" />
+                </Switch>
             </main>
         </>);
 };

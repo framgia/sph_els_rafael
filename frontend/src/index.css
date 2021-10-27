@@ -125,34 +125,10 @@ a {
 .icon-right {
   margin-left: auto;
 }
-
-/* CSSTransition classes  */
-/* .menu-primary-enter {
-  position: absolute;
-  transform: translateX(-110%);
-}
-.menu-primary-enter-active {
-  transform: translateX(0%);
-  transition: all var(--speed) ease;
-}
-.menu-primary-exit {
-  position: absolute;
-}
-.menu-primary-exit-active {
-  transform: translateX(-110%);
-  transition: all var(--speed) ease;
+.table-tail {
+  @apply min-w-full divide-y divide-gray-800;
 }
 
-.menu-secondary-enter {
-  transform: translateX(110%);
+.table-col {
+  @apply px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider;
 }
-.menu-secondary-enter-active {
-  transform: translateX(0%);
-  transition: all var(--speed) ease;
-}
-.menu-secondary-exit {
-}
-.menu-secondary-exit-active {
-  transform: translateX(110%);
-  transition: all var(--speed) ease;
-} */
