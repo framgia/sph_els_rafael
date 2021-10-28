@@ -21,3 +21,4 @@ const AdminQuiz = () => {
 
 
 export default AdminQuiz
+

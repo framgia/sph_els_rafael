@@ -27,3 +27,4 @@ const Boxwidget: FC<BoxInterface> = ({ action, title, children }) => {
 
 
 export default Boxwidget;
+
