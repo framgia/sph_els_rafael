@@ -1,8 +1,8 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import NavigationLeftItem from './NavigationLeftItem/NavigationLeftItem'
 
-const NavigationLeftItems:FC = (props) =>{
-    return(
+const NavigationLeftItems: FC = (props) => {
+    return (
         <ul className="flex justify-between items-center">
             <NavigationLeftItem link="/" exact>
                 Quizzes
@@ -15,3 +15,4 @@ const NavigationLeftItems:FC = (props) =>{
 }
 
 export default NavigationLeftItems;
+

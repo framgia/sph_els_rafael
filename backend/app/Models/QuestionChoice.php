@@ -9,12 +9,12 @@ class QuestionChoices extends Model
 {
     use HasFactory;
 
-    protected $table = 'question_choices';
+    protected $table = 'question_choices_table';
 
     protected $fillable = ['choice', 'isCorrect', 'question_id'];
 
     public function questions()
     {
-        return $this->belongsTo(Question::class, 'questions');
+        return $this->belongsTo(Question::class, 'question_id');
     }
 }

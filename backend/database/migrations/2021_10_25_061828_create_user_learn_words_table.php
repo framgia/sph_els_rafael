@@ -15,8 +15,6 @@ class CreateUserLearnWordsTable extends Migration
     {
         Schema::create('user_learn_words', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('choice_id');
-            $table->unsignedBigInteger('u_id');
             $table->foreign('choice_id')->references('id')->on('question_choices');
             $table->foreign('u_id')->references('id')->on('users');
             $table->timestamps();

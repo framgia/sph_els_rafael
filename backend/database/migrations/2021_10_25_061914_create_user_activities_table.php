@@ -15,10 +15,7 @@ class CreateUserActivitiesTable extends Migration
     {
         Schema::create('user_activities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('u_id');
-            $table->unsignedBigInteger('activity_id');
-            $table->foreign('u_id')->references('id')->on('users');
-            $table->foreign('activity_id')->references('id')->on('quizzes');
+
             $table->timestamps();
         });
     }

@@ -1,4 +1,4 @@
-import {FC,useState} from 'react';
+import { FC, useState } from 'react';
 
 
 
@@ -7,16 +7,16 @@ interface Props {
     width?: number
     height?: number
 }
-  
 
-const NavigationItem:FC<Props> = (props)=>{
-    const [open,setOpen] = useState(false);
+
+const NavigationItem: FC<Props> = (props) => {
+    const [open, setOpen] = useState(false);
 
     const { Icon } = props;
-    return(
+    return (
         <li className="nav-item-right">
-            <a href="#" className="icon-button" onClick={()=> setOpen(!open)}>
-              {Icon && <Icon/>}    
+            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+                {Icon && <Icon />}
             </a>
             {open && props.children}
         </li>
@@ -24,3 +24,4 @@ const NavigationItem:FC<Props> = (props)=>{
 }
 
 export default NavigationItem;
+

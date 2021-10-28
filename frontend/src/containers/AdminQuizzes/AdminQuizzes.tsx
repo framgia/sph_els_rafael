@@ -1,13 +1,14 @@
-import {FC,useState} from 'react';
+import { FC, useState } from 'react';
 import QuizList from '@components/AdminQuizComp/QuizList';
 
-const AdminQuizzes:FC = (props) =>{
-   
-    // const columns = ['name','title','status','role']
+const AdminQuizzes: FC = (props) => {
 
-    return(
-          <QuizList/>
-        )
+  // const columns = ['name','title','status','role']
+
+  return (
+    <QuizList />
+  )
 }
 
 export default AdminQuizzes;
+

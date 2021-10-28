@@ -17,7 +17,6 @@ class CreateQuestionChoicesTable extends Migration
             $table->id();
             $table->string('choice');
             $table->boolean('isCorrect');
-            $table->unsignedBigInteger('question_id');
             $table->foreign('question_id')->references('id')->on('questions');
             $table->timestamps();
         });

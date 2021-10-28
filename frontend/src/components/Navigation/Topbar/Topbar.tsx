@@ -1,16 +1,17 @@
-import {FC} from 'react';
+import { FC } from 'react';
 
- const Topbar:FC = (props) =>{
+const Topbar: FC = (props) => {
     return (
         <>
-            <nav className="navbar">               
+            <nav className="navbar">
                 <ul className="navbar-nav">
                     {props.children}
-                </ul>    
+                </ul>
             </nav>
-           
+
         </>
     )
 }
 
 export default Topbar;
+
