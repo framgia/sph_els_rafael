@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import {
     XIcon
 } from "@heroicons/react/solid";
-
+import { Dialog, Transition } from '@headlessui/react'
 import classes from './Modal.module.css';
 
 interface ModalProps {
@@ -12,12 +12,12 @@ interface ModalProps {
     onClose: () => void;
 }
 
-export const Modal: FC<ModalProps> = ({ title, isOpen, onClose, children }) => {
-    const overlayRef = useRef(null);
+const Modal: FC<ModalProps> = ({ title, isOpen, onClose, children }) => {
+    const outsideRef = React.useRef(null);
 
-    const handleOverlayClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        if (e.target === overlayRef.current) {
-            onclose;
+    const handleCloseOnOverlay = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        if (e.target === outsideRef.current) {
+            onClose();
         }
     }
 
@@ -25,26 +25,20 @@ export const Modal: FC<ModalProps> = ({ title, isOpen, onClose, children }) => {
     if (!isOpen) return null;
 
     return ReactDom.createPortal(
-
-        <div className={classes.modal}>
-            <div className={classes.overLay}
-                ref={overlayRef}
-                onClick={handleOverlayClick} />
-            <div className={classes.modalBox}>
-                <div className={classes.modalClose}>
-                    <XIcon className="text-align-right h-2 w-2 text-gray-400" />
-                </div>
-            </div>
-            <div className={classes.modalTitle}>
-                {title}
-            </div>
-            <div className={classes.modalContent}>
-                {children}
-            </div>
-
+        <div
+            className={classes.Modal}
+            style={{
+                transform: isOpen ? "translateY(0)" : "translateY(-100vh)",
+                opacity: isOpen ? "1" : "0"
+            }}
+        >
+            <h2 className={classes.title}>{title}</h2>
+            {children}
         </div>
         , modalRoot
     )
 
 
 }
+
+export default Modal;

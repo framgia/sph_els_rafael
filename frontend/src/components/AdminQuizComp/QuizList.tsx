@@ -4,8 +4,11 @@ import Columns from "./QuizListColumns";
 import Table from '@components/UI/Table/Table';
 import Boxwidget from '@components/UI/Widget/Boxwidget/Boxwidget';
 
+interface Props {
+  action: () => void;
+}
 
-const QuizList: FC = () => {
+const QuizList: FC<Props> = ({ action }) => {
 
   const [people, setPeople] = useState([
     {
@@ -64,6 +67,7 @@ const QuizList: FC = () => {
   return (
     <>
       <Boxwidget
+        action={action}
         title="Quizzes">
         <Table
           columns={Columns}

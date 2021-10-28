@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
-import QuizList from '@components/AdminQuizComp/QuizList';
+import AdminQuiz from '@components/AdminQuizComp/AdminQuiz';
 
 const AdminQuizzes: FC = (props) => {
 
   // const columns = ['name','title','status','role']
 
   return (
-    <QuizList />
+    <AdminQuiz />
   )
 }
 
