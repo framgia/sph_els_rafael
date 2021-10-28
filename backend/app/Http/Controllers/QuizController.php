@@ -13,4 +13,10 @@ class QuizController extends Controller
     {
         return Quiz::all();
     }
+
+    public function store(Request $request)
+    {
+        return Quiz::create($request->all());
+    }
+    // public function store
 }
