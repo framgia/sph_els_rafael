@@ -2,8 +2,6 @@ import { FC, useState } from 'react'
 import QuizList from './QuizList'
 import QuizModal from './QuizModal'
 
-
-
 const AdminQuiz = () => {
     const [isModalOpen, setModalOpen] = useState(false);
 
@@ -19,6 +17,4 @@ const AdminQuiz = () => {
     )
 }
 
-
 export default AdminQuiz
-
