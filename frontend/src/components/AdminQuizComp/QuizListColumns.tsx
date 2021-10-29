@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import {
     PencilAltIcon,
     MinusCircleIcon,
@@ -68,3 +67,4 @@ const columns = [
 ];
 
 export default columns;
+
