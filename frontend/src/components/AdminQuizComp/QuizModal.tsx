@@ -4,7 +4,6 @@ import {
     PlusCircleIcon, SaveIcon
 } from "@heroicons/react/solid";
 import QuizDataService from "../../services/quiz.service";
-// import IQuizData from '../../types/quiz.type';
 
 
 interface Props {
