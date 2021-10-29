@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import QuizList from './QuizList'
 import QuizModal from './QuizModal'
 
