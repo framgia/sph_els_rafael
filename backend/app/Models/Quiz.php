@@ -11,7 +11,10 @@ class Quiz extends Model
 
     protected $table = 'quizzes';
 
-    protected $fillable = ['title,description'];
+    protected $fillable = [
+        'title',
+        'description'
+    ];
 
     public function questions()
     {
