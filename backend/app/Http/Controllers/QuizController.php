@@ -23,5 +23,4 @@ class QuizController extends Controller
 
         return Quiz::create($request->all());
     }
-    // public function store
 }
