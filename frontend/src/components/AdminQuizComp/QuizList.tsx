@@ -2,9 +2,14 @@ import { FC, useState } from 'react';
 
 import Columns from "./QuizListColumns";
 import Table from '@components/UI/Table/Table';
+import Boxwidget from '@components/UI/Widget/Boxwidget/Boxwidget';
 
+interface Props {
+  action: () => void;
+}
 
-const QuizList: FC = () => {
+const QuizList: FC<Props> = ({ action }) => {
+
   const [people, setPeople] = useState([
     {
       title: "Basic 500",
@@ -61,17 +66,14 @@ const QuizList: FC = () => {
 
   return (
     <>
-      <div className="h-full  bg-gray-700 rounded-lg border-white  m-5">
-        <div className="border-t text-white bg-gray-800 p-5">
-          <h2>QUIZZES</h2>
-        </div>
-        <div className="p-5">
-          <Table
-            columns={Columns}
-            data={people}
-          />
-        </div>
-      </div>
+      <Boxwidget
+        action={action}
+        title="Quizzes">
+        <Table
+          columns={Columns}
+          data={people}
+        />
+      </Boxwidget>
     </>
   )
 }

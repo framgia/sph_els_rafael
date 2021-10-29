@@ -1,0 +1,20 @@
+.Boxwidget {
+  @apply h-full bg-gray-700 rounded-lg border-white  m-5;
+}
+
+.BoxwidgetHead {
+  @apply border-t text-white bg-gray-800 p-5;
+}
+
+.actionButton {
+  @apply flex flex-row justify-end;
+}
+
+.addBtn {
+  @apply text-white 
+    rounded-md
+    mt-4 py-5 px-8 
+    bg-gray-700 mr-6 
+    hover:bg-gray-900
+    border-black;
+}
