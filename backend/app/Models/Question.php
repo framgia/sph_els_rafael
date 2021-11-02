@@ -15,7 +15,7 @@ class Question extends Model
 
     public function quizzes()
     {
-        return $this->belongsToMany(Quizzes::class);
+        return $this->belongsToMany(Quiz::class);
     }
 
     public function questionChoices()
