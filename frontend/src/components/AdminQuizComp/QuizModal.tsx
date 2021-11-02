@@ -7,11 +7,12 @@ import QuizDataService from "../../services/quiz.service";
 
 
 interface Props {
+    refresh: () => void;
     modalIsclose: boolean;
     onClose: () => void;
 }
 
-const QuizModal: FC<Props> = ({ modalIsclose, onClose }) => {
+const QuizModal: FC<Props> = ({ refresh, modalIsclose, onClose }) => {
     const [input, setInput] = useState({
         title: "",
         description: ""
@@ -52,7 +53,6 @@ const QuizModal: FC<Props> = ({ modalIsclose, onClose }) => {
             console.log(e);
         }
     }
-
 
     return (
         <Modal
