@@ -17,7 +17,7 @@ class CreateQuestionChoicesTable extends Migration
             $table->id();
             $table->string('choice');
             $table->boolean('isCorrect');
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

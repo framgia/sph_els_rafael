@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class QuizController extends Controller
 {
 
-    //
     public function index()
     {
         return Quiz::all();
@@ -22,5 +21,13 @@ class QuizController extends Controller
         ]);
 
         return Quiz::create($request->all());
+    }
+
+    public function update(Request $request, $id)
+    {
+        $quiz = Quiz::find($id);
+        $quiz->update($request->all());
+
+        return $quiz;
     }
 }

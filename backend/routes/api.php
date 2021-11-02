@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('quizzes', QuizController::class);
 
-Route::get('/quizzes', [QuizController::class, 'index']);
-Route::post('/quizzes', [QuizController::class, 'store']);
+//Needed this for later when using auth
+
+// Route::get('/quizzes', [QuizController::class, 'index']);
+// Route::post('/quizzes', [QuizController::class, 'store']);
+// Route::put('/quizzes/{id}', [QuizController::class, 'update']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
