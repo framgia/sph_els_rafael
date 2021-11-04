@@ -1,68 +1,80 @@
-import React, { ChangeEvent, ChangeEventHandler, FC, useState } from 'react';
+import React, { FC, useState, useEffect, Dispatch } from 'react';
 import Modal from '@components/UI/Modal/Modal';
 import {
     PlusCircleIcon, SaveIcon
 } from "@heroicons/react/solid";
-import QuizDataService from "../../services/quiz.service";
+import { RootState } from '../../store/reducers'
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from '../../store/actions/index'
+import { bindActionCreators } from 'redux';
+import { editQuizAdminModal, saveQuizData, updateQuizData } from '../../store/actions/action-creator/'
+import { connect } from 'react-redux'
+import Quiz from '../../models/quizModels';
+import Swal from 'sweetalert2'
 
+interface RProps {
 
-interface Props {
-    refresh: () => void;
-    modalIsclose: boolean;
-    onClose: () => void;
 }
 
-const QuizModal: FC<Props> = ({ refresh, modalIsclose, onClose }) => {
+type Props = RProps & LinkDispatchProps & LinkStateProps;
+
+const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizData, updateQuizData }) => {
     const [input, setInput] = useState({
+        id: "",
         title: "",
-        description: ""
+        description: "",
     })
 
+    useEffect(() => {
+        const { title, description, id } = editQuizListData && editQuizListData
+
+        editQuizListData && setInput({
+            title: title,
+            description: description,
+            id: id
+        })
+
+    }, [editQuizListData])
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const name = e.target.name;
+        const value = e.target.value;
+
         setInput({
             ...input,
-            [e.target.name]: e.target.value
+            [name]: value
         })
+        console.log(input);
     }
 
     const saveClick = () => {
-        if (!input.title || !input.description) {
+        if (input && !input.title || input && !input.description) {
             return
         }
 
         const formData = new FormData();
+
         formData.set('title', input.title);
         formData.set('description', input.description);
 
-        postData(formData);
+
+
+        input.id ?
+            updateQuizData(input, input.id && input.id)
+            : saveQuizData(formData);
+
     }
 
-
-
-    async function postData(data: any) {
-        try {
-            let response = await QuizDataService.create(data);
-
-            console.log(response.data);
-            setInput({
-                title: "",
-                description: "",
-            });
-            onClose();
-        } catch (e) {
-            console.log(e);
-        }
-    }
 
     return (
         <Modal
-            isOpen={modalIsclose}
+            isOpen={editQuizListData ? true : false}
             title={
                 <span>
                     <PlusCircleIcon className="w-5 h-5" />&nbsp;Add Quiz
                 </span>
             }
-            onClose={onClose}>
+            onClose={() => editQuizAdminModal(null)}>
             <div className="w-full flex flex-col justify-center items-center m-auto ">
                 <div className="mb-4">
                     <label className="block text-gray-700 text-lg font-bold mb-2">
@@ -91,5 +103,28 @@ const QuizModal: FC<Props> = ({ refresh, modalIsclose, onClose }) => {
 
 }
 
-export default QuizModal;
+interface LinkStateProps {
+    editQuizListData: Quiz | any,
+}
+
+interface LinkDispatchProps {
+    editQuizAdminModal: (data: object | null) => void;
+    saveQuizData: (data: FormData | null) => void;
+    updateQuizData: (data: any, id: string) => void;
+}
+
+const mapStateToProps = (state: RootState, ownProps: RProps): LinkStateProps => ({
+    editQuizListData: state.quizzes.editQuizDetails
+})
+
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({
+    editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch),
+    saveQuizData: bindActionCreators(saveQuizData, dispatch),
+    updateQuizData: bindActionCreators(updateQuizData, dispatch)
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizModal)
+
 
