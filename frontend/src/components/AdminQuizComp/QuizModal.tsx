@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import { editQuizAdminModal, saveQuizData, updateQuizData } from '../../store/actions/action-creator/'
 import { connect } from 'react-redux'
 import Quiz from '../../models/quizModels';
-import Swal from 'sweetalert2'
+import SpinnerBtn from '@components/SVG/SpinnerBtn';
 
 interface RProps {
 
@@ -18,7 +18,7 @@ interface RProps {
 
 type Props = RProps & LinkDispatchProps & LinkStateProps;
 
-const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizData, updateQuizData }) => {
+const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModal, saveQuizData, updateQuizData }) => {
     const [input, setInput] = useState({
         id: "",
         title: "",
@@ -56,8 +56,6 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
         formData.set('title', input.title);
         formData.set('description', input.description);
 
-
-
         input.id ?
             updateQuizData(input, input.id && input.id)
             : saveQuizData(formData);
@@ -91,8 +89,13 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
 
                 </div>
                 <div className="flex items-center justify-between">
-                    <button onClick={() => saveClick()} className="bg-gray-600 text-lg hover:bg-gray-800 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline" type="button">
-                        Save{" "} <SaveIcon className="text-2xl h-5 w-5" />
+                    <button disabled={SaveLoading} onClick={() => saveClick()} className="bg-gray-600 text-lg hover:bg-gray-800 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline" type="button">
+                        Save{" "}  {SaveLoading ? (
+
+                            <SpinnerBtn />
+                        ) : (
+                            <SaveIcon className="text-2xl h-5 w-5" />
+                        )}
                     </button>
 
                 </div>
@@ -104,6 +107,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
 
 interface LinkStateProps {
     editQuizListData: Quiz | any,
+    SaveLoading: boolean,
 }
 
 interface LinkDispatchProps {
@@ -113,7 +117,8 @@ interface LinkDispatchProps {
 }
 
 const mapStateToProps = (state: RootState, ownProps: RProps): LinkStateProps => ({
-    editQuizListData: state.quizzes.editQuizDetails
+    editQuizListData: state.quizzes.editQuizDetails,
+    SaveLoading: state.quizzes.SaveLoading,
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({

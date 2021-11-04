@@ -30,4 +30,9 @@ class QuizController extends Controller
 
         return $quiz;
     }
+
+    public function destroy($id)
+    {
+        return Quiz::destroy($id);
+    }
 }

@@ -60,6 +60,7 @@ const reducer = (
         ...state,
         editQuizDetails: null,
         isSuccess: true,
+        SaveLoading: false,
       }
     case ActionType.SAVE_QUIZ_DATA_ERROR:
       return {
@@ -77,6 +78,7 @@ const reducer = (
         ...state,
         editQuizDetails: null,
         isSuccess: true,
+        SaveLoading: false,
       }
     case ActionType.UPDATE_QUIZ_DATA_FAIL:
       return {
@@ -108,3 +110,4 @@ function* getQuizListSaga(action: Action) {
 }
 
 export default reducer;
+

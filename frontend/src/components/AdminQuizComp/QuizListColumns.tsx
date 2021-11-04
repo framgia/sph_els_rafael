@@ -3,6 +3,9 @@ import {
     MinusCircleIcon,
     PlusCircleIcon
 } from "@heroicons/react/solid";
+import { useDispatch } from "react-redux";
+import { editQuizAdminModal } from '../../store/actions/action-creator/'
+
 
 const columns = [
     {
@@ -23,7 +26,7 @@ const columns = [
                     let {
                         row: { original },
                     } = data;
-
+                    const dispatch = useDispatch();
                     return (
                         <>
                             <div className="w-full flex flex-end">
@@ -39,7 +42,7 @@ const columns = [
                                 </button>{" "}
 
                                 <button
-                                    //   onClick={() => props.openModal(original)}
+                                    onClick={() => dispatch(editQuizAdminModal(original))}
                                     className="bg-gray-600 px-5 py-2 rounded-md text-white hover:bg-gray-800 "
                                 >
                                     <PencilAltIcon
