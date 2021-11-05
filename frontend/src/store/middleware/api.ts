@@ -11,7 +11,6 @@ export const post: Middleware = ({ dispatch }) => next => (action) => {
 
     http(meta.api)
       .then(({ data }) => {
-
         if (!data.errors) {
           dispatch({ type: `${type} success`, payload: data });
         } else if (data.errors) {

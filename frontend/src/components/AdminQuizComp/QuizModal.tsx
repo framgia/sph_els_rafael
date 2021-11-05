@@ -44,7 +44,6 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
             ...input,
             [name]: value
         })
-        console.log(input);
     }
 
     const saveClick = () => {
@@ -117,14 +116,10 @@ const mapStateToProps = (state: RootState, ownProps: RProps): LinkStateProps => 
     editQuizListData: state.quizzes.editQuizDetails
 })
 
-
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({
     editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch),
     saveQuizData: bindActionCreators(saveQuizData, dispatch),
     updateQuizData: bindActionCreators(updateQuizData, dispatch)
 })
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(QuizModal)
-
-

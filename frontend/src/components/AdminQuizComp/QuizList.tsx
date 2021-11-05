@@ -119,8 +119,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps:
   editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch)
 })
 
-
 export default connect(null, mapDispatchToProps)(QuizList)
-
-
-

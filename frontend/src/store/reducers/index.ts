@@ -3,7 +3,6 @@ import { all } from "redux-saga/effects";
 
 import quizReducer, { quizzesSaga } from './quizReducer';
 
-
 export function* rootSaga() {
   yield all([...quizzesSaga]);
 }
