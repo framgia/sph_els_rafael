@@ -114,7 +114,6 @@ interface LinkDispatchProps {
   editQuizAdminModal: (data: object) => void;
 }
 
-
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({
 
   editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch)
