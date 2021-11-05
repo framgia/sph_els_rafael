@@ -23,7 +23,6 @@ export const initialState = {
   SaveLoading: false,
 };
 
-
 const reducer = (
   state: QuizState = initialState,
   action: Action): QuizState => {
