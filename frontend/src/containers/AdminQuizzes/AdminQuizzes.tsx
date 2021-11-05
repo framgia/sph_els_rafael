@@ -10,3 +10,4 @@ const AdminQuizzes: FC = () => {
 
 export default AdminQuizzes;
 
+

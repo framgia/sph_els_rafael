@@ -1,53 +1,61 @@
-import { useState, useEffect, FC } from 'react'
+import { useEffect, FC } from 'react'
 import QuizList from './QuizList'
 import QuizModal from './QuizModal'
-import QuizDataService from '../../services/quiz.service';
-import IQuizData from 'types/quiz.type';
+import { connect } from 'react-redux'
+import { getQuizList, editQuizAdminModal } from '../../store/actions/action-creator/'
+import Quiz from 'models/quizModels';
+import { RootState } from '../../store/reducers'
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from '../../store/actions/index'
+import { bindActionCreators } from 'redux';
 
 
-interface IState {
-    quizzes: IQuizData[];
+interface QuizState {
+
 }
 
-const AdminQuiz: FC = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [isModalOpen, setModalOpen] = useState(false);
-    const [quiz, setQuiz] = useState<IState["quizzes"]>([])
+type Props = QuizState & LinkStateProps & LinkDispatchProps;
+
+const AdminQuiz: FC<Props> = ({ getQuizList, quizList, loading, editQuizListData }) => {
 
     useEffect(() => {
-        const fetchDataAsync = async () => {
-            await fetchData();
-        }
-        fetchDataAsync()
+        getQuizList();
     }, []);
 
 
-    async function fetchData() {
-        try {
-            setIsLoading(true);
-            let response = await QuizDataService.getAll();
-
-            setQuiz(response.data);
-            console.table(response.data);
-            setIsLoading(false);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    const toggleModal = () => setModalOpen(!isModalOpen);
-
     return (
         <>
-            <QuizList loading={isLoading} data={quiz} action={toggleModal} />
-            {isModalOpen && (
-                <QuizModal
-                    refresh={fetchData}
-                    modalIsclose={isModalOpen}
-                    onClose={toggleModal} />
+            <QuizList loading={loading} data={quizList} />
+            {editQuizListData && (
+                <QuizModal />
             )}
+
         </>
     )
 }
 
-export default AdminQuiz
+interface LinkStateProps {
+    quizList: Quiz[] | null,
+    loading: boolean,
+    editQuizListData: object | null,
+}
+
+interface LinkDispatchProps {
+    getQuizList: () => void;
+    editQuizAdminModal: (data: object) => void;
+}
+
+const mapStateToProps = (state: RootState, ownProps: QuizState): LinkStateProps => ({
+    quizList: state.quizzes.quizList,
+    loading: state.quizzes.quizListloading,
+    editQuizListData: state.quizzes.editQuizDetails,
+})
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: QuizState): LinkDispatchProps => ({
+    getQuizList: bindActionCreators(getQuizList, dispatch),
+    editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch)
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminQuiz)
+

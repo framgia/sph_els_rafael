@@ -7,7 +7,7 @@ interface Props {
 
 const AddButton: FC<Props> = ({ action, children, className }) => {
     return (
-        <div onClick={action} className={className}>
+        <div onClick={() => action && action()} className={className}>
             {children}
         </div>
     )
