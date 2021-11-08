@@ -10,15 +10,10 @@ import { bindActionCreators } from 'redux';
 import { editQuizAdminModal, saveQuizData, updateQuizData } from '../../store/actions/action-creator/'
 import { connect } from 'react-redux'
 import Quiz from '../../models/quizModels';
-import Swal from 'sweetalert2'
+import SpinnerBtn from '@components/SVG/SpinnerBtn';
 
-interface RProps {
-
-}
-
-type Props = RProps & LinkDispatchProps & LinkStateProps;
-
-const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizData, updateQuizData }) => {
+type Props = LinkDispatchProps & LinkStateProps;
+const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModal, saveQuizData, updateQuizData }) => {
     const [input, setInput] = useState({
         id: "",
         title: "",
@@ -48,7 +43,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
 
     const saveClick = () => {
         if (input && !input.title || input && !input.description) {
-            return
+            return;
         }
 
         const formData = new FormData();
@@ -57,13 +52,11 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
         formData.set('description', input.description);
 
 
-
         input.id ?
             updateQuizData(input, input.id && input.id)
             : saveQuizData(formData);
 
     }
-
 
     return (
         <Modal
@@ -91,8 +84,13 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
 
                 </div>
                 <div className="flex items-center justify-between">
-                    <button onClick={() => saveClick()} className="bg-gray-600 text-lg hover:bg-gray-800 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline" type="button">
-                        Save{" "} <SaveIcon className="text-2xl h-5 w-5" />
+                    <button disabled={SaveLoading} onClick={() => saveClick()} className="bg-gray-600 text-lg hover:bg-gray-800 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline" type="button">
+                        Save{" "}  {SaveLoading ? (
+
+                            <SpinnerBtn />
+                        ) : (
+                            <SaveIcon className="text-2xl h-5 w-5" />
+                        )}
                     </button>
 
                 </div>
@@ -104,6 +102,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, editQuizAdminModal, saveQuizDa
 
 interface LinkStateProps {
     editQuizListData: Quiz | any,
+    SaveLoading: boolean,
 }
 
 interface LinkDispatchProps {
@@ -112,11 +111,12 @@ interface LinkDispatchProps {
     updateQuizData: (data: any, id: string) => void;
 }
 
-const mapStateToProps = (state: RootState, ownProps: RProps): LinkStateProps => ({
-    editQuizListData: state.quizzes.editQuizDetails
+const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
+    editQuizListData: state.quizzes.editQuizDetails,
+    SaveLoading: state.quizzes.SaveLoading
 })
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: any): LinkDispatchProps => ({
     editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch),
     saveQuizData: bindActionCreators(saveQuizData, dispatch),
     updateQuizData: bindActionCreators(updateQuizData, dispatch)
