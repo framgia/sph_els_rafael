@@ -12,6 +12,7 @@ import { connect } from 'react-redux'
 import Quiz from '../../models/quizModels';
 import SpinnerBtn from '@components/SVG/SpinnerBtn';
 
+
 interface RProps {
 
 }
@@ -55,6 +56,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
 
         formData.set('title', input.title);
         formData.set('description', input.description);
+
 
         input.id ?
             updateQuizData(input, input.id && input.id)
@@ -119,6 +121,7 @@ interface LinkDispatchProps {
 const mapStateToProps = (state: RootState, ownProps: RProps): LinkStateProps => ({
     editQuizListData: state.quizzes.editQuizDetails,
     SaveLoading: state.quizzes.SaveLoading,
+    editQuizListData: state.quizzes.editQuizDetails
 })
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({

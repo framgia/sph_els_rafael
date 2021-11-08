@@ -110,4 +110,3 @@ function* getQuizListSaga(action: Action) {
 }
 
 export default reducer;
-

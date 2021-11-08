@@ -1,5 +1,4 @@
 import { FC } from 'react';
-
 import Columns from "./QuizListColumns";
 import Table from '@components/UI/Table/Table';
 import Boxwidget from '@components/UI/Widget/Boxwidget/Boxwidget';
@@ -16,9 +15,17 @@ interface RProps {
   data: Quiz[] | null;
 }
 
-type Props = RProps & LinkDispatchProps;
 
 const QuizList: FC<Props> = ({ loading, data, editQuizAdminModal }) => {
+
+
+type Props = RProps & LinkDispatchProps;
+
+
+
+const QuizList: FC<Props> = ({ loading, data, editQuizAdminModal }) => {
+
+
 
   return (
     <>
@@ -29,7 +36,7 @@ const QuizList: FC<Props> = ({ loading, data, editQuizAdminModal }) => {
           <Spinner />
         ) : (
           <Table
-            columns={Columns}
+            columns={columns}
             data={data}
           />
         )}
@@ -48,4 +55,3 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps:
 })
 
 export default connect(null, mapDispatchToProps)(QuizList)
-
