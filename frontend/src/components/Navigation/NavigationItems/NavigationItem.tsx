@@ -15,7 +15,7 @@ const NavigationItem: FC<Props> = (props) => {
     const { Icon } = props;
     return (
         <li className="nav-item-right">
-            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+            <a className="icon-button" onClick={() => setOpen(!open)}>
                 {Icon && <Icon />}
             </a>
             {open && props.children}

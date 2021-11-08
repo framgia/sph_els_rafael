@@ -48,6 +48,20 @@ interface UpdateQuizDataFailAction {
   payload: string
 }
 
+
+interface DeleteQuizDataAction {
+  type: ActionType.DELETE_QUIZ_DATA
+}
+
+interface DeleteQuizDataSuccessAction {
+  type: ActionType.DELETE_QUIZ_DATA_SUCCESS,
+}
+
+interface DeleteQuizDataFailAction {
+  type: ActionType.DELETE_QUIZ_DATA_FAIL,
+  payload: string
+}
+
 export type Action =
   | FetchQuizListAction
   | FetchQuizListFailAction
@@ -58,5 +72,8 @@ export type Action =
   | SaveQuizDataFailAction
   | UpdateQuizDataAction
   | UpdateQuizDataSuccessAction
-  | UpdateQuizDataFailAction;
+  | UpdateQuizDataFailAction
+  | DeleteQuizDataAction
+  | DeleteQuizDataSuccessAction
+  | DeleteQuizDataFailAction;
 

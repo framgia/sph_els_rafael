@@ -3,7 +3,7 @@ import { Action } from '../actions'
 import { put, takeEvery, call } from "redux-saga/effects";
 import Quiz from "models/quizModels";
 import { getQuizList } from '../actions/action-creator'
-import Swal from 'sweetalert2'
+import Swal, { SweetAlertIcon } from 'sweetalert2'
 
 interface QuizState {
   quizList: Quiz[] | null;
@@ -72,6 +72,7 @@ const reducer = (
       return {
         ...state,
         SaveLoading: true,
+
       }
     case ActionType.UPDATE_QUIZ_DATA_SUCCESS:
       return {
@@ -85,7 +86,6 @@ const reducer = (
         ...state,
         error: action.payload
       }
-
     default:
       return state;
   }
@@ -93,20 +93,42 @@ const reducer = (
 
 
 export const quizzesSaga = [
-  takeEvery(ActionType.SAVE_QUIZ_DATA_SUCCESS, getQuizListSaga),
-  takeEvery(ActionType.UPDATE_QUIZ_DATA_SUCCESS, getQuizListSaga)
+  takeEvery(ActionType.SAVE_QUIZ_DATA_SUCCESS, showAlert),
+  takeEvery(ActionType.SAVE_QUIZ_DATA_ERROR, showAlert),
+  takeEvery(ActionType.UPDATE_QUIZ_DATA_SUCCESS, showAlert),
+  takeEvery(ActionType.UPDATE_QUIZ_DATA_FAIL, showAlert),
+
+  takeEvery(ActionType.DELETE_QUIZ_DATA_SUCCESS, showAlert),
+
 ]
 
-function* getQuizListSaga(action: Action) {
-  if (action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS || ActionType.UPDATE_QUIZ_DATA_SUCCESS) {
-    yield put(getQuizList());
-  }
+function* showAlert(action: Action) {
+  type Icon = SweetAlertIcon;
+
+  let icon: Icon = action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS
+    || ActionType.UPDATE_QUIZ_DATA_SUCCESS
+    || ActionType.DELETE_QUIZ_DATA_SUCCESS ? "success" : 'error';
+  let title = action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS
+    || ActionType.UPDATE_QUIZ_DATA_SUCCESS
+    || ActionType.DELETE_QUIZ_DATA_SUCCESS ? "Sucessfully Save" : 'error in saving';
+
+
   Swal.fire({
-    icon: 'success',
-    title: 'Sucessfully Save',
+    icon: `${icon}`,
+    title: title,
     showConfirmButton: false,
     timer: 1500
   })
+
+  yield call(getQuizListSaga, action);
+}
+
+function* getQuizListSaga(action: Action) {
+  if (action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS
+    || ActionType.UPDATE_QUIZ_DATA_SUCCESS
+    || ActionType.DELETE_QUIZ_DATA_SUCCESS) {
+    yield put(getQuizList());
+  }
 }
 
 export default reducer;

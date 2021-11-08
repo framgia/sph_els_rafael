@@ -14,7 +14,6 @@ import {
   ChevronDoubleRightIcon,
 } from "@heroicons/react/solid";
 import { Button, PageButton } from "./shared/Button";
-import { classNames } from "./shared/Utils";
 import { SortIcon, SortUpIcon, SortDownIcon } from "./shared/Icons";
 
 // Define a default UI for filtering
