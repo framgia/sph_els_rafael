@@ -12,13 +12,7 @@ import { connect } from 'react-redux'
 import Quiz from '../../models/quizModels';
 import SpinnerBtn from '@components/SVG/SpinnerBtn';
 
-
-interface RProps {
-
-}
-
-type Props = RProps & LinkDispatchProps & LinkStateProps;
-
+type Props = LinkDispatchProps & LinkStateProps;
 const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModal, saveQuizData, updateQuizData }) => {
     const [input, setInput] = useState({
         id: "",
@@ -49,7 +43,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
 
     const saveClick = () => {
         if (input && !input.title || input && !input.description) {
-            return
+            return;
         }
 
         const formData = new FormData();
@@ -63,7 +57,6 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
             : saveQuizData(formData);
 
     }
-
 
     return (
         <Modal
@@ -118,13 +111,12 @@ interface LinkDispatchProps {
     updateQuizData: (data: any, id: string) => void;
 }
 
-const mapStateToProps = (state: RootState, ownProps: RProps): LinkStateProps => ({
+const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
     editQuizListData: state.quizzes.editQuizDetails,
-    SaveLoading: state.quizzes.SaveLoading,
-    editQuizListData: state.quizzes.editQuizDetails
+    SaveLoading: state.quizzes.SaveLoading
 })
 
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: any): LinkDispatchProps => ({
     editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch),
     saveQuizData: bindActionCreators(saveQuizData, dispatch),
     updateQuizData: bindActionCreators(updateQuizData, dispatch)

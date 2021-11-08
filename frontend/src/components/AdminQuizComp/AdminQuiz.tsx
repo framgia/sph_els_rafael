@@ -9,7 +9,6 @@ import { ThunkDispatch } from 'redux-thunk';
 import { Action } from '../../store/actions/index'
 import { bindActionCreators } from 'redux';
 
-
 interface QuizState {
 
 }
@@ -55,7 +54,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps:
     getQuizList: bindActionCreators(getQuizList, dispatch),
     editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch)
 })
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdminQuiz)
 

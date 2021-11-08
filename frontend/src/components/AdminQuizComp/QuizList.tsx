@@ -15,17 +15,9 @@ interface RProps {
   data: Quiz[] | null;
 }
 
-
-const QuizList: FC<Props> = ({ loading, data, editQuizAdminModal }) => {
-
-
 type Props = RProps & LinkDispatchProps;
 
-
-
 const QuizList: FC<Props> = ({ loading, data, editQuizAdminModal }) => {
-
-
 
   return (
     <>
@@ -36,7 +28,7 @@ const QuizList: FC<Props> = ({ loading, data, editQuizAdminModal }) => {
           <Spinner />
         ) : (
           <Table
-            columns={columns}
+            columns={Columns}
             data={data}
           />
         )}
@@ -54,4 +46,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps:
   editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch)
 })
 
-export default connect(null, mapDispatchToProps)(QuizList)
+export default connect(null, mapDispatchToProps)(QuizList);
