@@ -125,10 +125,11 @@ function* showAlert(action: Action) {
 
 function* getQuizListSaga(action: Action) {
   if (action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS
-    || ActionType.UPDATE_QUIZ_DATA_SUCCESS
-    || ActionType.DELETE_QUIZ_DATA_SUCCESS) {
+    || ActionType.UPDATE_QUIZ_DATA_SUCCESS) {
     yield put(getQuizList());
   }
 }
 
+
 export default reducer;
+

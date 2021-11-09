@@ -6,6 +6,7 @@ import {
 import { useDispatch } from "react-redux";
 import { editQuizAdminModal, deleteQuizData } from '../../store/actions/action-creator/'
 import DeleteButton from "@components/UI/Buttons/DeleteButton";
+import TableActionColumns from "@components/UI/Table/TableActionColumns";
 
 
 const columns = [
@@ -41,23 +42,11 @@ const columns = [
                                     {" "}
                                     Add Word
                                 </button>{" "}
-
-                                <button
-                                    onClick={() => dispatch(editQuizAdminModal(original))}
-                                    className="bg-gray-600 px-5 py-2 rounded-md text-white hover:bg-gray-800 "
-                                >
-                                    <PencilAltIcon
-                                        className="h-5 w-5 text-gray-400"
-                                        aria-hidden="true" />
-                                    Edit
-                                </button>{" "}
-                                <DeleteButton action={() => dispatch(deleteQuizData(original.id))}>
-                                    <MinusCircleIcon
-                                        className="h-5 w-5 text-white"
-                                        aria-hidden="true" />
-                                    {" "}
-                                    Delete
-                                </DeleteButton>
+                                <TableActionColumns
+                                    original={original}
+                                    editAction={() => editQuizAdminModal(original)}
+                                    deleteAction={() => deleteQuizData(original.id)}
+                                />
                             </div>
                         </>
                     );

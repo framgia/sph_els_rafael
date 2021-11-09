@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import { Redirect, Route, Switch } from "react-router-dom";
 import Topbar from '@components/Navigation/Topbar/Topbar'
 import NavigationItem from '@components/Navigation/NavigationItems/NavigationItem'
@@ -7,8 +7,7 @@ import NavigationLeftItems from '@components/Navigation/NavigationLeftItems/Navi
 import Logo from '@components/SVG/Logo';
 import { ReactComponent as CaretIcon } from '@assets/Icons/caret.svg';
 import { ReactComponent as BellIcon } from '@assets/Icons/bell.svg';
-import AdminQuizzes from '@containers/AdminQuizzes/AdminQuizzes';
-import UserCon from '@containers/UsersContainer/UserCon';
+import { routable } from '../../routes/';
 
 const Layout: FC = () => {
 
@@ -35,12 +34,20 @@ const Layout: FC = () => {
             </Topbar>
             <main className="m-10 h-4/5">
                 <Switch>
-                    {/* <Route path="/data/:id" exact component={ShippingAgentMore} /> */}
-                    <Route path="/" exact component={AdminQuizzes} />
-                    <Route path="/users" exact component={UserCon} />
-                    {/* <Route path="/arrivals" exact component={ArrivalView} />
-                    <Route path="/logout" component={Logout} /> */}
-                    <Redirect to="/" />
+                    <Suspense fallback={<div>Loading...</div>}>
+                        {routable.map(
+                            (route, idx) =>
+                                route.component && (
+                                    <Route
+                                        key={idx}
+                                        path={route.path}
+                                        exact={route.exact}
+                                        component={route.component}
+                                    />
+                                )
+                        )}
+                        <Redirect to="/" />
+                    </Suspense>
                 </Switch>
             </main>
         </>);

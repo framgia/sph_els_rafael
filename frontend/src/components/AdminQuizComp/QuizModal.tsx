@@ -42,7 +42,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
     }
 
     const saveClick = () => {
-        if (input && !input.title || input && !input.description) {
+        if (!input.title || !input.description) {
             return;
         }
 

@@ -4,17 +4,18 @@ import classes from './Boxwidget.module.css';
 
 interface BoxInterface {
     title: string,
-    action: (data: object) => void;
+    action?: (data: object) => void;
+    btnName: string;
 }
 
-const Boxwidget: FC<BoxInterface> = ({ action, title, children }) => {
+const Boxwidget: FC<BoxInterface> = ({ action, title, children, btnName }) => {
     return (
         <div className={classes.Boxwidget}>
             <div className={classes.BoxwidgetHead}>
                 <h2>{title}</h2>
                 <div className={classes.actionButton}>
-                    <AddButton action={() => action({})} className={classes.addBtn} >
-                        New Quiz
+                    <AddButton action={() => action && action({})} className={classes.addBtn} >
+                        {btnName}
                     </AddButton>
                 </div>
             </div>
