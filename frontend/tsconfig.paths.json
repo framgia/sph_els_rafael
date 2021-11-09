@@ -4,7 +4,9 @@
         "paths": {
            "@components/*" : ["./components/*"],
            "@assets/*":["./assets"],
-           "@containers/*" :["./containers/*"]
+           "@containers/*" :["./containers/*"],
+           "@store/*":["./store/*"],
+           "@model/*":["./models/*"]
          },
       "target": "es5",
       "lib": [

@@ -23,6 +23,7 @@ const QuizList: FC<Props> = ({ loading, data, editQuizAdminModal }) => {
     <>
       <Boxwidget
         action={() => editQuizAdminModal({})}
+        btnName="Add Quiz"
         title="Quizzes">
         {loading ? (
           <Spinner />

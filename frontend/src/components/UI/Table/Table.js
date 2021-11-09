@@ -139,70 +139,72 @@ function Table({ columns, data }) {
       </div>
       {/* table */}
 
-      <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-        <table {...getTableProps()} className="table-tail">
-          <thead className="bg-gray-800">
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  // Add the sorting props to control sorting. For this example
-                  // we can add them into the header props
-                  <th
-                    scope="col"
-                    className="table-col"
-                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                  >
-                    <div className="flex items-center justify-between">
-                      {column.render("Header")}
-                      {/* Add a sort direction indicator */}
-                      <span>
-                        {column.isSorted ? (
-                          column.isSortedDesc ? (
-                            <SortDownIcon className="w-4 h-4 text-gray-400" />
+      <div className="shadow rounded-lg border-gray-200 py-5">
+        <div className="overflow-x-auto w-full">
+          <table {...getTableProps()} className="table-tail">
+            <thead className="bg-gray-800">
+              {headerGroups.map((headerGroup) => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    // Add the sorting props to control sorting. For this example
+                    // we can add them into the header props
+                    <th
+                      scope="col"
+                      className="table-col"
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
+                      <div className="flex items-center justify-between">
+                        {column.render("Header")}
+                        {/* Add a sort direction indicator */}
+                        <span>
+                          {column.isSorted ? (
+                            column.isSortedDesc ? (
+                              <SortDownIcon className="w-4 h-4 text-gray-400" />
+                            ) : (
+                              <SortUpIcon className="w-4 h-4 text-gray-400" />
+                            )
                           ) : (
-                            <SortUpIcon className="w-4 h-4 text-gray-400" />
-                          )
-                        ) : (
-                          <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
-                        )}
-                      </span>
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody
-            {...getTableBodyProps()}
-            className="bg-blue-50 divide-y divide-blue-200"
-          >
-            {page.map((row, i) => {
-              // new
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return (
-                      <td
-                        {...cell.getCellProps()}
-                        className="px-6 py-4 whitespace-nowrap"
-                        role="cell"
-                      >
-                        {cell.column.Cell.name === "defaultRenderer" ? (
-                          <div className="text-base text-gray-500">
-                            {cell.render("Cell")}
-                          </div>
-                        ) : (
-                          cell.render("Cell")
-                        )}
-                      </td>
-                    );
-                  })}
+                            <SortIcon className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100" />
+                          )}
+                        </span>
+                      </div>
+                    </th>
+                  ))}
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              ))}
+            </thead>
+            <tbody
+              {...getTableBodyProps()}
+              className="bg-blue-50 divide-y divide-blue-200"
+            >
+              {page.map((row, i) => {
+                // new
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <td
+                          {...cell.getCellProps()}
+                          className="px-6 py-4 whitespace-nowrap"
+                          role="cell"
+                        >
+                          {cell.column.Cell.name === "defaultRenderer" ? (
+                            <div className="text-base text-gray-500">
+                              {cell.render("Cell")}
+                            </div>
+                          ) : (
+                            cell.render("Cell")
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Pagination */}
