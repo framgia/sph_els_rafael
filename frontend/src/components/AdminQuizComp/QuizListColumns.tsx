@@ -4,7 +4,8 @@ import {
     PlusCircleIcon
 } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
-import { editQuizAdminModal } from '../../store/actions/action-creator/'
+import { editQuizAdminModal, deleteQuizData } from '../../store/actions/action-creator/'
+import DeleteButton from "@components/UI/Buttons/DeleteButton";
 
 
 const columns = [
@@ -50,16 +51,13 @@ const columns = [
                                         aria-hidden="true" />
                                     Edit
                                 </button>{" "}
-                                <button
-                                    //   onClick={() => warningDeleting(original.u_id)}
-                                    className="bg-red-700 p-2 rounded-md text-white hover:bg-red-800"
-                                >
+                                <DeleteButton action={() => dispatch(deleteQuizData(original.id))}>
                                     <MinusCircleIcon
                                         className="h-5 w-5 text-white"
                                         aria-hidden="true" />
                                     {" "}
                                     Delete
-                                </button>
+                                </DeleteButton>
                             </div>
                         </>
                     );

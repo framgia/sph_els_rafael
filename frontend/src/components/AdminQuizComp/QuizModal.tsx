@@ -51,7 +51,6 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
         formData.set('title', input.title);
         formData.set('description', input.description);
 
-
         input.id ?
             updateQuizData(input, input.id && input.id)
             : saveQuizData(formData);
@@ -85,7 +84,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
                 </div>
                 <div className="flex items-center justify-between">
                     <button disabled={SaveLoading} onClick={() => saveClick()} className="bg-gray-600 text-lg hover:bg-gray-800 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline" type="button">
-                        Save{" "}  {SaveLoading ? (
+                        Save {SaveLoading ? (
 
                             <SpinnerBtn />
                         ) : (
@@ -123,3 +122,4 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps:
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuizModal)
+

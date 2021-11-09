@@ -47,3 +47,16 @@ export const updateQuizData = (Data: any, id: string) => ({
   },
 })
 
+
+export const deleteQuizData = (id: string) => ({
+  type: ActionType.DELETE_QUIZ_DATA,
+  payload: {
+    meta: {
+      api: {
+        method: "delete",
+        url: `/quizzes/${id}`,
+      },
+    },
+  },
+})
+
