@@ -1,8 +1,8 @@
-import ActionType from '../../actions/action-types';
+import { QuizActionType } from '../action-types/';
 
 export const getQuizList = () => ({
   //AND IT ALSO MAKES THE CALL TO OUR BACK END
-  type: ActionType.FETCH_QUIZ_LIST,
+  type: QuizActionType.FETCH_QUIZ_LIST,
   payload: {
     meta: {
       api: {
@@ -14,12 +14,12 @@ export const getQuizList = () => ({
 });
 
 export const editQuizAdminModal = (data: object | null) => ({
-  type: ActionType.EDIT_QUIZ_ADMIN_MODAL,
+  type: QuizActionType.EDIT_QUIZ_ADMIN_MODAL,
   payload: data,
 });
 
 export const saveQuizData = (Data: FormData | null) => ({
-  type: ActionType.SAVE_QUIZ_DATA,
+  type: QuizActionType.SAVE_QUIZ_DATA,
   payload: {
     meta: {
       api: {
@@ -35,7 +35,7 @@ export const saveQuizData = (Data: FormData | null) => ({
 })
 
 export const updateQuizData = (Data: any, id: string) => ({
-  type: ActionType.UPDATE_QUIZ_DATA,
+  type: QuizActionType.UPDATE_QUIZ_DATA,
   payload: {
     meta: {
       api: {
@@ -49,7 +49,7 @@ export const updateQuizData = (Data: any, id: string) => ({
 
 
 export const deleteQuizData = (id: string) => ({
-  type: ActionType.DELETE_QUIZ_DATA,
+  type: QuizActionType.DELETE_QUIZ_DATA,
   payload: {
     meta: {
       api: {

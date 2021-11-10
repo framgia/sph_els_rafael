@@ -22,7 +22,7 @@ const columns = [
       },
       {
         Header: "Role",
-        accessor: "role",
+        accessor: "rolestring",
       },
       {
         width: 150,
