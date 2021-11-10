@@ -1,17 +1,9 @@
-import React from 'react';
-import UserList from '@components/Users/UserList';
+import { FC } from 'react';
+import UserAdmin from '@components/Users/UserAdmin';
 
-interface Props {
 
-}
+const UserCon: FC = () => (<UserAdmin />)
 
-const UserCon = (props: Props) => {
-    return (
-        <>
-            <UserList />
-        </>
-    )
-}
 
 export default UserCon
 

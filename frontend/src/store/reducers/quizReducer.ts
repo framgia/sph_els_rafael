@@ -1,4 +1,4 @@
-import ActionType from '../actions/action-types';
+import { QuizActionType } from '../actions/action-types/';
 import { Action } from '../actions'
 import { put, takeEvery, call } from "redux-saga/effects";
 import Quiz from "models/quizModels";
@@ -28,60 +28,60 @@ const reducer = (
   action: Action): QuizState => {
 
   switch (action.type) {
-    case ActionType.FETCH_QUIZ_LIST:
+    case QuizActionType.FETCH_QUIZ_LIST:
       return {
         ...state,
         quizListloading: true,
       };
-    case ActionType.FETCH_QUIZ_LIST_SUCCESS:
+    case QuizActionType.FETCH_QUIZ_LIST_SUCCESS:
       return {
         ...state,
         quizListloading: false,
         quizList: action.payload
       }
-    case ActionType.FETCH_QUIZ_LIST_FAIL:
+    case QuizActionType.FETCH_QUIZ_LIST_FAIL:
       return {
         ...state,
         quizListloading: false,
         error: action.payload
       }
-    case ActionType.EDIT_QUIZ_ADMIN_MODAL:
+    case QuizActionType.EDIT_QUIZ_ADMIN_MODAL:
       return {
         ...state,
         editQuizDetails: action.payload
       }
-    case ActionType.SAVE_QUIZ_DATA:
+    case QuizActionType.SAVE_QUIZ_DATA:
       return {
         ...state,
         SaveLoading: true,
       }
-    case ActionType.SAVE_QUIZ_DATA_SUCCESS:
+    case QuizActionType.SAVE_QUIZ_DATA_SUCCESS:
       return {
         ...state,
         editQuizDetails: null,
         isSuccess: true,
         SaveLoading: false,
       }
-    case ActionType.SAVE_QUIZ_DATA_ERROR:
+    case QuizActionType.SAVE_QUIZ_DATA_ERROR:
       return {
         ...state,
         error: action.payload
       }
 
-    case ActionType.UPDATE_QUIZ_DATA:
+    case QuizActionType.UPDATE_QUIZ_DATA:
       return {
         ...state,
         SaveLoading: true,
 
       }
-    case ActionType.UPDATE_QUIZ_DATA_SUCCESS:
+    case QuizActionType.UPDATE_QUIZ_DATA_SUCCESS:
       return {
         ...state,
         editQuizDetails: null,
         isSuccess: true,
         SaveLoading: false,
       }
-    case ActionType.UPDATE_QUIZ_DATA_FAIL:
+    case QuizActionType.UPDATE_QUIZ_DATA_FAIL:
       return {
         ...state,
         error: action.payload
@@ -93,24 +93,24 @@ const reducer = (
 
 
 export const quizzesSaga = [
-  takeEvery(ActionType.SAVE_QUIZ_DATA_SUCCESS, showAlert),
-  takeEvery(ActionType.SAVE_QUIZ_DATA_ERROR, showAlert),
-  takeEvery(ActionType.UPDATE_QUIZ_DATA_SUCCESS, showAlert),
-  takeEvery(ActionType.UPDATE_QUIZ_DATA_FAIL, showAlert),
+  takeEvery(QuizActionType.SAVE_QUIZ_DATA_SUCCESS, showAlert),
+  takeEvery(QuizActionType.SAVE_QUIZ_DATA_ERROR, showAlert),
+  takeEvery(QuizActionType.UPDATE_QUIZ_DATA_SUCCESS, showAlert),
+  takeEvery(QuizActionType.UPDATE_QUIZ_DATA_FAIL, showAlert),
 
-  takeEvery(ActionType.DELETE_QUIZ_DATA_SUCCESS, showAlert),
+  takeEvery(QuizActionType.DELETE_QUIZ_DATA_SUCCESS, showAlert),
 
 ]
 
 function* showAlert(action: Action) {
   type Icon = SweetAlertIcon;
 
-  let icon: Icon = action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS
-    || ActionType.UPDATE_QUIZ_DATA_SUCCESS
-    || ActionType.DELETE_QUIZ_DATA_SUCCESS ? "success" : 'error';
-  let title = action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS
-    || ActionType.UPDATE_QUIZ_DATA_SUCCESS
-    || ActionType.DELETE_QUIZ_DATA_SUCCESS ? "Sucessfully Save" : 'error in saving';
+  let icon: Icon = action.type === QuizActionType.SAVE_QUIZ_DATA_SUCCESS
+    || QuizActionType.UPDATE_QUIZ_DATA_SUCCESS
+    || QuizActionType.DELETE_QUIZ_DATA_SUCCESS ? "success" : 'error';
+  let title = action.type === QuizActionType.SAVE_QUIZ_DATA_SUCCESS
+    || QuizActionType.UPDATE_QUIZ_DATA_SUCCESS
+    || QuizActionType.DELETE_QUIZ_DATA_SUCCESS ? "Sucessfully Save" : 'error in saving';
 
 
   Swal.fire({
@@ -124,8 +124,8 @@ function* showAlert(action: Action) {
 }
 
 function* getQuizListSaga(action: Action) {
-  if (action.type === ActionType.SAVE_QUIZ_DATA_SUCCESS
-    || ActionType.UPDATE_QUIZ_DATA_SUCCESS) {
+  if (action.type === QuizActionType.SAVE_QUIZ_DATA_SUCCESS
+    || QuizActionType.UPDATE_QUIZ_DATA_SUCCESS) {
     yield put(getQuizList());
   }
 }
