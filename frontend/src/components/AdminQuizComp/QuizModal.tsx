@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, Dispatch } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Modal from '@components/UI/Modal/Modal';
 import {
     PlusCircleIcon, SaveIcon
@@ -21,7 +21,7 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
     })
 
     useEffect(() => {
-        const { title, description, id } = editQuizListData && editQuizListData
+        const { title, description, id } = editQuizListData && editQuizListData || {}
 
         editQuizListData && setInput({
             title: title,
@@ -62,11 +62,12 @@ const QuizModal: FC<Props> = ({ editQuizListData, SaveLoading, editQuizAdminModa
             isOpen={editQuizListData ? true : false}
             title={
                 <span>
-                    <PlusCircleIcon className="w-5 h-5" />&nbsp;Add Quiz
+                    <PlusCircleIcon className="w-5 h-5" />
+                    {input.id && input.id ? 'Update Quiz' : 'Add Quiz'}
                 </span>
             }
             onClose={() => editQuizAdminModal(null)}>
-            <div className="w-full flex flex-col justify-center items-center m-auto ">
+            <div className="w-full flex flex-col justify-center items-center m-auto pb-10">
                 <div className="mb-4">
                     <label className="block text-gray-700 text-lg font-bold mb-2">
                         Title

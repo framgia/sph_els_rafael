@@ -1,15 +1,9 @@
 .Modal {
-  position: fixed;
-  z-index: 500 !important;
-  background-color: white;
-  width: 65%;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px black;
-  padding: 16px;
-  left: 20%;
-  top: 10%;
-  box-sizing: border-box;
-  transition: all 0.3s ease-out;
+  width: clamp(50%, 700px, 90%);
+  margin: auto;
+  padding: 0 2rem;
+  border-radius: 12px;
+  background: rgb(241, 240, 240);
 }
 
 .title {

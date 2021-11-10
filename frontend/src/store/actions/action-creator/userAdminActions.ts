@@ -26,7 +26,8 @@ export const saveUserData = (Data: FormData | null) => ({
         url: "/users",
         data: Data,
         headers: {
-          "Content-type": "application/x-www-form-urlencoded"
+          "Content-type": "application/x-www-form-urlencoded",
+          "Accept": "application/json"
         }
       },
     },

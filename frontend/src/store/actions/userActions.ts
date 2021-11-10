@@ -1,6 +1,13 @@
 import User from "models/userModels";
 import { UserAdminQuiz } from "./action-types";
 
+export interface ErrorMessage {
+  email: string;
+  fname: string;
+  lname: string;
+  mname: string;
+}
+
 interface FetchUserListAction {
   type: UserAdminQuiz.FETCH_USER_LIST
 }
@@ -31,7 +38,7 @@ interface SaveUserDataSuccessAction {
 
 interface SaveUserDataFailAction {
   type: UserAdminQuiz.SAVE_USER_DATA_ERROR,
-  payload: string
+  payload: ErrorMessage;
 }
 
 interface UpdateUserDataAction {
@@ -45,7 +52,7 @@ interface UpdateUserDataSuccessAction {
 
 interface UpdateUserDataFailAction {
   type: UserAdminQuiz.UPDATE_USER_DATA_FAIL,
-  payload: string
+  payload: ErrorMessage
 }
 
 
@@ -59,7 +66,7 @@ interface DeleteUserDataSuccessAction {
 
 interface DeleteUserDataFailAction {
   type: UserAdminQuiz.DELETE_USER_DATA_FAIL,
-  payload: string
+  payload: ErrorMessage
 }
 
 export type UserAction =

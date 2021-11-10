@@ -42,7 +42,7 @@ class UserController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             'mname' => 'required',
-            'email' => 'required|string|unique:users,email',
+            'email' => 'required|string|email|unique:users,email',
         ]);
 
         $password = bcrypt(Str::random(10));

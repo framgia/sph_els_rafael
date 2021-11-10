@@ -1,10 +1,10 @@
 type User = {
-  id?: number;
+  id?: string;
   email: string;
   fname: string;
   mname: string;
   lname: string;
-  role: number;
+  role?: number;
 }
 
 export default User;
