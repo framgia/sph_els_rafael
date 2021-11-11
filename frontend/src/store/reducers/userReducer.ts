@@ -130,7 +130,8 @@ function* showAlert(action: Action) {
 
 function* getUserListSaga(action: Action) {
   if (action.type === UserAdminQuiz.SAVE_USER_DATA_SUCCESS
-    || UserAdminQuiz.UPDATE_USER_DATA_SUCCESS) {
+    || UserAdminQuiz.UPDATE_USER_DATA_SUCCESS
+    || UserAdminQuiz.DELETE_USER_DATA_SUCCESS) {
     yield put(getUserList());
   }
 }
