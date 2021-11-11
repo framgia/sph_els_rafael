@@ -1,5 +1,6 @@
 import { useEffect, FC } from 'react'
 import Userlist from './UserList'
+import UserModal from './UserModal'
 import { connect } from 'react-redux'
 import { getUserList, editUserAdminModal } from '@store/actions/action-creator/'
 import User from 'models/userModels';
@@ -7,19 +8,31 @@ import { RootState } from '@store/reducers'
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from '@store/actions/index'
 import { bindActionCreators } from 'redux';
+import { AnimatePresence } from 'framer-motion';
 
 type Props = LinkStateProps & LinkDispatchProps;
 
-const UserAdmin: FC<Props> = ({ getUserList, userList, loading, editQuizAdminModal, editUserListData }) => {
+const UserAdmin: FC<Props> = ({ getUserList, userList, loading, editUserListData }) => {
   useEffect(() => {
     getUserList();
   }, []);
 
   return (
-    <Userlist
-      data={userList}
-      loading={loading}
-    />
+    <>
+      <Userlist
+        data={userList}
+        loading={loading}
+      />
+      <AnimatePresence
+        initial={false}
+        exitBeforeEnter={true}
+        onExitComplete={() => null}
+      >
+        {editUserListData && (
+          <UserModal />
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
@@ -31,7 +44,6 @@ interface LinkStateProps {
 
 interface LinkDispatchProps {
   getUserList: () => void;
-  editQuizAdminModal: (data: object) => void;
 }
 
 const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
@@ -45,7 +57,6 @@ const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: any): LinkDispatchProps => ({
   getUserList: bindActionCreators(getUserList, dispatch),
-  editQuizAdminModal: bindActionCreators(editUserAdminModal, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAdmin);

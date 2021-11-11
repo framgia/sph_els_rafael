@@ -1,11 +1,8 @@
 import {
-    PencilAltIcon,
-    MinusCircleIcon,
     PlusCircleIcon
 } from "@heroicons/react/solid";
 import { useDispatch } from "react-redux";
 import { editQuizAdminModal, deleteQuizData } from '../../store/actions/action-creator/'
-import DeleteButton from "@components/UI/Buttons/DeleteButton";
 import TableActionColumns from "@components/UI/Table/TableActionColumns";
 
 

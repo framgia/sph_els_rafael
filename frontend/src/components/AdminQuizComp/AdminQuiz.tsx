@@ -8,6 +8,7 @@ import { RootState } from '../../store/reducers'
 import { ThunkDispatch } from 'redux-thunk';
 import { Action } from '../../store/actions/index'
 import { bindActionCreators } from 'redux';
+import { AnimatePresence } from 'framer-motion';
 
 interface QuizState {
 
@@ -25,10 +26,15 @@ const AdminQuiz: FC<Props> = ({ getQuizList, quizList, loading, editQuizListData
     return (
         <>
             <QuizList loading={loading} data={quizList} />
-            {editQuizListData && (
-                <QuizModal />
-            )}
-
+            <AnimatePresence
+                initial={false}
+                exitBeforeEnter={true}
+                onExitComplete={() => null}
+            >
+                {editQuizListData && (
+                    <QuizModal />
+                )}
+            </AnimatePresence>
         </>
     )
 }

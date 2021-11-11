@@ -4,11 +4,12 @@ import { put, takeEvery, call } from "redux-saga/effects";
 import User from "models/userModels";
 import { getUserList } from '../actions/action-creator'
 import Swal, { SweetAlertIcon } from 'sweetalert2'
+import { ErrorMessage } from '../actions/userActions'
 
 interface UserState {
   userList: User[];
   userListloading: boolean;
-  error: string | null;
+  error: ErrorMessage | null;
   isSuccess: boolean;
   editUserDetails: User | null;
   SaveLoading: boolean,
@@ -65,7 +66,8 @@ const reducer = (
     case UserAdminQuiz.SAVE_USER_DATA_ERROR:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        SaveLoading: false,
       }
 
     case UserAdminQuiz.UPDATE_USER_DATA:
@@ -106,11 +108,11 @@ function* showAlert(action: Action) {
   type Icon = SweetAlertIcon;
 
   let icon: Icon = action.type === UserAdminQuiz.SAVE_USER_DATA_SUCCESS
-    || UserAdminQuiz.UPDATE_USER_DATA_SUCCESS
-    || UserAdminQuiz.DELETE_USER_DATA_SUCCESS ? "success" : 'error';
+    && UserAdminQuiz.UPDATE_USER_DATA_SUCCESS
+    && UserAdminQuiz.DELETE_USER_DATA_SUCCESS ? "success" : 'error';
   let title = action.type === UserAdminQuiz.SAVE_USER_DATA_SUCCESS
-    || UserAdminQuiz.UPDATE_USER_DATA_SUCCESS
-    || UserAdminQuiz.DELETE_USER_DATA_SUCCESS ? "Sucessfully Save" : 'error in saving';
+    && UserAdminQuiz.UPDATE_USER_DATA_SUCCESS
+    && UserAdminQuiz.DELETE_USER_DATA_SUCCESS ? "Sucessfully Save" : 'error in saving';
 
 
   Swal.fire({
@@ -125,7 +127,7 @@ function* showAlert(action: Action) {
 
 function* getUserListSaga(action: Action) {
   if (action.type === UserAdminQuiz.SAVE_USER_DATA_SUCCESS
-    || UserAdminQuiz.UPDATE_USER_DATA_SUCCESS) {
+    && UserAdminQuiz.UPDATE_USER_DATA_SUCCESS) {
     yield put(getUserList());
   }
 }
