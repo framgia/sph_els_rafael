@@ -49,7 +49,8 @@ const reducer = (
     case UserAdminQuiz.EDIT_USER_MODAL:
       return {
         ...state,
-        editUserDetails: action.payload
+        editUserDetails: action.payload,
+        error: null,
       }
     case UserAdminQuiz.SAVE_USER_DATA:
       return {
@@ -86,7 +87,8 @@ const reducer = (
     case UserAdminQuiz.UPDATE_USER_DATA_FAIL:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        SaveLoading: false,
       }
     default:
       return state;
@@ -107,13 +109,14 @@ export const usersSaga = [
 function* showAlert(action: Action) {
   type Icon = SweetAlertIcon;
 
-  let icon: Icon = action.type === UserAdminQuiz.SAVE_USER_DATA_SUCCESS
-    && UserAdminQuiz.UPDATE_USER_DATA_SUCCESS
-    && UserAdminQuiz.DELETE_USER_DATA_SUCCESS ? "success" : 'error';
-  let title = action.type === UserAdminQuiz.SAVE_USER_DATA_SUCCESS
-    && UserAdminQuiz.UPDATE_USER_DATA_SUCCESS
-    && UserAdminQuiz.DELETE_USER_DATA_SUCCESS ? "Sucessfully Save" : 'error in saving';
+  let icon: Icon = "success";
+  let title = "Sucessfully Save";
 
+  if (action.type === UserAdminQuiz.SAVE_USER_DATA_ERROR &&
+    UserAdminQuiz.UPDATE_USER_DATA_FAIL) {
+    icon = 'error';
+    title = 'error in saving'
+  }
 
   Swal.fire({
     icon: `${icon}`,
@@ -127,7 +130,7 @@ function* showAlert(action: Action) {
 
 function* getUserListSaga(action: Action) {
   if (action.type === UserAdminQuiz.SAVE_USER_DATA_SUCCESS
-    && UserAdminQuiz.UPDATE_USER_DATA_SUCCESS) {
+    || UserAdminQuiz.UPDATE_USER_DATA_SUCCESS) {
     yield put(getUserList());
   }
 }

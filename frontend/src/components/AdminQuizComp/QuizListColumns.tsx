@@ -1,7 +1,6 @@
 import {
     PlusCircleIcon
 } from "@heroicons/react/solid";
-import { useDispatch } from "react-redux";
 import { editQuizAdminModal, deleteQuizData } from '../../store/actions/action-creator/'
 import TableActionColumns from "@components/UI/Table/TableActionColumns";
 
@@ -25,7 +24,7 @@ const columns = [
                     let {
                         row: { original },
                     } = data;
-                    const dispatch = useDispatch();
+
                     return (
                         <>
                             <div className="w-full flex flex-end">
