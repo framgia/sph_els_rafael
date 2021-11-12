@@ -1,6 +1,6 @@
 import TableActionColumns from "@components/UI/Table/TableActionColumns";
-import { useDispatch } from "react-redux";
-import { editUserAdminModal, deleteUserData } from '../../store/actions/action-creator/'
+
+import { editUserAdminModal, deleteUserData } from '@store/actions/action-creator/'
 
 const columns = [
   {
@@ -38,6 +38,7 @@ const columns = [
               <TableActionColumns
                 original={original}
                 editAction={() => editUserAdminModal(original)}
+                deleteAction={() => deleteUserData(original.id)}
               />
             </div>
           );
