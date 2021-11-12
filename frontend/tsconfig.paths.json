@@ -6,7 +6,8 @@
            "@assets/*":["./assets"],
            "@containers/*" :["./containers/*"],
            "@store/*":["./store/*"],
-           "@model/*":["./models/*"]
+           "@model/*":["./models/*"],
+           "@myroutes/*":["./routes/*"]
          },
       "target": "es5",
       "lib": [

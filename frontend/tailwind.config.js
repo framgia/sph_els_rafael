@@ -5,10 +5,38 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    fontFamily: {
+      sans: ["Open Sans", "sans-serif"],
+    },
+    extend: {
+      height: (theme) => ({
+        110: "28rem !important",
+        120: "36rem !important ",
+        150: "42rem",
+        "screen/2": "50vh",
+        "screen/3": "calc(100vh / 3)",
+        "screen/4": "calc(100vh / 4)",
+        "screen/5": "calc(100vh / 5)",
+      }),
+      width: (theme) => ({
+        110: "28rem !important",
+        120: "36rem !important ",
+        150: "42rem",
+        "screen/2": "50vh",
+        "screen/3": "calc(100vh / 3)",
+        "screen/4": "calc(100vh / 4)",
+        "screen/5": "calc(100vh / 5)",
+      }),
+      outline: {
+        blue: "2px solid #0000ff",
+        none: "none",
+      },
+    },
   },
   variants: {
-    extend: {},
+    extend: {
+      outline: ["hover", "active"],
+    },
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
