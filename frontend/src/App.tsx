@@ -19,12 +19,11 @@ const App: FC<Props> = ({ userToken }) => {
   } else {
     routes = (
       <>
-        <Route path={["/login"]} component={LoginLayout} />
-        <Redirect to='/login' push />
+        <Route path={["/login", "/signup"]} component={LoginLayout} />
+        <Redirect to='/login' />
       </>
     );
   }
-
 
 
   return (
