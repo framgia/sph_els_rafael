@@ -3,12 +3,15 @@ import './index.css';
 import App from './App';
 import { Provider } from "react-redux";
 import { store } from './store';
+import React from 'react';
 
 
 const app = (
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>
 )
 
 ReactDOM.render(

@@ -1,20 +1,33 @@
-import {FC} from "react";
+import { FC } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import Layout from './hoc/Layout/Layout';
+import AdminLayout from './hoc/Layout/AdminLayout';
+import LoginLayout from './hoc/Layout/LoginLayout';
 
+interface Props {
+  userToken?: string;
+}
 
+const App: FC<Props> = ({ userToken }) => {
 
-const App:FC = () =>{
-
-  let routes:any = "";
+  let routes: any = "";
+  if (userToken) {
     routes = (
       <>
-      <Route path={["/"]} component={Layout} />
+        <Route path={["/"]} component={AdminLayout} />
       </>
     )
+  } else {
+    routes = (
+      <>
+        <Route path={["/login"]} component={LoginLayout} />
+        <Redirect to='/login' push />
+      </>
+    );
+  }
 
 
-  return(
+
+  return (
     <div>
       <Router>
         {routes}
