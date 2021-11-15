@@ -1,11 +1,10 @@
-import { FC, Suspense, lazy } from 'react'
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { FC, Suspense } from 'react'
+import { Route } from "react-router-dom";
 import Wave from '@assets/Images/wave.svg';
 import { routable } from '../../../routes/LoginRoutes';
 
 const LoginLayout: FC = () => {
-  let match = useRouteMatch();
-  console.log(match);
+
   return (
     <main>
       <img className="fixed hidden lg:block inset-0 h-full" src={Wave} />

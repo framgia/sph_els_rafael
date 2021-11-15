@@ -2,6 +2,7 @@ import { AuthActionType } from '../action-types/';
 import { Dispatch } from 'redux';
 import Http from '../../../http-common';
 import { Action } from '../';
+import { AxiosError } from 'axios';
 
 export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Action>) => {
 
@@ -88,4 +89,38 @@ export const authLogout = () => async (dispatch: Dispatch<Action>): Promise<any>
     })
   }
 };
+
+export const register = (DataForm: FormData) => async (dispatch: Dispatch<Action>) => {
+
+  try {
+    dispatch({
+      type: AuthActionType.REGISTER_START
+    })
+    const { data } = await Http.post("/register", DataForm, {
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+        "Accept": "application/json",
+      }
+    });
+
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('userid', data.user.id);
+
+
+    dispatch({
+      type: AuthActionType.REGISTER_START_SUCCESS,
+      user: data.user,
+      idToken: data.token,
+    })
+  } catch (error) {
+    const err = error as AxiosError;
+    if (err.response) {
+      dispatch({
+        type: AuthActionType.REGISTER_START_FAIL,
+        errorMessage: err.response.data.errors,
+      })
+    }
+  }
+};
+
 

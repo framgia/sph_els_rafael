@@ -1,6 +1,7 @@
 import { AuthActionType } from '../actions/action-types/';
 import { Action } from '../actions'
 import User from "models/userModels";
+import IRegisterErrorType from '../../types/registerErrorType'
 
 interface AuthState {
   token: string | null;
@@ -8,7 +9,9 @@ interface AuthState {
   userId: string | null,
   error: string | null,
   errorStatus: string | null,
+  errorMessage: IRegisterErrorType | null,
   loading: boolean,
+  registerLoading: boolean,
   authRedirectPath: string,
 }
 
@@ -18,7 +21,9 @@ export const initialState = {
   user: null,
   error: null,
   errorStatus: "",
+  errorMessage: null,
   loading: false,
+  registerLoading: false,
   authRedirectPath: '/'
 };
 
@@ -52,6 +57,26 @@ const reducer = (
         ...state,
         user: null,
         token: null,
+      }
+    case AuthActionType.REGISTER_START:
+      return {
+        ...state,
+        registerLoading: true,
+        error: null,
+      }
+    case AuthActionType.REGISTER_START_SUCCESS:
+      return {
+        ...state,
+        token: action.idToken,
+        user: action.user,
+        registerLoading: false,
+        errorMessage: null,
+      }
+    case AuthActionType.REGISTER_START_FAIL:
+      return {
+        ...state,
+        registerLoading: false,
+        errorMessage: action.errorMessage,
       }
     default:
       return state;

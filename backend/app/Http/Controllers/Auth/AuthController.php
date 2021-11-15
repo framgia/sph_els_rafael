@@ -40,8 +40,8 @@ class AuthController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             'mname' => 'required',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
+            'email' => 'required|string|email|unique:users,email',
+            'password' => 'required|string|confirmed|min:8'
         ]);
 
 
