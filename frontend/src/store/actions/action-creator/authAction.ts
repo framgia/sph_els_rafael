@@ -11,10 +11,9 @@ export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Actio
       type: AuthActionType.AUTH_START
     })
 
-    const { data } = await Http.post("/login", DataForm, {
+    const { data } = await Http.post("/api/login", DataForm, {
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
-        "Accept": "application/json",
       }
     });
 
@@ -38,13 +37,10 @@ export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Actio
 };
 
 export const authCheckState = () => async (dispatch: Dispatch<Action>) => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    try {
-      await authLogout();
-    } catch (e) {
 
-    }
+  let token = localStorage.getItem('token');
+  if (!token) {
+    await authLogout();
   } else {
     dispatch({
       type: AuthActionType.AUTH_SUCCESS,
@@ -60,27 +56,18 @@ export const authLogout = () => async (dispatch: Dispatch<Action>): Promise<any>
     dispatch({
       type: AuthActionType.AUTH_LOGOUT
     })
-    let token = localStorage.getItem('token');
-    const { data } = await Http.post("/logout", {
+
+    await Http.post("/api/logout", {
       headers: {
         "Accept": "application/json",
-        "Authorization": token ? `Bearer ${token}` : '',
       },
     });
 
-    if (data.status === 201) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userid');
-      dispatch({
-        type: AuthActionType.AUTH_LOGOUT_SUCCESS,
-      })
-    } else {
-      dispatch({
-        type: AuthActionType.AUTH_LOGOUT_FAIL,
-        payload: 'error log',
-        status: data.status,
-      })
-    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('userid');
+    dispatch({
+      type: AuthActionType.AUTH_LOGOUT_SUCCESS,
+    })
   } catch (err: any) {
     dispatch({
       type: AuthActionType.AUTH_LOGOUT_FAIL,
@@ -96,16 +83,14 @@ export const register = (DataForm: FormData) => async (dispatch: Dispatch<Action
     dispatch({
       type: AuthActionType.REGISTER_START
     })
-    const { data } = await Http.post("/register", DataForm, {
+    const { data } = await Http.post("/api/register", DataForm, {
       headers: {
         "Content-type": "application/x-www-form-urlencoded",
-        "Accept": "application/json",
       }
     });
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('userid', data.user.id);
-
 
     dispatch({
       type: AuthActionType.REGISTER_START_SUCCESS,
@@ -122,5 +107,3 @@ export const register = (DataForm: FormData) => async (dispatch: Dispatch<Action
     }
   }
 };
-
-
