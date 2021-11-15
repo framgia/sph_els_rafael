@@ -1,11 +1,17 @@
-import { FC, Suspense } from 'react'
-import { Redirect, Route, Switch } from "react-router-dom";
+import { FC, Suspense, lazy } from 'react'
+import { Route, Switch, useRouteMatch } from "react-router-dom";
+import Wave from '@assets/Images/wave.svg';
 import { routable } from '../../../routes/LoginRoutes';
 
-const loginLayout: FC = () => {
+const LoginLayout: FC = () => {
+  let match = useRouteMatch();
+  console.log(match);
   return (
     <main>
-      <Switch>
+      <img className="fixed hidden lg:block inset-0 h-full" src={Wave} />
+      <div
+        className="w-screen h-screen flex flex-col justify-center items-center lg:grid lg:grid-cols-2"
+      >
         <Suspense fallback={<div>Loading...</div>}>
           {routable.map(
             (route, idx) =>
@@ -18,12 +24,11 @@ const loginLayout: FC = () => {
                 />
               )
           )}
-          <Redirect to="/login" />
         </Suspense>
-      </Switch>
+      </div>
     </main>
   )
 }
 
-export default loginLayout
+export default LoginLayout
 
