@@ -1,6 +1,6 @@
 import User from "models/userModels";
 import { AuthActionType } from "./action-types";
-
+import IRegisterErrorType from '../../types/registerErrorType'
 interface AuthStartAction {
   type: AuthActionType.AUTH_START
 }
@@ -35,6 +35,21 @@ interface CheckValidAction {
   type: AuthActionType.CHECK_VALID_SUCCESS
 }
 
+interface RegisterStartAction {
+  type: AuthActionType.REGISTER_START
+}
+
+interface RegisterSuccessAction {
+  type: AuthActionType.REGISTER_START_SUCCESS,
+  user: User | null,
+  idToken: string,
+}
+
+interface RegisterFailAction {
+  type: AuthActionType.REGISTER_START_FAIL,
+  errorMessage: IRegisterErrorType | null,
+}
+
 export type AuthAction =
   | AuthStartAction
   | AuthFailAction
@@ -43,4 +58,7 @@ export type AuthAction =
   | AuthLogoutSuccessAction
   | AuthLogoutFailAction
   | CheckValidAction
+  | RegisterStartAction
+  | RegisterSuccessAction
+  | RegisterFailAction
 
