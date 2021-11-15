@@ -1,16 +1,21 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import AdminLayout from './hoc/Layout/AdminLayout';
 import LoginLayout from './hoc/Layout/LoginLayout';
+import { RootState } from '@store/reducers'
+import { authCheckState } from '@store/actions/action-creator/'
+import { connect, useDispatch } from 'react-redux'
 
-interface Props {
-  userToken?: string;
-}
+type Props = LinkStateProps;
 
-const App: FC<Props> = ({ userToken }) => {
+const App: FC<Props> = ({ token }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authCheckState());
+  }, [])
 
   let routes: any = "";
-  if (userToken) {
+  if (token) {
     routes = (
       <>
         <Route path={["/"]} component={AdminLayout} />
@@ -34,5 +39,12 @@ const App: FC<Props> = ({ userToken }) => {
     </div>
   )
 }
+interface LinkStateProps {
+  token: string | any,
+}
 
-export default App;
+const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
+  token: state.auth.token,
+})
+
+export default connect(mapStateToProps, null)(App)
