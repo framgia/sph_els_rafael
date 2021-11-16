@@ -22,8 +22,8 @@ class AuthController extends Controller
             ], 401);
         }
         $token = $user->role == 0 || 1 ?
-            $user->createToken('admin', ['adminAccess'])->plainTextToken
-            : $token = $user->createToken('myapptoken', ['studentAccess'])->plainTextToken;
+            $user->createToken('admin', ['adminAccess'])->plainTextToken :
+            $token = $user->createToken('myapptoken', ['studentAccess'])->plainTextToken;
 
         $response = [
             'user' => $user,
