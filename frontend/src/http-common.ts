@@ -11,8 +11,8 @@ axiosClient.defaults.withCredentials = true;
 axiosClient.interceptors.request.use((config: AxiosRequestConfig) => {
   let token = localStorage.getItem('token');
   let headers: AxiosRequestHeaders = {
-    ['Authorization']: `Bearer ${token}`,
-    ['Accept']: 'application/json',
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/json',
   }
   config.headers = headers;
   return config;
