@@ -6,7 +6,7 @@ export const getUserList = () => ({
     meta: {
       api: {
         method: "get",
-        url: "/users",
+        url: "/api/users",
       },
     },
   },
@@ -23,11 +23,10 @@ export const saveUserData = (Data: FormData | null) => ({
     meta: {
       api: {
         method: "post",
-        url: "/users",
+        url: "/api/users",
         data: Data,
         headers: {
           "Content-type": "application/x-www-form-urlencoded",
-          "Accept": "application/json"
         }
       },
     },
@@ -40,7 +39,7 @@ export const updateUserData = (Data: any, id: string) => ({
     meta: {
       api: {
         method: "put",
-        url: `/users/${id}`,
+        url: `/api/users/${id}`,
         data: Data,
       },
     },
@@ -54,7 +53,7 @@ export const deleteUserData = (id: string) => ({
     meta: {
       api: {
         method: "delete",
-        url: `/users/${id}`,
+        url: `/api/users/${id}`,
       },
     },
   },

@@ -44,6 +44,7 @@ const reducer = (
         user: action.user,
         loading: false,
         error: null,
+        errorMessage: null,
       }
     case AuthActionType.AUTH_FAIL:
       return {
@@ -52,11 +53,22 @@ const reducer = (
         loading: false,
         errorStatus: action.status,
       }
+    case AuthActionType.AUTH_LOGOUT:
+      return {
+        ...state,
+        loading: true,
+      }
     case AuthActionType.AUTH_LOGOUT_SUCCESS:
       return {
         ...state,
         user: null,
         token: null,
+        loading: false,
+      }
+    case AuthActionType.AUTH_LOGOUT_FAIL:
+      return {
+        ...state,
+        loading: false,
       }
     case AuthActionType.REGISTER_START:
       return {

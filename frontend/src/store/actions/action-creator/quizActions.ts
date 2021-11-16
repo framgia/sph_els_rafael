@@ -7,7 +7,7 @@ export const getQuizList = () => ({
     meta: {
       api: {
         method: "get",
-        url: "/quizzes",
+        url: "/api/quizzes",
       },
     },
   },
@@ -24,10 +24,10 @@ export const saveQuizData = (Data: FormData | null) => ({
     meta: {
       api: {
         method: "post",
-        url: "/quizzes",
+        url: "/api/quizzes",
         data: Data,
         headers: {
-          "Content-type": "application/x-www-form-urlencoded"
+          "Content-type": "application/x-www-form-urlencoded",
         }
       },
     },
@@ -40,7 +40,7 @@ export const updateQuizData = (Data: any, id: string) => ({
     meta: {
       api: {
         method: "put",
-        url: `/quizzes/${id}`,
+        url: `/api/quizzes/${id}`,
         data: Data,
       },
     },
@@ -54,7 +54,7 @@ export const deleteQuizData = (id: string) => ({
     meta: {
       api: {
         method: "delete",
-        url: `/quizzes/${id}`,
+        url: `/api/quizzes/${id}`,
       },
     },
   },

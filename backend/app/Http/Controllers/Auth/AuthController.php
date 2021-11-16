@@ -3,28 +3,27 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $fields =  $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string'
-        ]);
 
-        $user = User::where('email', $fields['email'])->first();
+        $user = User::where('email', $request->email)->first();
 
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
                 'message' => 'Bad creds',
             ], 401);
         }
-
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->role == 0 || 1 ?
+            $user->createToken('admin', ['adminAccess'])->plainTextToken
+            : $token = $user->createToken('myapptoken', ['studentAccess'])->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -34,27 +33,19 @@ class AuthController extends Controller
         return response()->json($response, 201);
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $fields =  $request->validate([
-            'fname' => 'required',
-            'lname' => 'required',
-            'mname' => 'required',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string|confirmed|min:8'
-        ]);
-
 
         $user = User::create([
-            'fname' => $fields['lname'],
-            'mname' => $fields['mname'],
-            'lname' => $fields['lname'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password']),
+            'fname' => $request->fname,
+            'mname' => $request->mname,
+            'lname' => $request->lname,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
             'role' => 2
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('myapptoken', ['studentAccess'])->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -66,7 +57,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return response()->json('Logged out', 200);
     }

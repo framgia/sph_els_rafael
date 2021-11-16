@@ -5,12 +5,17 @@ import LoginLayout from './hoc/Layout/LoginLayout';
 import { RootState } from '@store/reducers'
 import { authCheckState } from '@store/actions/action-creator/'
 import { connect, useDispatch } from 'react-redux'
+import Http from './http-common'
 
 type Props = LinkStateProps;
-
 const App: FC<Props> = ({ token }) => {
+
   const dispatch = useDispatch();
   useEffect(() => {
+    const init = async () => {
+      await Http.get('/sanctum/csrf-cookie');
+    }
+    init();
     dispatch(authCheckState());
   }, [])
 
@@ -29,7 +34,6 @@ const App: FC<Props> = ({ token }) => {
       </>
     );
   }
-
 
   return (
     <div>
