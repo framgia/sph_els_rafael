@@ -3,6 +3,7 @@ import {
 } from "@heroicons/react/solid";
 import { editQuizAdminModal, deleteQuizData } from '../../store/actions/action-creator/'
 import TableActionColumns from "@components/UI/Table/TableActionColumns";
+import { Link } from "react-router-dom";
 
 
 const columns = [
@@ -28,16 +29,16 @@ const columns = [
                     return (
                         <>
                             <div className="w-full flex flex-end">
-                                <button
-                                    //   onClick={() => props.openModal(original)}
+                                <Link
+                                    to={`/quiz/${original.id}/question`}
                                     className="bg-gray-600 px-5 py-2 rounded-md text-white hover:bg-gray-800"
                                 >
                                     <PlusCircleIcon
                                         className="h-5 w-5 text-gray-400"
                                         aria-hidden="true" />
                                     {" "}
-                                    Add Word
-                                </button>{" "}
+                                    Add Question
+                                </Link>{" "}
                                 <TableActionColumns
                                     original={original}
                                     editAction={() => editQuizAdminModal(original)}

@@ -15,7 +15,6 @@ class CreateUserLearnWordsTable extends Migration
     {
         Schema::create('user_learn_words', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('choice_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
