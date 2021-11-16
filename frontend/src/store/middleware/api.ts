@@ -1,5 +1,6 @@
 import http from '../../http-common'
 import { Middleware } from 'redux';
+import { AxiosError } from 'axios';
 
 
 
@@ -18,7 +19,8 @@ export const post: Middleware = ({ dispatch }) => next => (action) => {
         }
       })
       .catch((err) => {
-        dispatch({ type: `${type} error`, payload: err });
+        const errorAx = err as AxiosError;
+        dispatch({ type: `${type} error`, payload: errorAx });
       });
   }
 

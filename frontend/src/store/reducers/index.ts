@@ -4,6 +4,7 @@ import { all } from "redux-saga/effects";
 import quizReducer, { quizzesSaga } from './quizReducer';
 import userReducer, { usersSaga } from './userReducer';
 import authReducer from './authReducer';
+import questionReducer from './questionReducer';
 
 export function* rootSaga() {
   yield all([...quizzesSaga]);
@@ -14,6 +15,7 @@ const reducers = combineReducers({
   quizzes: quizReducer,
   users: userReducer,
   auth: authReducer,
+  questions: questionReducer,
 });
 
 export default reducers;
