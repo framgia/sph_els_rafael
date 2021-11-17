@@ -3,7 +3,7 @@ import Choices from './Choices';
 
 const columns = [
   {
-    Header: " ",
+    Header: "Quiz Table",
     columns: [
       {
         Header: "Question",

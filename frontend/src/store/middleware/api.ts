@@ -20,7 +20,7 @@ export const post: Middleware = ({ dispatch }) => next => (action) => {
       })
       .catch((err) => {
         const errorAx = err as AxiosError;
-        dispatch({ type: `${type} error`, payload: errorAx });
+        dispatch({ type: `${type} error`, payload: errorAx.response });
       });
   }
 

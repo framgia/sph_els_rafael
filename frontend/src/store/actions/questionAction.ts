@@ -30,6 +30,26 @@ interface FetchQuizDataFailAction {
   payload: string
 }
 
+interface EditQuestionAction {
+  type: QuestionActionType.EDIT_QUESTION_MODAL,
+  payload: Question | null,
+}
+
+interface SaveQuestionDataAction {
+  type: QuestionActionType.SAVE_QUESTION_DATA,
+  id: string,
+}
+
+interface SaveQuestionDataSuccessAction {
+  type: QuestionActionType.SAVE_QUESTION_DATA_SUCCESS,
+  payload: object,
+}
+
+interface SaveQuestionDataFailAction {
+  type: QuestionActionType.SAVE_QUESTION_DATA_ERROR,
+  payload: string
+}
+
 export type QuestionAction =
   | FetchQuestionListAction
   | FetchQuestionListFailAction
@@ -37,3 +57,7 @@ export type QuestionAction =
   | FetchQuizDataAction
   | FetchQuizDataSuccessAction
   | FetchQuizDataFailAction
+  | EditQuestionAction
+  | SaveQuestionDataAction
+  | SaveQuestionDataFailAction
+  | SaveQuestionDataSuccessAction

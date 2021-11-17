@@ -12,11 +12,6 @@ const QuizDetails: FC<Props> = ({ quizData, loading }) => {
 
   const [titleTruncate, setTitleTruncate] = useState(true);
   const [DescriptionTruncate, setDescriptionTruncate] = useState(true);
-  const [quizState, setQuizState] = useState<Quiz>({ title: "", description: "" });
-
-  useEffect(() => {
-    quizData && setQuizState(quizData && quizData);
-  }, [quizData])
 
   const titleTransform = () => {
     setTitleTruncate(titleTruncate => !titleTruncate);
@@ -25,7 +20,6 @@ const QuizDetails: FC<Props> = ({ quizData, loading }) => {
   const descriptionTransform = () => {
     setDescriptionTruncate(DescriptionTruncate => !DescriptionTruncate);
   }
-
 
   return loading ? (
     <Spinner />
@@ -38,11 +32,11 @@ const QuizDetails: FC<Props> = ({ quizData, loading }) => {
               line={2}
               element="span"
               truncateText="…"
-              text={(quizState && quizState.title) || ""}
+              text={(quizData && quizData.title) || ""}
               textTruncateChild={<button className="mt-2 font-sm px-5 py-2 border-0 ring-0 rounded-xl" onClick={() => titleTransform()}>Read more</button>}
             />
           ) : (<>
-            <span className="mr-2">{(quizState && quizState.title) || ""}</span>
+            <span className="mr-2">{(quizData && quizData.title) || ""}</span>
             <button className="mt-2 font-sm px-5 py-2 border-0 ring-0 rounded-xl" onClick={() => titleTransform()}>Show Less</button>
           </>
           )
@@ -56,11 +50,11 @@ const QuizDetails: FC<Props> = ({ quizData, loading }) => {
               line={12}
               element="span"
               truncateText="......"
-              text={(quizState && quizState.description) || ""}
+              text={(quizData && quizData.description) || ""}
               textTruncateChild={<button className="mt-2 font-sm px-5 py-2 border-0 ring-0 rounded-xl" onClick={() => descriptionTransform()}>Read more</button>}
             />
           ) : (<>
-            <span className="mr-2">{(quizState && quizState.description) || ""}</span>
+            <span className="mr-2">{(quizData && quizData.description) || ""}</span>
             <button className="mt-2 font-sm px-5 py-2 border-0 ring-0 rounded-xl" onClick={() => descriptionTransform()}>Show Less</button>
           </>
           )
