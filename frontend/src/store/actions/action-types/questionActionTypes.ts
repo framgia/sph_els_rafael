@@ -12,6 +12,10 @@ enum QuestionActionTypes {
   SAVE_QUESTION_DATA = "[SAVE_QUESTION_DATA] - save question data",
   SAVE_QUESTION_DATA_SUCCESS = "[SAVE_QUESTION_DATA] - save question data success",
   SAVE_QUESTION_DATA_ERROR = "[SAVE_QUESTION_DATA] - save question data error",
+
+  UPDATE_QUESTION_DATA = "[UPDATE_QUESTION_DATA] - update question data",
+  UPDATE_QUESTION_DATA_SUCCESS = "[UPDATE_QUESTION_DATA] - update question data success",
+  UPDATE_QUESTION_DATA_ERROR = "[UPDATE_QUESTION_DATA] - update question data error",
 }
 
 export default QuestionActionTypes;

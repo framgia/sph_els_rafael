@@ -1,5 +1,6 @@
 import TableActionColumns from "@components/UI/Table/TableActionColumns";
 import Choices from './Choices';
+import { editQuestionModal } from '@store/actions/action-creator/'
 
 const columns = [
   {
@@ -36,6 +37,7 @@ const columns = [
             <div className="w-full flex flex-end">
               <TableActionColumns
                 original={original}
+                editAction={() => editQuestionModal(original)}
               />
             </div>
           );

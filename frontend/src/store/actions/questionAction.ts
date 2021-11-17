@@ -50,6 +50,21 @@ interface SaveQuestionDataFailAction {
   payload: string
 }
 
+interface UpdateQuestionDataAction {
+  type: QuestionActionType.UPDATE_QUESTION_DATA,
+  id: string,
+}
+
+interface UpdateQuestionDataSuccessAction {
+  type: QuestionActionType.UPDATE_QUESTION_DATA_SUCCESS,
+  payload: object,
+}
+
+interface UpdateQuestionDataFailAction {
+  type: QuestionActionType.UPDATE_QUESTION_DATA_ERROR,
+  payload: string
+}
+
 export type QuestionAction =
   | FetchQuestionListAction
   | FetchQuestionListFailAction
@@ -61,3 +76,6 @@ export type QuestionAction =
   | SaveQuestionDataAction
   | SaveQuestionDataFailAction
   | SaveQuestionDataSuccessAction
+  | UpdateQuestionDataAction
+  | UpdateQuestionDataSuccessAction
+  | UpdateQuestionDataFailAction

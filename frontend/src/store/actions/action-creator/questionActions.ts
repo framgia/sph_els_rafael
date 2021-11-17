@@ -44,4 +44,17 @@ export const saveQuestionData = (Data: Question, id: string) => ({
   },
 })
 
+export const updateQuestionData = (Data: Question, id: string) => ({
+  type: QuestionActionType.UPDATE_QUESTION_DATA,
+  payload: {
+    meta: {
+      api: {
+        method: "put",
+        url: `/api/question/${id}`,
+        data: Data,
+      },
+    },
+  },
+})
+
 
