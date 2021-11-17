@@ -3,7 +3,7 @@ import { Action } from '../actions'
 import { put, takeEvery, call } from "redux-saga/effects";
 import Question from "@model/questionModel";
 import Quiz from "@model/quizModels";
-import { getQuizList } from '../actions/action-creator'
+import { getQuestionList } from '../actions/action-creator'
 import Swal, { SweetAlertIcon } from 'sweetalert2'
 
 interface QuestionState {
@@ -67,8 +67,64 @@ const reducer = (
         quizDataLoading: false,
         error: action.payload
       }
+    case QuestionActionType.EDIT_QUESTION_MODAL:
+      return {
+        ...state,
+        editQuestionDetails: action.payload,
+        error: null,
+      }
+    case QuestionActionType.SAVE_QUESTION_DATA:
+      return {
+        ...state,
+        SaveLoading: true,
+      }
+    case QuestionActionType.SAVE_QUESTION_DATA_SUCCESS:
+      return {
+        ...state,
+        editQuestionDetails: null,
+        isSuccess: true,
+        SaveLoading: false,
+      }
+    case QuestionActionType.SAVE_QUESTION_DATA_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        SaveLoading: false,
+      }
     default:
       return state;
+  }
+}
+
+
+export const questionsSaga = [
+  takeEvery(QuestionActionType.SAVE_QUESTION_DATA_SUCCESS, showAlert),
+  takeEvery(QuestionActionType.SAVE_QUESTION_DATA_ERROR, showAlert),
+]
+
+function* showAlert(action: Action) {
+  type Icon = SweetAlertIcon;
+
+  let icon: Icon = action.type === QuestionActionType.SAVE_QUESTION_DATA_SUCCESS
+    ? "success" : 'error';
+  let title = action.type === QuestionActionType.SAVE_QUESTION_DATA_SUCCESS
+    ? "Sucessfully Save" : 'error in saving';
+
+  Swal.fire({
+    icon: `${icon}`,
+    title: title,
+    showConfirmButton: false,
+    timer: 1500
+  })
+
+  yield call(getQuestionListSaga, action);
+}
+
+function* getQuestionListSaga(action: Action) {
+  if (action.type === QuestionActionType.SAVE_QUESTION_DATA_SUCCESS) {
+    const data: any = action.payload;
+    const { question: { quiz_id } } = data;
+    yield put(getQuestionList(quiz_id));
   }
 }
 

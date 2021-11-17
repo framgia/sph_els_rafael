@@ -5,7 +5,7 @@ import QuestionColumns from './QuestionColumns';
 import Questions from '@model/questionModel';
 import { Action } from '../../store/actions/index'
 import { bindActionCreators } from 'redux';
-import { editQuizAdminModal } from '../../store/actions/action-creator/'
+import { editQuestionModal } from '../../store/actions/action-creator/'
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import Spinner from '@components/UI/Spinner/Spinner';
@@ -17,11 +17,12 @@ interface RProps {
 
 type Props = RProps & LinkDispatchProps;
 
-const QuestionList: FC<Props> = ({ loading, data }) => {
+const QuestionList: FC<Props> = ({ loading, data, openModal }) => {
   return (
     <Boxwidget
       btnName="Add Question"
-      title="Question">
+      title="Question"
+      action={() => openModal({})}>
       {loading ? (
         <Spinner />
       ) : (
@@ -32,12 +33,12 @@ const QuestionList: FC<Props> = ({ loading, data }) => {
 }
 
 interface LinkDispatchProps {
-  editQuizAdminModal: (data: object) => void;
+  openModal: (data: object) => void;
 }
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: RProps): LinkDispatchProps => ({
 
-  editQuizAdminModal: bindActionCreators(editQuizAdminModal, dispatch)
+  openModal: bindActionCreators(editQuestionModal, dispatch)
 })
 
 export default connect(null, mapDispatchToProps)(QuestionList);

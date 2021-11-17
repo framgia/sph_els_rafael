@@ -6,6 +6,12 @@ enum QuestionActionTypes {
   FETCH_QUIZ_DATA = "[FETCH_QUIZ_DATA] - fetch quiz data",
   FETCH_QUIZ_DATA_SUCCESS = "[FETCH_QUIZ_DATA] - fetch quiz data success",
   FETCH_QUIZ_DATA_FAIL = "[FETCH_QUIZ_DATA] - fetch quiz data error",
+
+  EDIT_QUESTION_MODAL = "[EDIT_QUESTION_MODAL] - edit question admin modal",
+
+  SAVE_QUESTION_DATA = "[SAVE_QUESTION_DATA] - save question data",
+  SAVE_QUESTION_DATA_SUCCESS = "[SAVE_QUESTION_DATA] - save question data success",
+  SAVE_QUESTION_DATA_ERROR = "[SAVE_QUESTION_DATA] - save question data error",
 }
 
 export default QuestionActionTypes;
