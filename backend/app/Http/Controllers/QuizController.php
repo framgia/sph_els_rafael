@@ -23,6 +23,11 @@ class QuizController extends Controller
         return Quiz::create($request->all());
     }
 
+    public function show($id)
+    {
+        return Quiz::where('id', $id)->get()->first();
+    }
+
     public function update(Request $request, $id)
     {
         $quiz = Quiz::find($id);
