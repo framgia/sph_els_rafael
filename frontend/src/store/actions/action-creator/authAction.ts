@@ -19,11 +19,13 @@ export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Actio
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('userid', data.user.id);
+    localStorage.setItem('role', data.user.role);
 
     dispatch({
       type: AuthActionType.AUTH_SUCCESS,
       user: data.user,
       idToken: data.token,
+      userRole: data.user.role,
     })
 
   } catch (err: any) {
@@ -36,18 +38,31 @@ export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Actio
 };
 
 export const authCheckState = () => async (dispatch: Dispatch<Action>) => {
-
   let token = localStorage.getItem('token');
   if (!token) {
     await authLogout();
   } else {
-    dispatch({
-      type: AuthActionType.AUTH_SUCCESS,
-      idToken: token,
-      user: null,
-    })
+    try {
+      const { data } = await Http.get("/api/checkAuth");
+      dispatch({
+        type: AuthActionType.AUTH_SUCCESS,
+        idToken: token,
+        user: data,
+        userRole: Number(data.role),
+      })
+    } catch (error: any) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('userid');
+      localStorage.removeItem('role');
+      dispatch({
+        type: AuthActionType.AUTH_FAIL,
+        payload: error.message,
+        status: error.status,
+      })
+    }
   }
 }
+
 
 export const authLogout = () => async (dispatch: Dispatch<Action>): Promise<any> => {
 
@@ -60,6 +75,7 @@ export const authLogout = () => async (dispatch: Dispatch<Action>): Promise<any>
 
     localStorage.removeItem('token');
     localStorage.removeItem('userid');
+    localStorage.removeItem('role');
     dispatch({
       type: AuthActionType.AUTH_LOGOUT_SUCCESS,
     })
@@ -86,11 +102,13 @@ export const register = (DataForm: FormData) => async (dispatch: Dispatch<Action
 
     localStorage.setItem('token', data.token);
     localStorage.setItem('userid', data.user.id);
+    localStorage.setItem('role', data.user.role);
 
     dispatch({
       type: AuthActionType.REGISTER_START_SUCCESS,
       user: data.user,
       idToken: data.token,
+      userRole: data.user.role
     })
   } catch (error) {
     const err = error as AxiosError;

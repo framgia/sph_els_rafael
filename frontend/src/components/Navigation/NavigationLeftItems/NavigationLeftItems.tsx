@@ -1,18 +1,34 @@
 import { FC } from 'react';
 import NavigationLeftItem from './NavigationLeftItem/NavigationLeftItem'
+import { RootState } from '@store/reducers'
+import { connect } from 'react-redux'
 
-const NavigationLeftItems: FC = (props) => {
+type Props = LinkStateProps;
+const NavigationLeftItems: FC<Props> = ({ role }) => {
     return (
-        <ul className="flex justify-between items-center">
-            <NavigationLeftItem link="/" exact>
-                Quizzes
-            </NavigationLeftItem>
-            <NavigationLeftItem link="/users" exact>
-                Users
-            </NavigationLeftItem>
-        </ul>
+        <div className="hidden md:flex items-center space-x-1">
+            {(role === 0 || role === 1) && (
+                <>
+                    <NavigationLeftItem link="/quizzes" exact>
+                        Quizzes
+                    </NavigationLeftItem>
+                    <NavigationLeftItem link="/users" exact>
+                        Users
+                    </NavigationLeftItem>
+                </>
+            )}
+        </div>
     )
 }
 
-export default NavigationLeftItems;
+interface LinkStateProps {
+    role: number | null,
+}
+
+const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
+    role: state.auth.userRole
+})
+
+export default connect(mapStateToProps, null)(NavigationLeftItems);
+
 

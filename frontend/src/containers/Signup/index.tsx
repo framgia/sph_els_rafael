@@ -68,8 +68,8 @@ const Signup: FC<Props> = ({ errorMessage, registerLoading }) => {
             className="mt-2 mr-5 font-sans bg-white rounded-full  leading-tight text-lg py-2 text-black w-full"
           />
           {errorMessage && errorMessage.fname &&
-            errorMessage.fname.map((err) => (
-              <span className="text-xs font-sans font-bold text-red-600">{err}</span>
+            errorMessage.fname.map((err, id) => (
+              <span key={id} className="block text-xs font-sans font-bold text-red-600">{err}</span>
             ))
           }
         </div>
@@ -86,14 +86,14 @@ const Signup: FC<Props> = ({ errorMessage, registerLoading }) => {
             className="mt-2 font-sans bg-white rounded-full  leading-tight text-lg py-2 text-black w-full"
           />
           {errorMessage && errorMessage.mname &&
-            errorMessage.mname.map((err) => (
-              <span className="text-xs font-sans font-bold text-red-600">{err}</span>
+            errorMessage.mname.map((err, id) => (
+              <span key={id} className="block text-xs font-sans font-bold text-red-600">{err}</span>
             ))
           }
         </div>
         <div className="w-96 mb-2 mx-auto md:w-120">
           <label htmlFor="lname" className="block font-sans text-lg text-white font-bold">
-            Lname name
+            Last name
           </label>
           <input
             type="text"
@@ -104,8 +104,8 @@ const Signup: FC<Props> = ({ errorMessage, registerLoading }) => {
             className="mt-2 font-sans bg-white rounded-full  leading-tight text-lg py-2 text-black w-full"
           />
           {errorMessage && errorMessage.lname &&
-            errorMessage.lname.map((err) => (
-              <span className="text-xs font-sans font-bold text-red-600">{err}</span>
+            errorMessage.lname.map((err, id) => (
+              <span key={id} className="block text-xs font-sans font-bold text-red-600">{err}</span>
             ))
           }
         </div>
@@ -122,8 +122,8 @@ const Signup: FC<Props> = ({ errorMessage, registerLoading }) => {
             className="mt-2 font-sans bg-white rounded-full  leading-tight text-lg py-2 text-black w-full"
           />
           {errorMessage && errorMessage.email &&
-            errorMessage.email.map((err) => (
-              <span className="text-xs font-sans font-bold text-red-600">{err}</span>
+            errorMessage.email.map((err, id) => (
+              <span key={id} className="block text-xs font-sans font-bold text-red-600">{err}</span>
             ))
           }
         </div>
@@ -140,8 +140,8 @@ const Signup: FC<Props> = ({ errorMessage, registerLoading }) => {
             className="mt-2 font-sans bg-white rounded-full  leading-tight text-lg py-2 text-black w-full"
           />
           {errorMessage && errorMessage.password &&
-            errorMessage.password.map((err) => (
-              <span className="text-xs font-sans font-bold text-red-600">{err}</span>
+            errorMessage.password.map((err, id) => (
+              <span key={id} className="block text-xs font-sans font-bold text-red-600">{err}</span>
             ))
           }
         </div>

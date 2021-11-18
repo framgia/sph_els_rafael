@@ -30,7 +30,7 @@ const columns = [
                         <>
                             <div className="w-full flex flex-end">
                                 <Link
-                                    to={`/quiz/${original.id}/question`}
+                                    to={`/quizzes/${original.id}/question`}
                                     className="bg-gray-600 px-5 py-2 rounded-md text-white hover:bg-gray-800"
                                 >
                                     <PlusCircleIcon

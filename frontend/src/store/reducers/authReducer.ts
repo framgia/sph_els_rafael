@@ -7,6 +7,7 @@ interface AuthState {
   token: string | null;
   user: User | null,
   userId: string | null,
+  userRole: number | null,
   error: string | null,
   errorStatus: string | null,
   errorMessage: IRegisterErrorType | null,
@@ -17,7 +18,8 @@ interface AuthState {
 
 export const initialState = {
   token: localStorage.getItem("token"),
-  userId: localStorage.getItem("token"),
+  userId: localStorage.getItem("userid"),
+  userRole: Number(localStorage.getItem('role')),
   user: null,
   error: null,
   errorStatus: "",
@@ -42,6 +44,7 @@ const reducer = (
         ...state,
         token: action.idToken,
         user: action.user,
+        userRole: action.userRole,
         loading: false,
         error: null,
         errorMessage: null,
@@ -80,6 +83,7 @@ const reducer = (
       return {
         ...state,
         token: action.idToken,
+        userRole: action.userRole,
         user: action.user,
         registerLoading: false,
         errorMessage: null,
