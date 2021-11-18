@@ -16,6 +16,10 @@ enum QuestionActionTypes {
   UPDATE_QUESTION_DATA = "[UPDATE_QUESTION_DATA] - update question data",
   UPDATE_QUESTION_DATA_SUCCESS = "[UPDATE_QUESTION_DATA] - update question data success",
   UPDATE_QUESTION_DATA_ERROR = "[UPDATE_QUESTION_DATA] - update question data error",
+
+  DELETE_QUESTION_DATA = "[DELETE_QUESTION_DATA] - delete question data",
+  DELETE_QUESTION_DATA_SUCCESS = "[DELETE_QUESTION_DATA] - delete question data success",
+  DELETE_QUESTION_DATA_ERROR = "[DELETE_QUESTION_DATA] - delete question data error",
 }
 
 export default QuestionActionTypes;

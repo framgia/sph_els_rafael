@@ -1,6 +1,6 @@
 import TableActionColumns from "@components/UI/Table/TableActionColumns";
 import Choices from './Choices';
-import { editQuestionModal } from '@store/actions/action-creator/'
+import { editQuestionModal, deleteQuestionData } from '@store/actions/action-creator/'
 
 const columns = [
   {
@@ -38,6 +38,7 @@ const columns = [
               <TableActionColumns
                 original={original}
                 editAction={() => editQuestionModal(original)}
+                deleteAction={() => deleteQuestionData(original.id)}
               />
             </div>
           );

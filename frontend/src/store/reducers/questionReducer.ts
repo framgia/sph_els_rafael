@@ -120,6 +120,7 @@ export const questionsSaga = [
   takeEvery(QuestionActionType.SAVE_QUESTION_DATA_ERROR, showAlert),
   takeEvery(QuestionActionType.UPDATE_QUESTION_DATA_SUCCESS, showAlert),
   takeEvery(QuestionActionType.UPDATE_QUESTION_DATA_ERROR, showAlert),
+  takeEvery(QuestionActionType.DELETE_QUESTION_DATA_SUCCESS, showAlert),
 ]
 
 function* showAlert(action: Action) {
@@ -129,7 +130,8 @@ function* showAlert(action: Action) {
   let title = "Sucessfully Save";
 
   if (action.type === QuestionActionType.SAVE_QUESTION_DATA_ERROR &&
-    QuestionActionType.UPDATE_QUESTION_DATA_ERROR) {
+    QuestionActionType.UPDATE_QUESTION_DATA_ERROR &&
+    QuestionActionType.DELETE_QUESTION_DATA_ERROR) {
     icon = 'error';
     title = 'error in saving'
   }
@@ -149,6 +151,11 @@ function* getQuestionListSaga(action: Action) {
     action.type === QuestionActionType.UPDATE_QUESTION_DATA_SUCCESS) {
     const data: any = action && action.payload;
     const { question: { quiz_id } } = data;
+    yield put(getQuestionList(quiz_id));
+  }
+  if (action.type === QuestionActionType.DELETE_QUESTION_DATA_SUCCESS) {
+    const data: any = action && action.payload;
+    const { quiz_id } = data;
     yield put(getQuestionList(quiz_id));
   }
 }

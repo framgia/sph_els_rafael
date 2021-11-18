@@ -56,11 +56,7 @@ export const authLogout = () => async (dispatch: Dispatch<Action>): Promise<any>
       type: AuthActionType.AUTH_LOGOUT
     })
 
-    await Http.post("/api/logout", {
-      headers: {
-        "Accept": "application/json",
-      },
-    });
+    await Http.post("/api/logout");
 
     localStorage.removeItem('token');
     localStorage.removeItem('userid');
