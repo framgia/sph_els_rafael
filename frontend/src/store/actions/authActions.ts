@@ -9,6 +9,7 @@ interface AuthSuccessAction {
   type: AuthActionType.AUTH_SUCCESS,
   user: User | null,
   idToken: string,
+  userRole: number,
 }
 
 interface AuthFailAction {
@@ -43,6 +44,7 @@ interface RegisterSuccessAction {
   type: AuthActionType.REGISTER_START_SUCCESS,
   user: User | null,
   idToken: string,
+  userRole: number,
 }
 
 interface RegisterFailAction {

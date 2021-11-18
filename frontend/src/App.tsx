@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import AdminLayout from './hoc/Layout/AdminLayout';
+import MainLayout from './hoc/Layout/MainLayout';
 import LoginLayout from './hoc/Layout/LoginLayout';
 import { RootState } from '@store/reducers'
 import { authCheckState } from '@store/actions/action-creator/'
@@ -23,7 +23,7 @@ const App: FC<Props> = ({ token }) => {
   if (token) {
     routes = (
       <>
-        <Route path={["/"]} component={AdminLayout} />
+        <Route path={["/"]} component={MainLayout} />
       </>
     )
   } else {

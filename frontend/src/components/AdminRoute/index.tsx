@@ -1,17 +1,18 @@
-import { FC } from "react";
-import { connect } from "react-redux";
-import { Route, Redirect, RouteProps } from "react-router-dom";
+import { FC } from 'react'
+import { Route, Redirect, RouteProps, } from "react-router-dom";
 
 interface Props extends RouteProps {
-  isAuth: boolean;
-  role: number;
+  role?: number | null;
 }
 
-
-const AdminRoute: FC<Props> = ({ component: Component, isAuth, role, ...rest }) => {
-  if (!isAuth) {
-    <Route {...rest} />
-  }
-  return <Redirect to="/login" />
+const AdminRoute: FC<Props> = ({ component: Component, role, ...rest }) => {
+  if (!Component) return null;
+  return (<Route
+    {...rest}
+    render={(props) =>
+      (role === 0 || role === 1) ? <Component {...props} /> : <Redirect to="/logout" />
+    }
+  />)
 }
+
 export default AdminRoute
