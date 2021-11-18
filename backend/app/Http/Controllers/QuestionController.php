@@ -6,7 +6,7 @@ use App\Http\Requests\QuestionRequest;
 use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\QuestionChoice;
-
+use Symfony\Component\Console\Question\ChoiceQuestion;
 
 class QuestionController extends Controller
 {
@@ -58,7 +58,23 @@ class QuestionController extends Controller
 
         $question->update(['word' => $request->word]);
 
-        return $question;
+        $choices = array();
+
+        foreach ($request->choices as $value) {
+            $choice =  QuestionChoice::find($value['id']);
+            $choice->update([
+                'choice' => $value['choice'],
+                'isCorrect' => $value['isCorrect']
+            ]);
+            array_push($choices, $choice);
+        }
+
+        $response = [
+            'question' => $question,
+            'choices' => $choices,
+        ];
+
+        return response()->json($response, 201);
     }
 
     public function destroy($id)

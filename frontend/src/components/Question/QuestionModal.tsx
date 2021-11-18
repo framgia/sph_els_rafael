@@ -12,7 +12,8 @@ import Question from '@model/questionModel';
 import Choice from '@model/choicesModel';
 import {
   editQuestionModal,
-  saveQuestionData
+  saveQuestionData,
+  updateQuestionData
 } from '@store/actions/action-creator/';
 import { produce } from 'immer'
 import ChoicesInput from './ChoicesInput'
@@ -22,9 +23,10 @@ import Swal from 'sweetalert2';
 
 type Props = LinkDispatchProps & LinkStateProps;
 const QuestionModal: FC<Props> = ({ editQuestionModal,
-  editUserDetails,
+  editQuestionDetails,
   saveLoading,
-  saveData, error }) => {
+  saveData, error,
+  updateData }) => {
 
   let { id } = useParams<any>();
   const [question, setQuestion] = useState<Question>({
@@ -39,6 +41,27 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
   ]);
 
   const [errorState, setErrorState] = useState<any>([]);
+
+
+  useEffect(() => {
+    const { word, question_choices, id } = (editQuestionDetails && editQuestionDetails)
+      || {
+      question_choices: [
+        { choice: "", isCorrect: false },
+        { choice: "", isCorrect: false },
+        { choice: "", isCorrect: false },
+        { choice: "", isCorrect: false },
+      ]
+    }
+
+    editQuestionDetails && setQuestion({
+      id,
+      word
+    })
+
+    question_choices && setChoices(question_choices)
+
+  }, [editQuestionDetails]);
 
   const questionHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -73,9 +96,9 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
 
   const saveQuestion = () => {
     const data: Question = {
+      id: question.id,
       word: question.word,
       choices: [...choices],
-      quizId: id
     }
 
     const hasCorrectAnswer = data.choices?.some((item) => {
@@ -83,7 +106,10 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
     })
 
     if (hasCorrectAnswer) {
-      saveData(data, id);
+      data.id ?
+        updateData(data, id)
+        : saveData(data, id);
+
     } else {
       Swal.fire({
         icon: 'error',
@@ -103,7 +129,7 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
 
   return (
     <Modal
-      isOpen={editUserDetails ? true : false}
+      isOpen={editQuestionDetails ? true : false}
       title={
         <span>
           <PlusCircleIcon className="w-5 h-5" />&nbsp;Add Question
@@ -139,6 +165,7 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
               <ChoicesInput
                 key={i}
                 id={i}
+                choiceText={e.choice}
                 isCorrect={e.isCorrect}
                 btnClick={btnSetAnswer}
                 handler={choiceHandler}
@@ -169,7 +196,7 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
 }
 
 interface LinkStateProps {
-  editUserDetails: Question | any,
+  editQuestionDetails: Question | any,
   saveLoading: boolean,
   error: string | null;
 }
@@ -177,10 +204,11 @@ interface LinkStateProps {
 interface LinkDispatchProps {
   editQuestionModal: (data: object | null) => void;
   saveData: (Data: Question, id: string) => void;
+  updateData: (Data: Question, id: string) => void;
 }
 
 const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
-  editUserDetails: state.questions.editQuestionDetails,
+  editQuestionDetails: state.questions.editQuestionDetails,
   saveLoading: state.questions.SaveLoading,
   error: state.questions.error,
 })
@@ -188,6 +216,7 @@ const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: any): LinkDispatchProps => ({
   editQuestionModal: bindActionCreators(editQuestionModal, dispatch),
   saveData: bindActionCreators(saveQuestionData, dispatch),
+  updateData: bindActionCreators(updateQuestionData, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionModal)

@@ -91,6 +91,24 @@ const reducer = (
         error: action.payload,
         SaveLoading: false,
       }
+    case QuestionActionType.UPDATE_QUESTION_DATA:
+      return {
+        ...state,
+        SaveLoading: true,
+      }
+    case QuestionActionType.UPDATE_QUESTION_DATA_SUCCESS:
+      return {
+        ...state,
+        editQuestionDetails: null,
+        isSuccess: true,
+        SaveLoading: false,
+      }
+    case QuestionActionType.UPDATE_QUESTION_DATA_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        SaveLoading: false,
+      }
     default:
       return state;
   }
@@ -100,15 +118,21 @@ const reducer = (
 export const questionsSaga = [
   takeEvery(QuestionActionType.SAVE_QUESTION_DATA_SUCCESS, showAlert),
   takeEvery(QuestionActionType.SAVE_QUESTION_DATA_ERROR, showAlert),
+  takeEvery(QuestionActionType.UPDATE_QUESTION_DATA_SUCCESS, showAlert),
+  takeEvery(QuestionActionType.UPDATE_QUESTION_DATA_ERROR, showAlert),
 ]
 
 function* showAlert(action: Action) {
   type Icon = SweetAlertIcon;
 
-  let icon: Icon = action.type === QuestionActionType.SAVE_QUESTION_DATA_SUCCESS
-    ? "success" : 'error';
-  let title = action.type === QuestionActionType.SAVE_QUESTION_DATA_SUCCESS
-    ? "Sucessfully Save" : 'error in saving';
+  let icon: Icon = "success";
+  let title = "Sucessfully Save";
+
+  if (action.type === QuestionActionType.SAVE_QUESTION_DATA_ERROR &&
+    QuestionActionType.UPDATE_QUESTION_DATA_ERROR) {
+    icon = 'error';
+    title = 'error in saving'
+  }
 
   Swal.fire({
     icon: `${icon}`,
@@ -121,8 +145,9 @@ function* showAlert(action: Action) {
 }
 
 function* getQuestionListSaga(action: Action) {
-  if (action.type === QuestionActionType.SAVE_QUESTION_DATA_SUCCESS) {
-    const data: any = action.payload;
+  if (action.type === QuestionActionType.SAVE_QUESTION_DATA_SUCCESS ||
+    action.type === QuestionActionType.UPDATE_QUESTION_DATA_SUCCESS) {
+    const data: any = action && action.payload;
     const { question: { quiz_id } } = data;
     yield put(getQuestionList(quiz_id));
   }

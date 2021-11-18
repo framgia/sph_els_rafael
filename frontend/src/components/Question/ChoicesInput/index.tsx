@@ -6,9 +6,10 @@ interface Props {
   handler: (e: React.ChangeEvent<HTMLInputElement>, id: number) => void;
   btnClick: (id: number) => void;
   isCorrect: boolean;
+  choiceText: string;
 }
 
-const ChoicesInput: FC<Props> = ({ id, handler, btnClick, isCorrect }) => {
+const ChoicesInput: FC<Props> = ({ id, handler, btnClick, isCorrect, choiceText }) => {
 
   return (
     <div className="my-auto">
@@ -19,6 +20,7 @@ const ChoicesInput: FC<Props> = ({ id, handler, btnClick, isCorrect }) => {
         type="text"
         id="choice1"
         onChange={(e) => handler(e, id)}
+        value={choiceText || ""}
         className={`mt-1 mb-2 b-0 focus:ring-indigo-500 
         focus:border-indigo-500 
         block w-11/12 sm:text-sm rounded-md ${isCorrect && 'border-green-400 border-2 ring-0'}`}

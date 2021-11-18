@@ -27,7 +27,6 @@ export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Actio
     })
 
   } catch (err: any) {
-    console.log(err);
     dispatch({
       type: AuthActionType.AUTH_FAIL,
       payload: err.message,
