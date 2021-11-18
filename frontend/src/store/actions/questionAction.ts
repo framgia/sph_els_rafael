@@ -65,6 +65,22 @@ interface UpdateQuestionDataFailAction {
   payload: string
 }
 
+
+interface DeleteQuestionDataAction {
+  type: QuestionActionType.DELETE_QUESTION_DATA,
+  id: string,
+}
+
+interface DeleteQuestionDataSuccessAction {
+  type: QuestionActionType.DELETE_QUESTION_DATA_SUCCESS,
+  payload: object,
+}
+
+interface DeleteQuestionDataFailAction {
+  type: QuestionActionType.DELETE_QUESTION_DATA_ERROR,
+  payload: string
+}
+
 export type QuestionAction =
   | FetchQuestionListAction
   | FetchQuestionListFailAction
@@ -79,3 +95,6 @@ export type QuestionAction =
   | UpdateQuestionDataAction
   | UpdateQuestionDataSuccessAction
   | UpdateQuestionDataFailAction
+  | DeleteQuestionDataAction
+  | DeleteQuestionDataSuccessAction
+  | DeleteQuestionDataFailAction

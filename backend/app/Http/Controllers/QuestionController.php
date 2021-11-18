@@ -86,6 +86,8 @@ class QuestionController extends Controller
                 'message' => 'Not found',
             ], 404);
 
-        return Question::destroy($id);
+        Question::destroy($id);
+
+        return $question;
     }
 }

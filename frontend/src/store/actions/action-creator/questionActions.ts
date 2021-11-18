@@ -57,4 +57,17 @@ export const updateQuestionData = (Data: Question, id: string) => ({
   },
 })
 
+export const deleteQuestionData = (id: string) => ({
+  type: QuestionActionType.DELETE_QUESTION_DATA,
+  payload: {
+    meta: {
+      api: {
+        method: "delete",
+        url: `/api/question/${id}`,
+      },
+    },
+  },
+})
+
+
 
