@@ -5,24 +5,21 @@ import classes from './NavigationLeftItem.module.css';
 interface Props {
     link: string,
     exact: boolean;
-    component?: React.ComponentType<any>;
     path?: string | string[];
-    sensitive?: boolean;
-    strict?: boolean;
 }
 
 const NavigationLeftItem: FC<Props> = (props) => {
     return (
-        <li className={classes.NavigationItem}>
-            <NavLink
-                to={props.link}
-                exact={props.exact}
 
-                activeStyle={{ fontWeight: 'bolder', fontSize: "1.5rem" }}
-            >
-                {props.children}
-            </NavLink>
-        </li>
+        <NavLink
+            to={props.link}
+            exact={props.exact}
+            className="py-5 font-sans px-3 text-base text-white  hover:font-bold"
+            activeStyle={{ fontWeight: 'bolder', fontSize: "1.5rem" }}
+        >
+            {props.children}
+        </NavLink>
+
     )
 }
 

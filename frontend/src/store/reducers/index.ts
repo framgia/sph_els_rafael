@@ -5,6 +5,7 @@ import quizReducer, { quizzesSaga } from './quizReducer';
 import userReducer, { usersSaga } from './userReducer';
 import authReducer from './authReducer';
 import questionReducer, { questionsSaga } from './questionReducer';
+import layoutReducer from './layoutReducer';
 
 export function* rootSaga() {
   yield all([...quizzesSaga]);
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   users: userReducer,
   auth: authReducer,
   questions: questionReducer,
+  layout: layoutReducer,
 });
 
 export default reducers;
