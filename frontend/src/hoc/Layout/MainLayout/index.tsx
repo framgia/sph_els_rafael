@@ -12,6 +12,7 @@ import AdminRoute from '@components/AdminRoute';
 import { RootState } from '@store/reducers'
 import { connect } from 'react-redux'
 import Spinner from '@components/UI/Spinner/Spinner';
+import HamburgerBtn from '@components/Navigation/HamburgerBtn';
 const Logout = lazy(() => import("@containers/Auth/Logout"));
 
 
@@ -34,6 +35,7 @@ const Layout: FC<Props> = ({ role }) => {
             <DropdownMenu></DropdownMenu>
           </NavigationItem>
         </div>
+        <HamburgerBtn />
       </Topbar>
       <main className="m-10 h-4/5">
         <Switch>
