@@ -36,6 +36,9 @@ module.exports = {
   variants: {
     extend: {
       outline: ["hover", "active"],
+      cursor: ["hover", "focus"],
+      fontStyle: ["hover", "focus"],
+      fontWeight: ["hover", "focus"],
     },
     screens: {
       sm: "640px",

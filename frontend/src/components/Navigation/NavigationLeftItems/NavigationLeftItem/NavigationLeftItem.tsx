@@ -14,8 +14,8 @@ const NavigationLeftItem: FC<Props> = (props) => {
         <NavLink
             to={props.link}
             exact={props.exact}
-            className="py-5 font-sans px-3 text-base text-white  hover:font-bold"
-            activeStyle={{ fontWeight: 'bolder', fontSize: "1.5rem" }}
+            className="py-5 font-sans px-3 text-base text-white  hover:underline hover:font-bold"
+            activeClassName="font-bold text-xl"
         >
             {props.children}
         </NavLink>
