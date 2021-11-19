@@ -7,15 +7,14 @@ import NavigationLeftItems from '@components/Navigation/NavigationLeftItems/Navi
 import Logo from '@components/SVG/Logo';
 import { ReactComponent as CaretIcon } from '@assets/Icons/caret.svg';
 import { ReactComponent as BellIcon } from '@assets/Icons/bell.svg';
-import { routable } from '../../../routes/MainRoutes';
+import { routable } from '@myroutes/MainRoutes';
 import AdminRoute from '@components/AdminRoute';
 import { RootState } from '@store/reducers'
 import { connect } from 'react-redux'
 import Spinner from '@components/UI/Spinner/Spinner';
 import HamburgerBtn from '@components/Navigation/HamburgerBtn';
 const Logout = lazy(() => import("@containers/Auth/Logout"));
-
-
+const Dashboard = lazy(() => import("@containers/Dashboard"));
 
 type Props = LinkStateProps;
 const Layout: FC<Props> = ({ role }) => {
@@ -25,7 +24,8 @@ const Layout: FC<Props> = ({ role }) => {
         <div>
           <a className="flex items-center py-5 px-2 text-White">
             <Logo />
-            <span className="font-bold text-sans text-lg lg:text-3xl">E-Learning Management | Admin</span>
+            <span className="font-bold text-sans text-lg lg:text-3xl">
+              E-Learning Management | {role === 2 ? "Student" : "Admin"}</span>
           </a>
         </div>
         <NavigationLeftItems />
@@ -40,6 +40,7 @@ const Layout: FC<Props> = ({ role }) => {
       <main className="m-10 h-4/5">
         <Switch>
           <Suspense fallback={<Spinner />}>
+            <Route path="/" exact component={Dashboard} />
             {routable.map(
               (route, idx) =>
                 route.component && route.isAdmin && (

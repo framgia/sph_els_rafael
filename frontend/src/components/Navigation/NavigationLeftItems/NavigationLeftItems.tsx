@@ -7,6 +7,9 @@ type Props = LinkStateProps;
 const NavigationLeftItems: FC<Props> = ({ role }) => {
     return (
         <div className="hidden md:flex items-center space-x-1">
+            <NavigationLeftItem link="/" exact>
+                Dashboard
+            </NavigationLeftItem>
             {(role === 0 || role === 1) && (
                 <>
                     <NavigationLeftItem link="/quizzes" exact>
