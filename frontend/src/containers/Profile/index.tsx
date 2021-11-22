@@ -1,9 +1,6 @@
 import { FC } from 'react';
-import UserProfile from '@components/UserProfile'
-const Profile: FC = () => {
-  return (
-    <UserProfile />
-  );
-}
+import UserProfile from '@components/User/UserProfile'
+
+const Profile: FC = () => (<UserProfile />)
 
 export default Profile;
