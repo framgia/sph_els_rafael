@@ -1,0 +1,20 @@
+.userCard {
+  @apply font-sans min-w-min
+  max-h-60 overflow-auto py-4 px-8 
+  bg-gray-700 shadow-lg rounded-lg 
+  my-10 flex flex-col items-center 
+  justify-center;
+}
+
+.userCardImg {
+  @apply w-32 rounded-xl;
+}
+
+.userCardName {
+  @apply mb-5 text-white font-sans font-bold;
+}
+
+.userCardAction {
+  @apply capitalize font-bold border-0 bg-purple-700 
+  text-white px-10 py-2 rounded-full hover:bg-purple-800;
+}
