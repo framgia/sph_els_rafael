@@ -6,6 +6,7 @@ const UserAdmin = lazy(() => import('@containers/UsersContainer/UserCon'));
 const Question = lazy(() => import("@containers/QuestionCon"));
 const Profile = lazy(() => import("@containers/Profile"));
 const LearnWords = lazy(() => import("@containers/LearnWords"));
+const StudentQuiz = lazy(() => import("@containers/Quizzes"));
 
 export type Page<P = unknown> = RouteProps & {
   path: string;
@@ -37,6 +38,11 @@ export const routable: Page[] = [
   , {
     path: '/learnWords/:id',
     component: LearnWords,
+    isAdmin: false,
+  },
+  {
+    path: '/student/quizzes',
+    component: StudentQuiz,
     isAdmin: false,
   }
 ]
