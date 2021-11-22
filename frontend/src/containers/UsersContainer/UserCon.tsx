@@ -1,9 +1,6 @@
 import { FC } from 'react';
-import UserAdmin from '@components/Users/UserAdmin';
-
+import UserAdmin from '@components/UsersAdmin/UserAdmin';
 
 const UserCon: FC = () => (<UserAdmin />)
 
-
 export default UserCon
-
