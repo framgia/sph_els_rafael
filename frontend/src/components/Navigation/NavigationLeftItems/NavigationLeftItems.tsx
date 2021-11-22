@@ -10,12 +10,21 @@ const NavigationLeftItems: FC<Props> = ({ role }) => {
             <NavigationLeftItem link="/" exact>
                 Dashboard
             </NavigationLeftItem>
-            {(role === 0 || role === 1) && (
+            {(role === 0 || role === 1) ? (
                 <>
                     <NavigationLeftItem link="/quizzes" exact>
                         Quizzes
                     </NavigationLeftItem>
                     <NavigationLeftItem link="/users" exact>
+                        Users
+                    </NavigationLeftItem>
+                </>
+            ) : (
+                <>
+                    <NavigationLeftItem link="/student/quizzes" exact>
+                        Quizzes
+                    </NavigationLeftItem>
+                    <NavigationLeftItem link="/student/users" exact>
                         Users
                     </NavigationLeftItem>
                 </>
