@@ -9,6 +9,7 @@ import { ReactComponent as CaretIcon } from '@assets/Icons/caret.svg';
 import { ReactComponent as BellIcon } from '@assets/Icons/bell.svg';
 import { routable } from '@myroutes/MainRoutes';
 import AdminRoute from '@components/AdminRoute';
+import StudentRoute from '@components/StudentRoute';
 import { RootState } from '@store/reducers'
 import { connect } from 'react-redux'
 import Spinner from '@components/UI/Spinner/Spinner';
@@ -43,13 +44,21 @@ const Layout: FC<Props> = ({ role }) => {
             <Route path="/" exact component={Dashboard} />
             {routable.map(
               (route, idx) =>
-                route.component && route.isAdmin && (
+                route.component && route.isAdmin ? (
                   <AdminRoute
                     key={idx}
                     role={role}
                     path={route.path}
                     exact={route.exact}
                     component={route.component} />
+                ) : (
+                  <StudentRoute
+                    key={idx}
+                    role={role}
+                    path={route.path}
+                    exact={route.exact}
+                    component={route.component}
+                  />
                 )
             )}
             <Route path="/Logout" component={Logout} />
