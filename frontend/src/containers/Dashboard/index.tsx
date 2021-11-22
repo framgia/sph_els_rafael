@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Activities from '@components/Activities';
-import UserDetail from '@components/UserDetail';
+import UserDetail from '@components/User/UserDetail';
 
 const Dashboard: FC = () => {
   return (
