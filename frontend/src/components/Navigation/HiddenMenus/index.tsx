@@ -10,7 +10,7 @@ const HiddenMenus: FC<Props> = ({ role, show }) => {
       <HiddenMenu link="/" exact>
         Dashboard
       </HiddenMenu>
-      {(role === 0 || role === 1) && (
+      {(role === 0 || role === 1) ? (
         <>
           <HiddenMenu link="/quizzes" exact>
             Quizzes
@@ -19,6 +19,17 @@ const HiddenMenus: FC<Props> = ({ role, show }) => {
             Users
           </HiddenMenu>
         </>
+      ) : (
+        (
+          <>
+            <HiddenMenu link="/student/quizzes" exact>
+              Quizzes
+            </HiddenMenu>
+            <HiddenMenu link="/student/users" exact>
+              Users
+            </HiddenMenu>
+          </>
+        )
       )}
     </div>
   )
