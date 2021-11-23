@@ -98,11 +98,11 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
     const data: Question = {
       id: question.id,
       word: question.word,
-      choices: [...choices],
+      question_choices: [...choices],
     }
 
-    const hasCorrectAnswer = data.choices?.some((item) => {
-      return item.isCorrect == true;
+    const hasCorrectAnswer = data.question_choices?.some((item) => {
+      return item.isCorrect === true;
     })
 
     if (hasCorrectAnswer) {

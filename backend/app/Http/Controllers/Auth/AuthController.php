@@ -21,7 +21,8 @@ class AuthController extends Controller
                 'message' => 'Bad creds',
             ], 401);
         }
-        $token = $user->role == 0 || 1 ?
+        
+        $token = $user->role == 0 || $user->role == 1 ?
             $user->createToken('admin', ['adminAccess'])->plainTextToken :
             $token = $user->createToken('myapptoken', ['studentAccess'])->plainTextToken;
 

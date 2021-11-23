@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 class QuizController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return Quiz::all();
+
+        return $request->user()->tokenCan('adminAccess') ?
+            Quiz::all() : Quiz::paginate(8);
     }
 
     public function store(Request $request)
