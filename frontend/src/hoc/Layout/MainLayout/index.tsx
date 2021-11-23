@@ -16,6 +16,7 @@ import Spinner from '@components/UI/Spinner/Spinner';
 import HamburgerBtn from '@components/Navigation/HamburgerBtn';
 const Logout = lazy(() => import("@containers/Auth/Logout"));
 const Dashboard = lazy(() => import("@containers/Dashboard"));
+const Settings = lazy(()=> import("@components/UserSettings"));
 
 type Props = LinkStateProps;
 const Layout: FC<Props> = ({ role }) => {
@@ -62,6 +63,7 @@ const Layout: FC<Props> = ({ role }) => {
                 )
             )}
             <Route path="/Logout" component={Logout} />
+            <Route path="/settings" component={Settings} />
             <Redirect to="/" />
           </Suspense>
         </Switch>
