@@ -16,13 +16,14 @@ const DropdownMenu: FC = () => {
                     <i className="fas fa-id-card self-center mr-2"></i>
                     <span className="self-center">My Profile</span>
                 </Link>
-                <DropdownItem
-                    LeftIcon={CogIcon}
-                    RightIcon={ChevronIcon}>
-                    Settings
-                </DropdownItem>
+                <Link className="h-10 flex align-center font-bold 
+                text-lg pl-5 hover:bg-gray-700" to={`/Settings/UserDetails`}>
+                   <i className="fas fa-cogs self-center mr-2"></i>
+                    <span className="self-center">Settings</span>
+                </Link>
                 <Link className="h-10 flex align-center font-bold 
                 text-xl pl-5 hover:bg-gray-700" to='/logout'>
+                    <i className="fas fa-sign-out-alt self-center mr-2"></i>
                     Logout
                 </Link>
             </div>
@@ -31,5 +32,3 @@ const DropdownMenu: FC = () => {
 };
 
 export default DropdownMenu;
-
-
