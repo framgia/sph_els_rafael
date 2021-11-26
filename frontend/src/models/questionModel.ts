@@ -4,7 +4,7 @@ type Question = {
   id?: number;
   word: string;
   quizId?: number,
-  choices?: Choices[],
+  question_choices?: Choices[],
 }
 
 export default Question;

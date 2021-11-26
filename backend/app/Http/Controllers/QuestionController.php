@@ -30,7 +30,7 @@ class QuestionController extends Controller
 
         $choices = array();
 
-        foreach ($request->choices as $value) {
+        foreach ($request->question_choices as $value) {
             $data = array(
                 'question_id' => $question->id,
                 'choice' => $value['choice'],
@@ -60,7 +60,7 @@ class QuestionController extends Controller
 
         $choices = array();
 
-        foreach ($request->choices as $value) {
+        foreach ($request->question_choices as $value) {
             $choice =  QuestionChoice::find($value['id']);
             $choice->update([
                 'choice' => $value['choice'],

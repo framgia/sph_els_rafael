@@ -15,9 +15,9 @@ class QuestionRequest extends FormRequest
     {
         return [
             'word' => 'required|min:5',
-            'choices' => 'required|array|min:4|max:4',
-            'choices.*.choice' => 'required|string',
-            'choices.*.isCorrect' => 'required|boolean'
+            'question_choices' => 'required|array|min:4|max:4',
+            'question_choices.*.choice' => 'required|string',
+            'question_choices.*.isCorrect' => 'required|boolean'
         ];
     }
 }

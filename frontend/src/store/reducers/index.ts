@@ -6,6 +6,8 @@ import userReducer, { usersSaga } from './userReducer';
 import authReducer from './authReducer';
 import questionReducer, { questionsSaga } from './questionReducer';
 import layoutReducer from './layoutReducer';
+import studentQuizReducer from './quizStudentReducer';
+import takeQuizReducer from './takeQuizReducer';
 
 export function* rootSaga() {
   yield all([...quizzesSaga]);
@@ -19,11 +21,10 @@ const reducers = combineReducers({
   auth: authReducer,
   questions: questionReducer,
   layout: layoutReducer,
+  quizStudent: studentQuizReducer,
+  takeQuiz: takeQuizReducer,
 });
 
 export default reducers;
 
 export type RootState = ReturnType<typeof reducers>
-
-
-

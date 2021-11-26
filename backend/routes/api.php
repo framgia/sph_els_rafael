@@ -12,13 +12,18 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('/logout', [AuthController::class, 'logout']);
   Route::get('/checkAuth', [AuthController::class, 'checkAuth']);
+  Route::get('/quizzes', [QuizController::class, 'index']);
+  Route::get('/quizzes/{id}', [QuizController::class, 'show']);
+  Route::get('/quiz/{id}/questions', [QuestionController::class, 'show']);
+
   Route::group(['middleware' => ['isAdmin']], function () {
-    Route::resource('quizzes', QuizController::class);
-    Route::resource('users', UserController::class);
+    Route::apiResource('quizzes', QuizController::class)->only([
+      'store', 'update', 'destroy',
+    ]);
     Route::get('/questions', [QuestionController::class, 'index']);
-    Route::get('/quiz/{id}/questions', [QuestionController::class, 'show']);
     Route::post('/quiz/{id}/question', [QuestionController::class, 'store']);
     Route::put('/question/{id}', [QuestionController::class, 'update']);
     Route::delete('/question/{id}', [QuestionController::class, 'destroy']);
+    Route::apiResource('users', UserController::class);
   });
 });

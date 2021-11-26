@@ -1,0 +1,21 @@
+.pagination {
+  @apply flex pl-0 rounded list-none flex-wrap;
+}
+
+.paginationNumbers {
+  @apply bg-gray-700
+     border-gray-700 
+     text-white 
+     relative 
+     inline-flex
+      items-center 
+      px-4 py-2 
+      border 
+      text-xs 
+      font-medium
+      hover:bg-black;
+}
+
+.paginationCurrentNumber {
+  @apply bg-black border-black text-white  relative inline-flex items-center px-4 py-2 border text-xs font-medium;
+}

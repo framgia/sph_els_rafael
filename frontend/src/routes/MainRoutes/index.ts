@@ -8,6 +8,8 @@ const Profile = lazy(() => import("@containers/Profile"));
 const LearnWords = lazy(() => import("@containers/LearnWords"));
 const StudentQuiz = lazy(() => import("@containers/Quizzes"));
 const StudentUser = lazy(() => import("@containers/StudentUserCon"));
+const StudentTakeQuiz = lazy(()=> import("@containers/TakeQuiz"));
+const StudentResultPage = lazy(()=> import("@containers/ResultPageCon"));
 
 export type Page<P = unknown> = RouteProps & {
   path: string;
@@ -50,6 +52,18 @@ export const routable: Page[] = [
     path: '/student/users',
     component: StudentUser,
     isAdmin: false,
+  },
+  {
+    path: '/student/result',
+    component: StudentResultPage,
+    exact:true,
+    isAdmin: false,
+  },
+  {
+    path: '/student/quiz/:id',
+    component: StudentTakeQuiz,
+    isAdmin: false,
   }
+  
 ]
 
