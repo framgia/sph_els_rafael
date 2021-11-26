@@ -10,20 +10,20 @@ class UserAnswer extends Model
     use HasFactory;
     protected $table = 'user_answers_table';
 
-    protected $fillable = ['question_id', 'choice_id', 'u_id'];
+    protected $fillable = ['question_id', 'question_choice_id', 'user_id'];
 
     public function question()
     {
-        return $this->belongsToMany(Question::class, "question_id");
+        return $this->belongsTo(Question::class, "question_id");
     }
 
     public function user()
     {
-        return $this->belongsToMany(User::class, "u_id");
+        return $this->belongsTo(User::class, "user_id");
     }
 
     public function questionChoice()
     {
-        return $this->belongsToMany(QuestionChoice::class, "choice_id");
+        return $this->belongsTo(QuestionChoice::class, "question_choice_id");
     }
 }

@@ -4,6 +4,8 @@ use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserAnswersController;
+use App\Models\UserAnswer;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -15,6 +17,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::get('/quizzes', [QuizController::class, 'index']);
   Route::get('/quizzes/{id}', [QuizController::class, 'show']);
   Route::get('/quiz/{id}/questions', [QuestionController::class, 'show']);
+  Route::apiResource('useranswers', UserAnswersController::class)->only([
+    'store', 'show'
+  ]);
 
   Route::group(['middleware' => ['isAdmin']], function () {
     Route::apiResource('quizzes', QuizController::class)->only([
