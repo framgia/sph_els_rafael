@@ -16,8 +16,25 @@ interface FetchStudentUserListFailAction {
   payload: string
 }
 
+interface FetchStudentUserAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_USER
+}
+
+interface FetchStudentUserSuccessAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_USER_SUCCESS,
+  payload: User,
+}
+
+interface FetchStudentUserFailAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_USER_FAIL,
+  payload: string
+}
+
 export type StudentUserAction =
   | FetchStudentUserListAction
   | FetchStudentUserListSuccessAction
   | FetchStudentUserListFailAction
+  | FetchStudentUserAction
+  | FetchStudentUserSuccessAction
+  | FetchStudentUserFailAction;
 

@@ -4,6 +4,8 @@ import User from "models/userModels";
 
 interface QuizState {
   userlist: User[] | null;
+  userLoading: boolean;
+  userDetail: User | null;
   userTotal: number;
   userListLoading: boolean;
   error: string | null;
@@ -13,7 +15,9 @@ interface QuizState {
 
 export const initialState = {
   userlist: [],
+  userDetail: null,
   userTotal: 0,
+  userLoading: false,
   userListLoading: false,
   error: null,
   isSuccess: false,
@@ -42,6 +46,23 @@ const reducer = (
       return {
         ...state,
         userListLoading: false,
+        error: action.payload
+      }
+    case UserStudentactiontypes.FETCH_STUDENT_USER:
+      return {
+        ...state,
+        userLoading: true,
+      };
+    case UserStudentactiontypes.FETCH_STUDENT_USER_SUCCESS:
+      return {
+        ...state,
+        userLoading: false,
+        userDetail: action.payload
+      }
+    case UserStudentactiontypes.FETCH_STUDENT_USER_FAIL:
+      return {
+        ...state,
+        userLoading: false,
         error: action.payload
       }
     default:

@@ -49,6 +49,13 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+
+        if (!$user) {
+            return response([
+                'message' => 'Not found',
+            ], 404);
+        }
+
         if ($this->isSuperAdmin($user)) {
             return response([
                 'message' => 'Cannot view this user',
