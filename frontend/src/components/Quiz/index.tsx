@@ -76,9 +76,10 @@ const Quiz: FC<Props> = ({
                 }
             })
             saveAnswer(saveData);
-            saveLearn({
+            user_learn_words && saveLearn({
                 user_learn_words
             });
+
         }
 
     }, [numberQuestion, userAnswer])
