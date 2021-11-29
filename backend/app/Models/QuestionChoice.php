@@ -22,4 +22,9 @@ class QuestionChoice extends Model
     {
         return $this->hasMany(UserAnswer::class, 'question_choice_id');
     }
+
+    public function userLearnWords()
+    {
+        return $this->hasMany(UserLearnWord::class, 'question_choice_id');
+    }
 }

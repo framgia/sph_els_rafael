@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserAnswersController;
+use App\Http\Controllers\UserLearnWordController;
 use App\Models\UserAnswer;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::get('/quiz/{id}/questions', [QuestionController::class, 'show']);
   Route::apiResource('useranswers', UserAnswersController::class)->only([
     'store', 'show'
+  ]);
+
+  Route::apiResource('userlearnwords', UserLearnWordController::class)->only([
+    'store', 'index'
   ]);
 
   Route::group(['middleware' => ['isAdmin']], function () {

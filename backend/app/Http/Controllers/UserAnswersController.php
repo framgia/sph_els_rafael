@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserAnswer;
-use App\Models\User;
 use App\Http\Requests\UserAnswerRequest;
-use App\Models\Quiz;
+
 
 class UserAnswersController extends Controller
 {
