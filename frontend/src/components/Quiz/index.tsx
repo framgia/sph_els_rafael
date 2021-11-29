@@ -5,7 +5,8 @@ import {
     getTakeQuizQuestion,
     addUserAnswer,
     getTakeQuizData,
-    saveUserAnswers
+    saveUserAnswers,
+    saveUserLearnWords
 } from '@store/actions/action-creator/';
 import { RootState } from '@store/reducers'
 import { ThunkDispatch } from 'redux-thunk';
@@ -27,6 +28,7 @@ const Quiz: FC<Props> = ({
     getQuizData,
     quizData,
     saveAnswer,
+    saveLearn,
     quizDataLoading,
     userAnswer }) => {
 
@@ -58,7 +60,25 @@ const Quiz: FC<Props> = ({
             const saveData = {
                 user_answers: [...userAnswer]
             }
+            const user_learn_words: any = [];
+            userAnswer.forEach((answer: any) => {
+                let questionFound = questionList.find((question) => {
+                    return question.id === answer.question_id;
+                })
+
+                if (questionFound && questionFound.question_choices) {
+                    let userAnswer = questionFound?.question_choices.find((choices) => {
+                        return choices.id === answer.question_choice_id
+                    });
+
+                    if (userAnswer?.isCorrect)
+                        user_learn_words.push({ question_choice_id: userAnswer.id });
+                }
+            })
             saveAnswer(saveData);
+            saveLearn({
+                user_learn_words
+            });
         }
 
     }, [numberQuestion, userAnswer])
@@ -109,6 +129,7 @@ interface LinkDispatchProps {
     setUserAnswer: (data: object) => void;
     getQuizData: (id: string) => void;
     saveAnswer: (data: any) => void;
+    saveLearn: (data: any) => void;
 }
 
 const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
@@ -124,6 +145,7 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps:
     setUserAnswer: bindActionCreators(addUserAnswer, dispatch),
     getQuizData: bindActionCreators(getTakeQuizData, dispatch),
     saveAnswer: bindActionCreators(saveUserAnswers, dispatch),
+    saveLearn: bindActionCreators(saveUserLearnWords, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Quiz)

@@ -65,6 +65,21 @@ interface FetchUserAnswerDataFailAction {
   payload: string;
 }
 
+interface SaveUserLearnWordsAction {
+  type: takeQuizStudentActionTypes.SAVE_USER_LEARN_DATA;
+  id: string;
+}
+
+interface SaveUserLearnWordsSuccessAction {
+  type: takeQuizStudentActionTypes.SAVE_USER_LEARN_DATA_SUCCESS;
+  payload: object;
+}
+
+interface SaveUserLearnWordsFailAction {
+  type: takeQuizStudentActionTypes.SAVE_USER_LEARN_DATA_FAIL;
+  payload: string;
+}
+
 export type TakeQuizAction =
   | FetchQuestionListAction
   | FetchQuestionListFailAction
@@ -73,9 +88,12 @@ export type TakeQuizAction =
   | FetchTakeQuizDataAction
   | FetchTakeQuizDataSuccessAction
   | FetchTakeQuizDataFailAction
-  | SaveUserAnswersAction
-  | SaveUserAnswersSuccessAction
-  | SaveUserAnswersFailAction
+  | SaveUserLearnWordsAction
+  | SaveUserLearnWordsSuccessAction
+  | SaveUserLearnWordsFailAction
   | FetchUserAnswerDataAction
   | FetchUserAnswerDataSuccessAction
-  | FetchUserAnswerDataFailAction;
+  | FetchUserAnswerDataFailAction
+  | SaveUserAnswersAction
+  | SaveUserAnswersSuccessAction
+  | SaveUserAnswersFailAction;

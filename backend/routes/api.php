@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     'store', 'index'
   ]);
 
+  Route::get('/users', [UserController::class, 'index']);
+  Route::get('/users/{id}', [UserController::class, 'show']);
+
   Route::group(['middleware' => ['isAdmin']], function () {
     Route::apiResource('quizzes', QuizController::class)->only([
       'store', 'update', 'destroy',
@@ -34,6 +37,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/quiz/{id}/question', [QuestionController::class, 'store']);
     Route::put('/question/{id}', [QuestionController::class, 'update']);
     Route::delete('/question/{id}', [QuestionController::class, 'destroy']);
-    Route::apiResource('users', UserController::class);
+    Route::apiResource('users', UserController::class)->only([
+      'store', 'update', 'destroy'
+    ]);
   });
 });

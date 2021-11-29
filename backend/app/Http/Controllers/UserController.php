@@ -5,36 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return User::whereNotIn('Role', [0])->get();
+
+        $ROLE = [
+            "SUPER_ADMIN" => 0,
+            "ADMIN" => 1,
+            "STUDENT" => 2,
+        ];
+
+        return $request->user()->tokenCan('adminAccess') ?
+            User::whereNotIn('Role', [$ROLE['STUDENT']])->get() :
+            User::whereNotIn('Role', [$ROLE['SUPER_ADMIN'], $ROLE['ADMIN']])
+            ->whereNotIn('id', [$request->user()->id])
+            ->paginate(8);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
@@ -57,40 +47,14 @@ class UserController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return User::with('userLearnWords.questionChoice.questions')
+            ->where('id', $id)->get()->first();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
-
         $user = User::find($id);
 
         if (!$user) {
@@ -110,12 +74,6 @@ class UserController extends Controller
         return $user;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $user = User::find($id);
