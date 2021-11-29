@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\UserAnswer;
 use App\Http\Requests\UserAnswerRequest;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserAnswersController extends Controller
 {
@@ -16,7 +15,7 @@ class UserAnswersController extends Controller
 
     public function store(UserAnswerRequest $request)
     {
-        $userid =  $request->user()->id;
+        $userid =  Auth::user()->id;
         $answers = array();
 
         foreach ($request->user_answers as $value) {
@@ -35,17 +34,16 @@ class UserAnswersController extends Controller
         return response()->json($response, 201);
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $userid =  $request->user()->id;
-        return UserAnswer::where("question_id", function ($query) use ($id) {
-            $query->select('question_id')
-                ->from('questions')
-                ->where('questions.quiz_id', $id)
-                ->limit(1);
-        })
-            ->with('question', 'questionChoice')
+        $userid =  Auth::user()->id;
+        return UserAnswer::with('question', 'questionChoice')
             ->where(['user_id' => $userid])
+            ->whereIn("question_id", function ($query) use ($id) {
+                $query->select('id')
+                    ->from('questions')
+                    ->where('quiz_id', $id);
+            })
             ->get();
     }
 }

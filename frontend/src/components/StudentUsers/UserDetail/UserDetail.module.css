@@ -1,7 +1,7 @@
 .userCard {
   @apply font-sans min-w-min
   max-h-60 overflow-auto py-4 px-8 
-  bg-gray-700 shadow-lg rounded-lg 
+  bg-gray-900 shadow-lg rounded-lg 
   my-10 flex flex-col items-center 
   justify-center;
 }

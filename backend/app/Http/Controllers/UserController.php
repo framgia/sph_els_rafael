@@ -27,7 +27,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        //
         $fields =  $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -49,6 +48,13 @@ class UserController extends Controller
 
     public function show($id)
     {
+        $user = User::find($id);
+        if ($this->isSuperAdmin($user)) {
+            return response([
+                'message' => 'Cannot view this user',
+            ], 405);
+        };
+
         return User::with('userLearnWords.questionChoice.questions')
             ->where('id', $id)->get()->first();
     }

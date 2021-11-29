@@ -8,6 +8,7 @@ import questionReducer, { questionsSaga } from './questionReducer';
 import layoutReducer from './layoutReducer';
 import studentQuizReducer from './quizStudentReducer';
 import takeQuizReducer from './takeQuizReducer';
+import studentUserReducer from './userStudentReducer';
 
 export function* rootSaga() {
   yield all([...quizzesSaga]);
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   layout: layoutReducer,
   quizStudent: studentQuizReducer,
   takeQuiz: takeQuizReducer,
+  userStudent: studentUserReducer,
 });
 
 export default reducers;
