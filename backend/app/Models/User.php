@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserAnswer::class, 'user_id');
     }
+
+    public function userLearnWords()
+    {
+        return $this->hasMany(UserLearnWord::class, 'user_id');
+    }
 }
