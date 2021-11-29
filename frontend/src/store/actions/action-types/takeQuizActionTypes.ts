@@ -8,6 +8,14 @@ enum takeQuizStudentActions {
     FETCH_STUDENT_QUIZ_DATA = "[FETCH_STUDENT_QUIZ_DATA] - fetch student quiz data",
     FETCH_STUDENT_QUIZ_DATA_SUCCESS = "[FETCH_STUDENT_QUIZ_DATA] - fetch student quiz data success",
     FETCH_STUDENT_QUIZ_DATA_FAIL = "[FETCH_STUDENT_QUIZ_DATA] - fetch student quiz data error",
-}
 
+    SAVE_STUDENT_ANSWER_DATA = "[SAVE_STUDENT_ANSWER_DATA] - save student answer data",
+    SAVE_STUDENT_ANSWER_DATA_SUCCESS = "[SAVE_STUDENT_ANSWER_DATA] - save student answer data sucess",
+    SAVE_STUDENT_ANSWER_DATA_FAIL = "[SAVE_STUDENT_ANSWER_DATA] - save student answer data error",
+
+    FETCH_STUDENT_ANSWER_DATA = "[FETCH_STUDENT_ANSWER_DATA] - fetch student answer data",
+    FETCH_STUDENT_ANSWER_DATA_SUCCESS = "[FETCH_STUDENT_ANSWER_DATA] - fetch student answer data success",
+    FETCH_STUDENT_ANSWER_DATA_FAIL = "[FETCH_STUDENT_ANSWER_DATA] - fetch student answer data error",
+}
+  
 export default takeQuizStudentActions;

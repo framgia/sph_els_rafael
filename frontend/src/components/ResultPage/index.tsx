@@ -1,63 +1,41 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import { RootState } from '@store/reducers'
 import { connect } from 'react-redux';
-import Questions from '@model/questionModel';
 import Spinner from '@components/UI/Spinner/Spinner'
 import UserAnswer from './Useranswer';
+import { ThunkDispatch } from 'redux-thunk';
+import { Action } from '@store/actions/index'
+import { bindActionCreators } from 'redux';
+import {
+    getUserAnswers
+} from '@store/actions/action-creator/';
+import { useParams } from 'react-router-dom';
+import UserAnswerModel from '@model/userAnswerModel';
 
+type Props = LinkStateProps & LinkDispatchProps;
 
-interface AnswerState {
-    questionWord: String;
-    isCorrect: Boolean;
-    userChoice: string;
-}
-
-
-type Props = LinkStateProps;
-
-const ResultPage: FC<Props> = ({ userAnswer, questionList }) => {
-    const [userAnswerState, setUserAnswerState] = useState<AnswerState[]>([])
+const ResultPage: FC<Props> = ({ checkAnswers, getAnswers, loading }) => {
+    let { id } = useParams<any>();
 
     useEffect(() => {
-        if (!userAnswer)
+        if (!checkAnswers)
             return;
-        if (!questionList)
-            return;
-        const usersAnsweredFunc = () => {
-            const newUserAnswer: any = userAnswer.map((answer: any) => {
-                let questionFound = questionList.find((question) => {
-                    return question.id === answer.question_id
-                });
 
-                let userChoice = questionFound &&
-                    questionFound.question_choices &&
-                    questionFound?.question_choices.find((choice) => {
-                        return choice.id === answer.choice_id;
-                    });
-                return {
-                    questionWord: questionFound?.word,
-                    userChoice: userChoice?.choice,
-                    isCorrect: userChoice?.isCorrect
-                };
-            })
-
-            setUserAnswerState(newUserAnswer);
-        }
-        usersAnsweredFunc();
+        getAnswers(id);
     }, [])
 
-    return userAnswerState.length > -1 ? (
+    return !loading ? (
         <>
             <div className="flex justify-between items-center w-150 text-white m-auto">
                 <div className="text-2xl font-bold font-sans">
                     Basic 500
                 </div>
                 <div className="font-sans">
-                    Result: {userAnswerState.reduce((currentTotal: any, item) => {
-                        if (!item.isCorrect)
+                    Result: {checkAnswers.reduce((currentTotal: any, answers) => {
+                        if (!answers.question_choice?.isCorrect)
                             return currentTotal;
                         return currentTotal + 1;
-                    }, 0)}  of {questionList.length}
+                    }, 0)}  of {checkAnswers.length}
                 </div>
             </div>
             <div className="flex justify-between items-center w-full md:w-150 text-white m-auto">
@@ -73,12 +51,15 @@ const ResultPage: FC<Props> = ({ userAnswer, questionList }) => {
                             Answer
                         </div>
                     </div>
-                    {userAnswerState.map((state, idx) => (
+                    {checkAnswers && checkAnswers.map((answer, idx) => (
                         <UserAnswer
                             key={idx}
-                            questionWord={state.questionWord}
-                            isCorrect={state.isCorrect}
-                            userChoice={state.userChoice} />
+                            questionWord={(answer.question && answer.question?.word) || ""}
+                            isCorrect={(answer.question_choice
+                                && answer.question_choice?.isCorrect) || false}
+                            userChoice={(answer.question_choice &&
+                                answer.question_choice.choice)
+                                || ""} />
                     ))}
                 </div>
             </div>
@@ -89,15 +70,22 @@ const ResultPage: FC<Props> = ({ userAnswer, questionList }) => {
 }
 
 interface LinkStateProps {
-    questionList: Questions[],
     loading: boolean,
-    userAnswer: {}[],
+    checkAnswers: UserAnswerModel[],
+}
+
+interface LinkDispatchProps {
+    getAnswers: (id: string) => void;
 }
 
 const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
-    questionList: state.takeQuiz.questionList,
-    loading: state.takeQuiz.questionListloading,
-    userAnswer: state.takeQuiz.userAnswers,
+    loading: state.takeQuiz.answersLoading,
+    checkAnswers: state.takeQuiz.checkAnswers
 })
 
-export default connect(mapStateToProps, null)(ResultPage)
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: any): LinkDispatchProps => ({
+    getAnswers: bindActionCreators(getUserAnswers, dispatch),
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResultPage)
