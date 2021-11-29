@@ -7,21 +7,26 @@ import { ThunkDispatch } from 'redux-thunk';
 import { Action } from '@store/actions/index'
 import { bindActionCreators } from 'redux';
 import {
-    getUserAnswers
+    getUserAnswers,
+    getTakeQuizData
 } from '@store/actions/action-creator/';
 import { useParams } from 'react-router-dom';
 import UserAnswerModel from '@model/userAnswerModel';
 
 type Props = LinkStateProps & LinkDispatchProps;
 
-const ResultPage: FC<Props> = ({ checkAnswers, getAnswers, loading }) => {
+const ResultPage: FC<Props> = ({ checkAnswers, getAnswers, loading, getQuizData }) => {
     let { id } = useParams<any>();
 
     useEffect(() => {
         if (!checkAnswers)
             return;
+        const loadData = () => {
+            getAnswers(id);
+            getQuizData(id);
+        }
 
-        getAnswers(id);
+        loadData();
     }, [])
 
     return !loading ? (
@@ -76,6 +81,7 @@ interface LinkStateProps {
 
 interface LinkDispatchProps {
     getAnswers: (id: string) => void;
+    getQuizData: (id: string) => void;
 }
 
 const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
@@ -85,7 +91,7 @@ const mapStateToProps = (state: RootState, ownProps: any): LinkStateProps => ({
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, Action>, ownProps: any): LinkDispatchProps => ({
     getAnswers: bindActionCreators(getUserAnswers, dispatch),
-
+    getQuizData: bindActionCreators(getTakeQuizData, dispatch),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResultPage)

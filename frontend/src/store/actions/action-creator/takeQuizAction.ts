@@ -30,7 +30,7 @@ export const addUserAnswer = (data:object) =>({
 })
 
 export const saveUserAnswers = (Data:any) => ({
-  type: takeQuizStudentActionTypes.FETCH_STUDENT_QUIZ_DATA,
+  type: takeQuizStudentActionTypes.SAVE_STUDENT_ANSWER_DATA,
   payload: {
     meta: {
       api: {
@@ -42,13 +42,26 @@ export const saveUserAnswers = (Data:any) => ({
   },
 });
 
-export const getUserAnswers = (id:string) =>({
+export const getUserAnswers =  (id:string) =>({
   type: takeQuizStudentActionTypes.FETCH_STUDENT_ANSWER_DATA,
   payload: {
     meta: {
       api: {
         method: "get",
         url: `/api/useranswers/${id}`,
+      },
+    },
+  },
+});
+
+export const saveUserLearnWords = (Data:any) => ({
+  type: takeQuizStudentActionTypes.SAVE_USER_LEARN_DATA,
+  payload: {
+    meta: {
+      api: {
+        method: "post",
+        url: `/api/userlearnwords`,
+        data:Data,
       },
     },
   },
