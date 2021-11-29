@@ -13,10 +13,14 @@ type Props = LinkStateProps;
 const Auth: FC<Props> = ({ SaveLoading, error }) => {
   const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({ email: "", password: "" });
-
+  const [errorState, setErrorState] = useState("")
   const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    error && setErrorState(error);
+  }, [error])
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +47,9 @@ const Auth: FC<Props> = ({ SaveLoading, error }) => {
           >
             Welcome to LMS
           </h2>
+          {errorState && (
+            <span className="block text-xs mb-5 font-sans font-bold text-red-600">Incorrect Password or Username</span>
+          )}
           <div className="w-80 border-0 border-b-2 border-solid border-indigo-500 mb-10">
             <div className="flex items-center">
               <i className='ml-2 text-white text-xs z-10 far fa-user '></i>
