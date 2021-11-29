@@ -3,9 +3,12 @@ import { Action } from '../actions'
 import Question from "@model/questionModel";
 import { shuffle} from '../utilities'
 import Quiz from "@model/quizModels";
+import UserAnswer from '@model/userAnswerModel'
 
 
 interface QuestionState {
+  checkAnswers: UserAnswer[],
+  answersLoading:boolean,
   quizData: Quiz | null,
   quizDataLoading: boolean,
   questionList: Question[];
@@ -18,6 +21,8 @@ interface QuestionState {
 }
 
 export const initialState = {
+  checkAnswers:[],
+  answersLoading:false,
   quizData: null,
   quizDataLoading: false,
   questionList: [],
@@ -39,6 +44,7 @@ const reducer = (
           ...state,
           questionListloading: true,
           userAnswers: [],
+          checkAnswers:[],
         };
       case takeQuizStudentActionTypes.FETCH_STUDENT_QUIZ_QUESTION_SUCCESS:
         return {
@@ -73,10 +79,27 @@ const reducer = (
             ...state,
             quizDataLoading: false,
             error: action.payload
-          }    
+          }
+          case takeQuizStudentActionTypes.FETCH_STUDENT_ANSWER_DATA:
+            return {
+              ...state,
+              answersLoading: true,
+            };
+          case takeQuizStudentActionTypes.FETCH_STUDENT_ANSWER_DATA_SUCCESS:
+            return {
+              ...state,
+              checkAnswers:action.payload,
+              answersLoading:false,
+            }
+          case takeQuizStudentActionTypes.FETCH_STUDENT_ANSWER_DATA_FAIL:
+            return {
+              ...state,
+              answersLoading: false,
+              error: action.payload
+            }      
       default:
         return state;
     }
   }
 
-  export default reducer;
+export default reducer;

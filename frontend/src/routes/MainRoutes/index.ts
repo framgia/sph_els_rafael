@@ -54,7 +54,7 @@ export const routable: Page[] = [
     isAdmin: false,
   },
   {
-    path: '/student/result',
+    path: '/student/quiz/:id/result',
     component: StudentResultPage,
     exact:true,
     isAdmin: false,
@@ -63,6 +63,7 @@ export const routable: Page[] = [
     path: '/student/quiz/:id',
     component: StudentTakeQuiz,
     isAdmin: false,
+    exact:true,
   }
   
 ]

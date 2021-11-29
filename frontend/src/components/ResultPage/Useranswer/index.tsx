@@ -3,7 +3,7 @@ import { FC } from 'react';
 interface AnswerState {
     questionWord: String;
     isCorrect: Boolean;
-    userChoice: string;
+    userChoice: String;
 }
 
 const UserAnswer: FC<AnswerState> = ({ questionWord, isCorrect, userChoice }) => {

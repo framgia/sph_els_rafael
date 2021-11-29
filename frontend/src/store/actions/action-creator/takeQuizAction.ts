@@ -28,3 +28,28 @@ export const addUserAnswer = (data:object) =>({
   type: takeQuizStudentActionTypes.SET_STUDENT_USER_ANSWER,
   payload: data,
 })
+
+export const saveUserAnswers = (Data:any) => ({
+  type: takeQuizStudentActionTypes.FETCH_STUDENT_QUIZ_DATA,
+  payload: {
+    meta: {
+      api: {
+        method: "post",
+        url: `/api/useranswers`,
+        data:Data,
+      },
+    },
+  },
+});
+
+export const getUserAnswers = (id:string) =>({
+  type: takeQuizStudentActionTypes.FETCH_STUDENT_ANSWER_DATA,
+  payload: {
+    meta: {
+      api: {
+        method: "get",
+        url: `/api/useranswers/${id}`,
+      },
+    },
+  },
+});
