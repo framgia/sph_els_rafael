@@ -20,7 +20,7 @@ class QuestionChoice extends Model
 
     public function userAnswers()
     {
-        return $this->hasMany(UserAnswer::class, 'question_choice_id');
+        return $this->hasMany(UserAnswer::class, 'user_id');
     }
 
     public function userLearnWords()

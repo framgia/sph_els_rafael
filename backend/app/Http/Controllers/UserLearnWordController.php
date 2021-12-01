@@ -20,14 +20,22 @@ class UserLearnWordController extends Controller
     {
         $userid = Auth::user()->id;
         $learnwords = array();
-
+        $userLearn = null;
+        $data2 = null;
         foreach ($request->user_learn_words as $value) {
             $data = array(
                 'question_choice_id' => $value['question_choice_id'],
                 'user_id' => $userid,
             );
-            array_push($learnwords, UserLearnWord::create($data));
+            $userLearn = UserLearnWord::create($data);
+            array_push($learnwords, $userLearn);
         }
+
+        $quiz =  $userLearn->questionChoice()
+            ->first()->questions()
+            ->first()->quizzes()->first();
+
+        $quiz->activities()->create(['user_id' => $userid]);
 
         $response = [
             'useranswers' => $learnwords,

@@ -20,4 +20,17 @@ class Quiz extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function questionChoices()
+    {
+        return $this->hasManyThrough(
+            QuestionChoice::class,
+            Question::class,
+        );
+    }
+
+    public function activities()
+    {
+        return $this->morphOne(UserActivity::class, 'activitable');
+    }
 }

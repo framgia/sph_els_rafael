@@ -7,6 +7,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserAnswersController;
 use App\Http\Controllers\UserLearnWordController;
 use App\Http\Controllers\UserFollowersController;
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -33,6 +34,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
   Route::get('/users', [UserController::class, 'index']);
   Route::get('/users/{id}', [UserController::class, 'show']);
+
+  Route::apiResource('activities', ActivityController::class)->only([
+    'index', 'show'
+  ]);
 
   Route::group(['middleware' => ['isAdmin']], function () {
     Route::apiResource('quizzes', QuizController::class)->only([
