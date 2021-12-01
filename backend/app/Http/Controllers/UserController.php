@@ -62,7 +62,11 @@ class UserController extends Controller
             ], 405);
         };
 
-        return User::with('userLearnWords.questionChoice.questions')
+        return User::with(
+            'userLearnWords.questionChoice.questions',
+            'followers',
+            'followings'
+        )
             ->where('id', $id)->get()->first();
     }
 

@@ -48,4 +48,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserLearnWord::class, 'user_id');
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'followers', 'following')
+            ->withTimestamps();
+    }
+
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'following', 'followers')
+            ->withTimestamps();
+    }
 }

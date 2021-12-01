@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserAnswersController;
 use App\Http\Controllers\UserLearnWordController;
-use App\Models\UserAnswer;
+use App\Http\Controllers\UserFollowersController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -21,6 +21,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::apiResource('useranswers', UserAnswersController::class)->only([
     'store', 'show'
   ]);
+
+  Route::get('/follow', [UserFollowersController::class, 'index']);
+  Route::post('/follow/{id}', [UserFollowersController::class, 'store']);
+  Route::delete('/unfollow/{id}', [UserFollowersController::class, 'destroy']);
+
 
   Route::apiResource('userlearnwords', UserLearnWordController::class)->only([
     'store', 'index'
