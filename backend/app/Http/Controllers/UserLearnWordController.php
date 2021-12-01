@@ -21,7 +21,6 @@ class UserLearnWordController extends Controller
         $userid = Auth::user()->id;
         $learnwords = array();
         $userLearn = null;
-        $data2 = null;
         foreach ($request->user_learn_words as $value) {
             $data = array(
                 'question_choice_id' => $value['question_choice_id'],

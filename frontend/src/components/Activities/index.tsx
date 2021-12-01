@@ -1,69 +1,15 @@
-import { FC, useState } from 'react';
-import User from '@model/userModels';
+import { FC } from 'react';
 import Activity from './Activity';
 import classes from './Activities.module.css'
+import UserActivity from '@model/userActivityModel';
+import Spinner from '@components/UI/Spinner/Spinner'
 
 interface ActivityProps {
-  user: User;
-  activity: string;
+  activities: UserActivity[];
+  loading: boolean;
 }
 
-const Activities: FC = () => {
-  const [activities, setActivities] = useState<ActivityProps[]>([
-    {
-      user: {
-        fname: "rafael",
-        mname: "G",
-        lname: "Parayno",
-        email: "RafaelParayno"
-      },
-      activity: "Learn 20 of 20 words in Basic 500"
-    },
-    {
-      user: {
-        fname: "rafael",
-        mname: "G",
-        lname: "Parayno",
-        email: "RafaelParayno"
-      },
-      activity: "Learn 20 of 20 words in Basic 500"
-    },
-    {
-      user: {
-        fname: "rafael",
-        mname: "G",
-        lname: "Parayno",
-        email: "RafaelParayno"
-      },
-      activity: "Learn 20 of 20 words in Basic 500"
-    }, {
-      user: {
-        fname: "rafael",
-        mname: "G",
-        lname: "Parayno",
-        email: "RafaelParayno"
-      },
-      activity: "Learn 20 of 20 words in Basic 500"
-    },
-    {
-      user: {
-        fname: "rafael",
-        mname: "G",
-        lname: "Parayno",
-        email: "RafaelParayno"
-      },
-      activity: "Learn 20 of 20 words in Basic 500"
-    },
-    {
-      user: {
-        fname: "rafael",
-        mname: "G",
-        lname: "Parayno",
-        email: "RafaelParayno"
-      },
-      activity: "Learn 20 of 20 words in Basic 500"
-    }
-  ])
+const Activities: FC<ActivityProps> = ({ activities, loading }) => {
 
   return (
     <div className="col-span-2" >
@@ -72,9 +18,13 @@ const Activities: FC = () => {
           <h2 className="font-sans">Activities</h2>
           <hr className="mb-5" />
           <div className="flex flex-col">
-            {activities.map((activity, key: number) => (
-              <Activity activity={activity.activity} user={activity.user} key={key} />
-            ))}
+            {loading ? (<Spinner />) : activities.length > 0
+              && activities.map((activity, key: number) => (
+                <Activity
+                  activity={activity.activitable}
+                  user={activity.user}
+                  key={key} />
+              ))}
           </div>
         </div>
       </div>

@@ -26,6 +26,8 @@ export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Actio
       user: data.user,
       idToken: data.token,
       userRole: data.user.role,
+      learnWords: data.learnWords,
+      quizzesTaken: data.quiz
     })
 
   } catch (err: any) {
@@ -38,17 +40,23 @@ export const authLogin = (DataForm: FormData) => async (dispatch: Dispatch<Actio
 };
 
 export const authCheckState = () => async (dispatch: Dispatch<Action>) => {
+
   let token = localStorage.getItem('token');
   if (!token) {
     await authLogout();
   } else {
     try {
+      dispatch({
+        type: AuthActionType.CHECK_VALID_SUCCESS
+      })
       const { data } = await Http.get("/api/checkAuth");
       dispatch({
         type: AuthActionType.AUTH_SUCCESS,
         idToken: token,
-        user: data,
-        userRole: Number(data.role),
+        user: data.user,
+        userRole: Number(data.user.role),
+        learnWords: data.learnWords,
+        quizzesTaken: data.quiz
       })
     } catch (error: any) {
       localStorage.removeItem('token');

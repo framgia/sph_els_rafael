@@ -1,4 +1,5 @@
 import User from "models/userModels";
+import Activity from '@model/userActivityModel';
 import { UserStudentactiontypes } from "./action-types";
 
 interface FetchStudentUserListAction {
@@ -56,6 +57,35 @@ interface UnfollowUserFailAction {
   payload: string
 }
 
+interface FetchActivityAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY
+}
+
+interface FetchActivitySuccessAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY_SUCCESS,
+  payload: Activity[],
+}
+
+interface FetchActivityFailAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY_FAIL,
+  payload: string
+}
+
+
+interface FetchSelfActivityAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY
+}
+
+interface FetchSelfActivitySuccessAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY_SUCCESS,
+  payload: Activity[],
+}
+
+interface FetchSelfActivityFailAction {
+  type: UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY_FAIL,
+  payload: string
+}
+
 export type StudentUserAction =
   | FetchStudentUserListAction
   | FetchStudentUserListSuccessAction
@@ -68,5 +98,10 @@ export type StudentUserAction =
   | FollowUserFailAction
   | UnfollowUserAction
   | UnfollowUserSuccessAction
-  | UnfollowUserFailAction;
-
+  | UnfollowUserFailAction
+  | FetchActivityAction
+  | FetchActivitySuccessAction
+  | FetchActivityFailAction
+  | FetchSelfActivityAction
+  | FetchSelfActivitySuccessAction
+  | FetchSelfActivityFailAction;

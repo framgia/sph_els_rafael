@@ -5,6 +5,8 @@ import IRegisterErrorType from '../../types/registerErrorType'
 
 interface AuthState {
   token: string | null;
+  userLearnWords: {}[];
+  quizzesTaken: {}[];
   user: User | null,
   userId: string | null,
   userRole: number | null,
@@ -20,6 +22,8 @@ export const initialState = {
   token: localStorage.getItem("token"),
   userId: localStorage.getItem("userid"),
   userRole: Number(localStorage.getItem('role')),
+  userLearnWords: [],
+  quizzesTaken: [],
   user: null,
   error: null,
   errorStatus: "",
@@ -45,6 +49,8 @@ const reducer = (
         token: action.idToken,
         user: action.user,
         userRole: action.userRole,
+        userLearnWords: action.learnWords,
+        quizzesTaken: action.quizzesTaken,
         loading: false,
         error: null,
         errorMessage: null,
@@ -93,6 +99,11 @@ const reducer = (
         ...state,
         registerLoading: false,
         errorMessage: action.errorMessage,
+      }
+    case AuthActionType.CHECK_VALID_SUCCESS:
+      return {
+        ...state,
+        loading: true,
       }
     default:
       return state;

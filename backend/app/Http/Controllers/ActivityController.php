@@ -22,38 +22,61 @@ class ActivityController extends Controller
                     ->from('followers')
                     ->where('followers', $id);
             })
-            ->with(['activitable' => function (MorphTo $morphTo) {
+            ->with(['user', 'activitable' => function (MorphTo $morphTo) use ($id) {
                 $morphTo->morphWith([
                     Quiz::class => [
-                        'questions:id,quiz_id,word',
-                        'questions.userAnswers:question_choice_id,question_id',
-                        'questions.userAnswers.questionChoice:isCorrect,id'
+                        'questionChoices' => function ($query) use ($id) {
+                            $query->join(
+                                'user_learn_words',
+                                'question_choices.id',
+                                '=',
+                                'user_learn_words.question_choice_id'
+                            )
+                                ->where('user_learn_words.user_id', $id)
+                                ->get();
+                        }, 'questions'
                     ],
                     Follower::class => [
                         'userFollower'
                     ]
                 ]);
-            }])->get();
+            }])->orderBy('created_at', 'desc')->get();
 
-        return $activities;
+        $response = [
+            'activities' => $activities,
+        ];
+
+        return response()->json($response, 201);
     }
 
     public function show($id)
     {
-        $activities = UserActivity::where('user_id', $id)
-            ->with(['activitable' => function (MorphTo $morphTo) {
-                $morphTo->morphWith([
-                    Quiz::class => [
-                        'questions:id,quiz_id,word',
-                        'questions.userAnswers:question_choice_id,question_id',
-                        'questions.userAnswers.questionChoice:isCorrect,id'
-                    ],
-                    Follower::class => [
-                        'userFollower'
-                    ]
-                ]);
-            }])->get();
+        $activities = UserActivity::with(['user', 'activitable' =>
+        function (MorphTo $morphTo) use ($id) {
+            $morphTo->morphWith([
+                Quiz::class => [
+                    'questionChoices' => function ($query) use ($id) {
+                        $query->join(
+                            'user_learn_words',
+                            'question_choices.id',
+                            '=',
+                            'user_learn_words.question_choice_id'
+                        )
+                            ->where('user_learn_words.user_id', $id)
+                            ->get();
+                    },
+                    'questions'
+                ],
+                Follower::class => [
+                    'userFollower'
+                ]
+            ]);
+        }])->where('user_id', $id)->orderBy('created_at', 'desc')->get();
 
-        return $activities;
+        $response = [
+            'activities' => $activities,
+        ];
+
+        return response()->json($response, 201);
     }
 }

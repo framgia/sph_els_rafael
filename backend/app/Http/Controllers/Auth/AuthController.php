@@ -7,6 +7,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Quiz;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -21,14 +22,35 @@ class AuthController extends Controller
                 'message' => 'Bad creds',
             ], 401);
         }
-        
+
+
+        $quiz = Quiz::whereIn('id', function ($query) use ($user) {
+            $query->select('quiz_id')->distinct('quiz_id')
+                ->from('questions')
+                ->join(
+                    'question_choices',
+                    'questions.id',
+                    '=',
+                    'question_choices.question_id'
+                )->join(
+                    'user_learn_words',
+                    'question_choices.id',
+                    '=',
+                    'user_learn_words.question_choice_id'
+                )->where('user_learn_words.user_id', $user->id);
+        })->get();
+
+
         $token = $user->role == 0 || $user->role == 1 ?
             $user->createToken('admin', ['adminAccess'])->plainTextToken :
             $token = $user->createToken('myapptoken', ['studentAccess'])->plainTextToken;
 
         $response = [
             'user' => $user,
+            'learnWords' => $user->role == 2 ?
+                $user->userLearnWords()->get() : "",
             'token' => $token,
+            'quiz' => $quiz
         ];
 
         return response()->json($response, 201);
@@ -65,6 +87,35 @@ class AuthController extends Controller
 
     public function checkAuth(Request $request)
     {
-        return $request->user();
+        $user = User::find($request->user()->id);;
+
+        $UserWithTotal =  User::withCount(['userLearnWords'])
+            ->where('id', $request->user()->id)
+            ->first();
+
+        $quiz = Quiz::whereIn('id', function ($query) use ($user) {
+            $query->select('quiz_id')->distinct('quiz_id')
+                ->from('questions')
+                ->join(
+                    'question_choices',
+                    'questions.id',
+                    '=',
+                    'question_choices.question_id'
+                )->join(
+                    'user_learn_words',
+                    'question_choices.id',
+                    '=',
+                    'user_learn_words.question_choice_id'
+                )->where('user_learn_words.user_id', $user->id);
+        })->get();
+
+
+        $response = [
+            'user' => $UserWithTotal,
+            'learnWords' => $user->userLearnWords()->get(),
+            'quiz' => $quiz,
+        ];
+
+        return response()->json($response, 201);
     }
 }

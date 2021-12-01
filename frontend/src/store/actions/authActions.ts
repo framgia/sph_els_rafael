@@ -10,6 +10,8 @@ interface AuthSuccessAction {
   user: User | null,
   idToken: string,
   userRole: number,
+  learnWords: {}[],
+  quizzesTaken: {}[],
 }
 
 interface AuthFailAction {
