@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('/follow/{id}', [UserFollowersController::class, 'store']);
   Route::delete('/unfollow/{id}', [UserFollowersController::class, 'destroy']);
 
+  Route::post('/details', [UserSettingsController::class, 'detailsUpdate']);
+  Route::post('/password', [UserSettingsController::class, 'passwordUpdate']);
 
   Route::apiResource('userlearnwords', UserLearnWordController::class)->only([
     'store', 'index'
