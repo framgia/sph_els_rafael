@@ -10,9 +10,12 @@ class QuizController extends Controller
 
     public function index(Request $request)
     {
-
+        $user = $request->user();
         return $request->user()->tokenCan('adminAccess') ?
-            Quiz::all() : Quiz::paginate(8);
+            Quiz::all() : Quiz::withCount(['userAnswers' => function ($query) use ($user) {
+                return $query->where('user_id', $user->id);
+            }])
+            ->paginate(8);
     }
 
     public function store(Request $request)
