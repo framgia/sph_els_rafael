@@ -67,7 +67,7 @@ class UserController extends Controller
             'followers',
             'followings'
         )
-            ->where('id', $id)->get()->first();
+            ->where('id', $id)->first();
     }
 
     public function update(Request $request, $id)

@@ -1,10 +1,14 @@
 import { UserStudentactiontypes } from '../actions/action-types/';
 import { Action } from '../actions'
 import User from "models/userModels";
+import Activity from "models/userActivityModel";
 
 interface QuizState {
   userlist: User[] | null;
+  activities: Activity[];
+  selfActivity: Activity[];
   userLoading: boolean;
+  activityLoading: boolean;
   userDetail: User | null;
   userTotal: number;
   followLoading: boolean;
@@ -14,11 +18,14 @@ interface QuizState {
 
 export const initialState = {
   userlist: [],
+  activities: [],
+  selfActivity: [],
   userDetail: null,
   userTotal: 0,
   userLoading: false,
   userListLoading: false,
   followLoading: false,
+  activityLoading: false,
   error: null,
 };
 
@@ -93,6 +100,41 @@ const reducer = (
       return {
         ...state,
         followLoading: false,
+        error: action.payload
+      }
+    case UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY:
+      return {
+        ...state,
+        activityLoading: true,
+      };
+    case UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY_SUCCESS:
+      return {
+        ...state,
+        activityLoading: false,
+        activities: action.payload
+      }
+    case UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY_FAIL:
+      return {
+        ...state,
+        activityLoading: false,
+        error: action.payload
+      }
+
+    case UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY:
+      return {
+        ...state,
+        activityLoading: true,
+      };
+    case UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY_SUCCESS:
+      return {
+        ...state,
+        activityLoading: false,
+        selfActivity: action.payload
+      }
+    case UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY_FAIL:
+      return {
+        ...state,
+        activityLoading: false,
         error: action.payload
       }
     default:

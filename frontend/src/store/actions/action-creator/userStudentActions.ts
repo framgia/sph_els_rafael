@@ -60,7 +60,7 @@ export const followUser = (id: string) => ({
       },
     },
   },
-})
+});
 
 export const unFollowUser = (id: string) => ({
   type: UserStudentactiontypes.UNFOLLOW_USER,
@@ -72,4 +72,52 @@ export const unFollowUser = (id: string) => ({
       },
     },
   },
-})
+});
+
+export const getUserActivity = (id: string) => async (dispatch: Dispatch<Action>) => {
+
+  try {
+    dispatch({
+      type: UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY
+    })
+
+    const { data } = await Http.get(`/api/activities/${id}`);
+
+    dispatch({
+      type: UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY_SUCCESS,
+      payload: data.activities,
+      total: data.total,
+    })
+
+  } catch (err: any) {
+    dispatch({
+      payload: err.message,
+      type: UserStudentactiontypes.FETCH_STUDENT_USER_ACTIVITY_FAIL,
+      status: err.status,
+    })
+  }
+};
+
+export const getSelfActivity = () => async (dispatch: Dispatch<Action>) => {
+
+  try {
+    dispatch({
+      type: UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY
+    })
+
+    const { data } = await Http.get(`/api/activities`);
+
+    dispatch({
+      type: UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY_SUCCESS,
+      payload: data.activities,
+    })
+
+  } catch (err: any) {
+    dispatch({
+      payload: err.message,
+      type: UserStudentactiontypes.FETCH_STUDENT_SELF_ACTIVITY_FAIL,
+      status: err.status,
+    })
+  }
+};
+

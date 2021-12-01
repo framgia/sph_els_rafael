@@ -16,14 +16,8 @@ class UserActivity extends Model
     {
         return $this->morphTo();
     }
-
-    public function userLearnWord()
+    public function user()
     {
-        return $this->belongsTo(UserLearnWord::class);
-    }
-
-    public function following()
-    {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, "user_id");
     }
 }
