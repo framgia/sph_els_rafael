@@ -17,7 +17,7 @@ type Props = LinkStateProps & LinkDispatchProps;
 
 const UserLearnWords: FC<Props> = ({ getUser, userData, loading }) => {
   const { id } = useParams<any>();
-  const { fname, lname } = (userData && userData) || {};
+  const { fname, lname, followers, followings, user_learn_words } = (userData && userData) || {};
 
   useEffect(() => {
     getUser(id);
@@ -29,7 +29,12 @@ const UserLearnWords: FC<Props> = ({ getUser, userData, loading }) => {
         <Spinner />
       ) : (
         <>
-          <UserProfileDetail fname={fname || ""} lname={lname || ""} />
+          <UserProfileDetail
+            fname={fname || ""}
+            lname={lname || ""}
+            followers={followers}
+            following={followings}
+            totalLearnWords={user_learn_words?.length} />
           <LearnWords />
         </>
       )}

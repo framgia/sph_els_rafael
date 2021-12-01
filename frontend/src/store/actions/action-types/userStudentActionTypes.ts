@@ -6,6 +6,14 @@ enum UserStudentAction {
   FETCH_STUDENT_USER = "[FETCH_STUDENT_USER] - fetch student user",
   FETCH_STUDENT_USER_SUCCESS = "[FETCH_STUDENT_USER] - fetch student user success",
   FETCH_STUDENT_USER_FAIL = "[FETCH_STUDENT_USER] - fetch student user error",
+
+  FOLLOW_USER = "[FOLLOW_USER] - follow user",
+  FOLLOW_USER_SUCCESS = "[FOLLOW_USER] - follow user success",
+  FOLLOW_USER_FAIL = "[FOLLOW_USER] - follow user error",
+
+  UNFOLLOW_USER = "[UNFOLLOW_USER] - unfollow user",
+  UNFOLLOW_USER_SUCCESS = "[UNFOLLOW_USER] - unfollow user success",
+  UNFOLLOW_USER_FAIL = "[UNFOLLOW_USER] - unfollow user error",
 }
 
 export default UserStudentAction;

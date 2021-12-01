@@ -30,11 +30,43 @@ interface FetchStudentUserFailAction {
   payload: string
 }
 
+interface FollowUserAction {
+  type: UserStudentactiontypes.FOLLOW_USER
+}
+
+interface FollowUserSuccessAction {
+  type: UserStudentactiontypes.FOLLOW_USER_SUCCESS,
+}
+
+interface FollowUserFailAction {
+  type: UserStudentactiontypes.FOLLOW_USER_FAIL,
+  payload: string
+}
+
+interface UnfollowUserAction {
+  type: UserStudentactiontypes.UNFOLLOW_USER
+}
+
+interface UnfollowUserSuccessAction {
+  type: UserStudentactiontypes.UNFOLLOW_USER_SUCCESS,
+}
+
+interface UnfollowUserFailAction {
+  type: UserStudentactiontypes.UNFOLLOW_USER_FAIL,
+  payload: string
+}
+
 export type StudentUserAction =
   | FetchStudentUserListAction
   | FetchStudentUserListSuccessAction
   | FetchStudentUserListFailAction
   | FetchStudentUserAction
   | FetchStudentUserSuccessAction
-  | FetchStudentUserFailAction;
+  | FetchStudentUserFailAction
+  | FollowUserAction
+  | FollowUserSuccessAction
+  | FollowUserFailAction
+  | UnfollowUserAction
+  | UnfollowUserSuccessAction
+  | UnfollowUserFailAction;
 
