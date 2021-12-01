@@ -94,6 +94,14 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
     setChoices(newChoice);
   }
 
+  const checkIfArrayIsUnique = (myArray: Choice[]) => {
+    let seen = new Set();
+    const hasDuplicates = myArray.some(function (currentObject) {
+      return seen.size === seen.add(currentObject.choice).size;
+    });
+    return hasDuplicates;
+  }
+
   const saveQuestion = () => {
     const data: Question = {
       id: question.id,
@@ -103,13 +111,25 @@ const QuestionModal: FC<Props> = ({ editQuestionModal,
 
     const hasCorrectAnswer = data.question_choices?.some((item) => {
       return item.isCorrect === true;
-    })
+    });
+
+    const isUniqueChoices = data.question_choices &&
+      checkIfArrayIsUnique(data.question_choices);
+
+    if (isUniqueChoices) {
+      Swal.fire({
+        icon: 'error',
+        title: 'choices has duplicate choices',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      return;
+    }
 
     if (hasCorrectAnswer) {
       data.id ?
         updateData(data, id)
         : saveData(data, id);
-
     } else {
       Swal.fire({
         icon: 'error',
