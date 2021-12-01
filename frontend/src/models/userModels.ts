@@ -1,4 +1,6 @@
 import LearnWord from './userLearnWord'
+import Follower from './followerModel';
+import Following from './followingModel';
 
 type User = {
   id?: string;
@@ -8,6 +10,8 @@ type User = {
   lname: string;
   role?: number;
   user_learn_words?: LearnWord[];
+  followers?: Follower[];
+  followings?: Following[];
 }
 
 export default User;

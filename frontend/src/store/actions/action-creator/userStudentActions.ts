@@ -49,3 +49,27 @@ export const getUserStudent = (id: String) => async (dispatch: Dispatch<Action>)
     })
   }
 };
+
+export const followUser = (id: string) => ({
+  type: UserStudentactiontypes.FOLLOW_USER,
+  payload: {
+    meta: {
+      api: {
+        method: "post",
+        url: `/api/follow/${id}`,
+      },
+    },
+  },
+})
+
+export const unFollowUser = (id: string) => ({
+  type: UserStudentactiontypes.UNFOLLOW_USER,
+  payload: {
+    meta: {
+      api: {
+        method: "delete",
+        url: `/api/unfollow/${id}`,
+      },
+    },
+  },
+})

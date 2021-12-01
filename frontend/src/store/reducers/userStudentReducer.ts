@@ -7,10 +7,9 @@ interface QuizState {
   userLoading: boolean;
   userDetail: User | null;
   userTotal: number;
+  followLoading: boolean;
   userListLoading: boolean;
   error: string | null;
-  isSuccess: boolean;
-  SaveLoading: boolean,
 }
 
 export const initialState = {
@@ -19,9 +18,8 @@ export const initialState = {
   userTotal: 0,
   userLoading: false,
   userListLoading: false,
+  followLoading: false,
   error: null,
-  isSuccess: false,
-  SaveLoading: false,
 };
 
 
@@ -63,6 +61,38 @@ const reducer = (
       return {
         ...state,
         userLoading: false,
+        error: action.payload
+      }
+    case UserStudentactiontypes.FOLLOW_USER:
+      return {
+        ...state,
+        followLoading: true,
+      };
+    case UserStudentactiontypes.FOLLOW_USER_SUCCESS:
+      return {
+        ...state,
+        followLoading: false,
+      }
+    case UserStudentactiontypes.FOLLOW_USER_FAIL:
+      return {
+        ...state,
+        followLoading: false,
+        error: action.payload
+      }
+    case UserStudentactiontypes.UNFOLLOW_USER:
+      return {
+        ...state,
+        followLoading: true,
+      };
+    case UserStudentactiontypes.UNFOLLOW_USER_SUCCESS:
+      return {
+        ...state,
+        followLoading: false,
+      }
+    case UserStudentactiontypes.UNFOLLOW_USER_FAIL:
+      return {
+        ...state,
+        followLoading: false,
         error: action.payload
       }
     default:

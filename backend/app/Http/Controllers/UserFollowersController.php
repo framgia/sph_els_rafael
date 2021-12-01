@@ -16,11 +16,25 @@ class UserFollowersController extends Controller
 
     public function store(Request $request, $id)
     {
-        return $request->user()->followings()->attach($id);
+        $user = User::find($id);
+
+        if (!$user)
+            return response(['message' => 'Not found'], 404);
+
+        $request->user()->followings()->attach($id);
+
+        return $user;
     }
 
-    public function destory(Request $request, $id)
+    public function destroy(Request $request, $id)
     {
-        return $request->user()->followings()->detach($id);
+        $user = User::find($id);
+
+        if (!$user)
+            return response(['message' => 'Not found'], 404);
+
+        $request->user()->followings()->detach($id);
+
+        return $user;
     }
 }

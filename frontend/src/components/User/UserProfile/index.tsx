@@ -17,7 +17,10 @@ type Props = LinkStateProps & LinkDispatchProps;
 
 const Profile: FC<Props> = ({ getUser, userData, loading }) => {
   const { id } = useParams<any>();
-  const { fname, lname } = (userData && userData) || {};
+
+  const { fname,
+    lname, followers,
+    followings, user_learn_words } = (userData && userData) || {};
 
 
   useEffect(() => {
@@ -30,7 +33,12 @@ const Profile: FC<Props> = ({ getUser, userData, loading }) => {
         <Spinner />
       ) : (
         <>
-          <UserProfileDetail fname={fname || ""} lname={lname || ""} />
+          <UserProfileDetail
+            fname={fname || ""}
+            lname={lname || ""}
+            followers={followers}
+            following={followings}
+            totalLearnWords={user_learn_words?.length} />
           <Activities />
         </>
       )}
