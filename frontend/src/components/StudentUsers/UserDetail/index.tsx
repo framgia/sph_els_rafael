@@ -29,8 +29,8 @@ const UserDetail: FC<Props> = ({
       return;
 
     const isFollowed = followers && followers.some((user: any) => {
-      return user.id !== studentId;
-    })
+      return Number(user.id) === Number(studentId);
+    });
 
     setIsFollowedState(isFollowed);
   }, [followers])
