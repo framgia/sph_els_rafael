@@ -29,6 +29,14 @@ class Quiz extends Model
         );
     }
 
+    public function userAnswers()
+    {
+        return $this->hasManyThrough(
+            UserAnswer::class,
+            Question::class,
+        );
+    }
+
     public function activities()
     {
         return $this->morphOne(UserActivity::class, 'activitable');

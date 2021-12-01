@@ -10,6 +10,9 @@ interface Props {
 }
 
 const QuizCard: FC<Props> = ({ quizData }) => {
+
+  const { id, title, description, user_answers_count } = quizData || {}
+
   const history = useHistory();
   const [DescriptionTruncate, setDescriptionTruncate] = useState(true);
 
@@ -20,7 +23,7 @@ const QuizCard: FC<Props> = ({ quizData }) => {
 
   const alertQuiz = (id: number | undefined): void => {
     Swal.fire({
-      title: `Do you want to start this ${quizData?.title}?`,
+      title: `Do you want to start this ${title}?`,
       showDenyButton: true,
       confirmButtonText: 'Confirm',
       denyButtonText: `No`,
@@ -34,20 +37,20 @@ const QuizCard: FC<Props> = ({ quizData }) => {
   return (
     <div className={classes.card}>
       <div>
-        <h2 className={classes.cardTitle}>{quizData?.title}</h2>
+        <h2 className={classes.cardTitle}>{title}</h2>
         {DescriptionTruncate ? (
           <TextTruncate
             line={4}
             containerClassName={classes.cardDescritpion}
             element="p"
             truncateText="......"
-            text={(quizData && quizData.description) || ""}
+            text={(quizData && description) || ""}
             textTruncateChild={<button className={classes.cardReadMore}
               onClick={() => descriptionTransform()}>Read more</button>}
           />
         ) :
           (<>
-            <p className={classes.cardDescritpion}>{(quizData && quizData.description) || ""}</p>
+            <p className={classes.cardDescritpion}>{(quizData && description) || ""}</p>
             <button className={classes.cardReadMore}
               onClick={() => descriptionTransform()}>Show Less</button>
           </>
@@ -55,8 +58,10 @@ const QuizCard: FC<Props> = ({ quizData }) => {
         }
       </div>
       <div className="flex justify-end mt-4">
-        <button onClick={() => alertQuiz(quizData?.id)} className={classes.cardAction}>
-          start now
+        <button
+          disabled={!!(user_answers_count && user_answers_count > 0)}
+          onClick={() => alertQuiz(id)} className={classes.cardAction}>
+          {!!(user_answers_count && user_answers_count > 0) ? 'Already Done' : 'start'}
         </button>
       </div>
     </div>
