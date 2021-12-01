@@ -15,16 +15,16 @@ class Question extends Model
 
     public function quizzes()
     {
-        return $this->belongsTo(Quiz::class);
-    }
-
-    public function questionChoices()
-    {
-        return $this->hasMany(QuestionChoice::class, 'question_id');
+        return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
     public function userAnswers()
     {
         return $this->hasMany(UserAnswer::class, 'question_id');
+    }
+
+    public function questionChoices()
+    {
+        return $this->hasMany(QuestionChoice::class, 'question_id');
     }
 }

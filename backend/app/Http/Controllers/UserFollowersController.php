@@ -21,9 +21,19 @@ class UserFollowersController extends Controller
         if (!$user)
             return response(['message' => 'Not found'], 404);
 
+
         $request->user()->followings()->attach($id);
 
-        return $user;
+        $followUser = Follower::where([
+            'followers' => $user->id,
+            'following' => $request->user()->id
+        ])->first();
+
+        $followUser->activities()->create([
+            'user_id' =>   $request->user()->id,
+        ]);
+
+        return $followUser;
     }
 
     public function destroy(Request $request, $id)
@@ -32,6 +42,13 @@ class UserFollowersController extends Controller
 
         if (!$user)
             return response(['message' => 'Not found'], 404);
+
+        $followUser = Follower::where([
+            'followers' => $user->id,
+            'following' => $request->user()->id
+        ])->first();
+
+        $followUser->activities()->first()->delete();
 
         $request->user()->followings()->detach($id);
 
