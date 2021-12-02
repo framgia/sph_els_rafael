@@ -7,6 +7,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\UserAnswersController;
 use App\Http\Controllers\UserLearnWordController;
 use App\Http\Controllers\UserFollowersController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::apiResource('activities', ActivityController::class)->only([
     'index', 'show'
   ]);
+
+  Route::post('/uploadImage', [UploadController::class, 'store']);
 
   Route::group(['middleware' => ['isAdmin']], function () {
     Route::apiResource('quizzes', QuizController::class)->only([
