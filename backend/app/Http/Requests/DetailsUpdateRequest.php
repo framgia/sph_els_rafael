@@ -9,10 +9,10 @@ class DetailsUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'fname' => 'required',
-            'lname' => 'required',
-            'mname' => 'required',
-            'email' => 'required|string|email|unique:users,email',
+            'fname' => 'required|min:5',
+            'lname' => 'required|min:5',
+            'mname' => 'required|min:5',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $this->user()->id,
         ];
     }
 }

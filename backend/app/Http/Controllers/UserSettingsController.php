@@ -14,7 +14,7 @@ class UserSettingsController extends Controller
     public function detailsUpdate(DetailsUpdateRequest $request)
     {
         $user = $request->user();
-        return $user->update($request->all());
+        $user->update($request->all());
 
         $response = [
             'user' => $user,
@@ -27,21 +27,9 @@ class UserSettingsController extends Controller
     {
         $user = $request->user();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response([
-                'message' => 'Incorrect Password',
-            ], 401);
-        }
+        $user->update(['password' => Hash::make($request->password)]);
 
-        $user->update([
-            'password' => bcrypt($request->password),
-        ]);
-
-        $user->update($request->all());
-
-        $response = [
-            'user' => $user,
-        ];
+        $response = ['user' => $user];
 
         return response()->json($response, 201);
     }
