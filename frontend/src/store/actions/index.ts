@@ -6,6 +6,7 @@ import { LayoutAction } from "./layoutActions";
 import { StudentQuizAction } from './quizStudentActions';
 import { TakeQuizAction } from './takeQuestionActions';
 import { StudentUserAction } from './userStudentActions';
+import { UserSettingAction } from "./userSettingAction";
 
 export type Action =
   | QuizAction
@@ -15,5 +16,6 @@ export type Action =
   | LayoutAction
   | StudentQuizAction
   | TakeQuizAction
-  | StudentUserAction;
+  | StudentUserAction
+  | UserSettingAction;
 

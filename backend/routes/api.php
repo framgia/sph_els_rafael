@@ -9,6 +9,7 @@ use App\Http\Controllers\UserLearnWordController;
 use App\Http\Controllers\UserFollowersController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\UserSettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
