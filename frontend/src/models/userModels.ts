@@ -9,6 +9,7 @@ type User = {
   mname: string;
   lname: string;
   role?: number;
+  photo?: string;
   user_learn_words?: LearnWord[];
   followers?: Follower[];
   followings?: Following[];

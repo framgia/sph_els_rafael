@@ -29,7 +29,8 @@ const Dashboard: FC<Props> = ({
           fname={user?.fname}
           lname={user?.lname}
           totalQuiz={quizTaken.length}
-          totalWords={learnWords.length} />
+          totalWords={learnWords.length}
+          displayPic={user.photo} />
       )}
       <Activities loading={loadingActivity} activities={UserActivity} />
     </div>

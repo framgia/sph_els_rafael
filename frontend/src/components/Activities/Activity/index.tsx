@@ -4,6 +4,7 @@ import UserFollowActivity from './UserFollowActivity';
 import UserQuizActivity from './UserQuizActivity';
 import { Link } from 'react-router-dom';
 import { differenceInDays, differenceInHours, differenceInMinutes } from 'date-fns'
+import { displayImage } from '../../../Utils';
 
 interface ActivityProps {
   user: User;
@@ -11,7 +12,7 @@ interface ActivityProps {
 }
 
 const Activity: FC<ActivityProps> = ({ user, activity }) => {
-  const { fname, lname } = user;
+  const { fname, lname, photo } = user;
   const { user_follower, title, question_choices, questions, created_at } = activity;
   const studentId = localStorage.getItem('userid');
   const dateActivity = new Date(created_at);
@@ -29,9 +30,12 @@ const Activity: FC<ActivityProps> = ({ user, activity }) => {
       return `${spanHours} hour ago`;
     }
   }
+
   return (
     <div className="flex items-center m-5">
-      <img className="mr-5" src={`https://avatars.dicebear.com/api/bottts/:${fname}${lname}.svg?b=bbbbbb`} width="75" alt="" />
+      <img className="mr-5"
+        src={displayImage(photo, fname, lname)}
+        width="75" alt="display photo" />
       <div className="font-sans">
         <span><Link to={`/profile/${user.id}`} className="italic underline mr-2 hover:cursor-pointer capitalize">
           {Number(studentId) === Number(user.id) ? 'you' : `${fname} ${lname}`}

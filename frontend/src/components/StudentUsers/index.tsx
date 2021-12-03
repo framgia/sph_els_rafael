@@ -46,6 +46,7 @@ const StudentUser: FC<Props> = ({ loading, userList, total }) => {
                 email={user.email}
                 mname={user.mname}
                 followers={user.followers}
+                photo={user.photo}
               />
             ))
         }

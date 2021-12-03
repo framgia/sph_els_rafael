@@ -8,6 +8,10 @@ enum UserSettingActions {
   UPDATE_PASSWORD_SETTINGS = "[UPDATE_PASSWORD_SETTINGS] - update password setting data",
   UPDATE_PASSWORD_SETTINGS_SUCCESS = "[UPDATE_PASSWORD_SETTINGS] - update password setting data success",
   UPDATE_PASSWORD_SETTINGS_ERROR = "[UPDATE_PASSWORD_SETTINGS] - update password setting data error",
+
+  UPLOAD_DISPLAY_PICTURE = "[UPLOAD_DISPLAY_PICTURE] - upload display picture",
+  UPLOAD_DISPLAY_PICTURE_SUCCESS = "[UPLOAD_DISPLAY_PICTURE] - upload display picture success",
+  UPLOAD_DISPLAY_PICTURE_ERROR = "[UPLOAD_DISPLAY_PICTURE] - upload display picture error",
 }
 
 export default UserSettingActions;

@@ -34,6 +34,20 @@ interface UserPasswordSettingUpdateDataFailAction {
   payload: string
 }
 
+interface UploadDisplayPictureAction {
+  type: UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE,
+}
+
+interface UploadDisplayPictureSuccessAction {
+  type: UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE_SUCCESS,
+  payload: object,
+}
+
+interface UploadDisplayPictureFailAction {
+  type: UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE_ERROR,
+  payload: string
+}
+
 export type UserSettingAction =
   | UserDetailSettingUpdateDataAction
   | UserDetailSettingUpdateDataSuccessAction
@@ -41,4 +55,7 @@ export type UserSettingAction =
   | UserPasswordSettingUpdateDataAction
   | UserPasswordSettingUpdateDataSuccessAction
   | UserPasswordSettingUpdateDataFailAction
-  | UserDetailSettingStartUpdateDataAction;
+  | UserDetailSettingStartUpdateDataAction
+  | UploadDisplayPictureAction
+  | UploadDisplayPictureSuccessAction
+  | UploadDisplayPictureFailAction;

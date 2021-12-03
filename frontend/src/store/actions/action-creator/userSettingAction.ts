@@ -32,3 +32,17 @@ export const updateUserPasswordSetting = (Data: FormData) => ({
 export const startDetailsSettings = () => ({
   type: UserSettingActionTypes.UPDATE_DETAILS_SETTINGS_START,
 });
+
+export const uploadProfileImage = (Data: FormData) => ({
+  type: UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE,
+  payload: {
+    meta: {
+      api: {
+        method: "post",
+        url: `/api/uploadImage`,
+        data: Data,
+      },
+    },
+  },
+});
+

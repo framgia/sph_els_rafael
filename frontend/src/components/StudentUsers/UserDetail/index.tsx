@@ -12,6 +12,7 @@ import {
 } from '@store/actions/action-creator/';
 import { RootState } from '@store/reducers';
 import SpinnerButton from '@components/SVG/SpinnerBtn';
+import { displayImage } from '../../../Utils';
 
 type Props = User & LinkDispatchProps & LinkStateProps;
 
@@ -19,7 +20,7 @@ const UserDetail: FC<Props> = ({
   fname, lname,
   id, followers,
   follow, unFollow,
-  loading }) => {
+  loading, photo }) => {
   const studentId = localStorage.getItem('userid');
 
   const [isFollowedState, setIsFollowedState] = useState(false);
@@ -43,8 +44,9 @@ const UserDetail: FC<Props> = ({
 
   return (
     <div className={classes.userCard}>
-      <img src={`https://avatars.dicebear.com/api/bottts/:${fname}${lname}.svg?b=bbbbbb`}
-        className={classes.userCardImg} alt="" />
+      <img
+        src={displayImage(photo, fname, lname)}
+        className={classes.userCardImg} alt="display pic" />
       <h2 className={classes.userCardName}>
         <Link to={`/profile/${id}`}>{`${fname} ${lname}`}</Link></h2>
       <button disabled={loading} onClick={() => followAction()} className={classes.userCardAction}>

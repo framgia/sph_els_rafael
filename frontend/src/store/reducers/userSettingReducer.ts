@@ -68,6 +68,23 @@ const reducer = (
         isSuccess: false,
         error: action.payload
       }
+    case UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE:
+      return {
+        ...state,
+        SaveLoading: true,
+      };
+    case UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE_SUCCESS:
+      return {
+        ...state,
+        SaveLoading: false,
+        error: null,
+      }
+    case UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE_ERROR:
+      return {
+        ...state,
+        SaveLoading: false,
+        error: action.payload
+      }
     default:
       return state;
   }
@@ -76,6 +93,7 @@ const reducer = (
 export const userSettingsSaga = [
   takeEvery(UserSettingActionTypes.UPDATE_DETAILS_SETTINGS_SUCCESS, showAlert),
   takeEvery(UserSettingActionTypes.UPDATE_PASSWORD_SETTINGS_SUCCESS, showAlert),
+  takeEvery(UserSettingActionTypes.UPLOAD_DISPLAY_PICTURE_SUCCESS, showAlert),
 
 ]
 
