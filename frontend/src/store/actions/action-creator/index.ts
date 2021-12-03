@@ -6,3 +6,4 @@ export * from './layoutAction';
 export * from './quizStudentActions';
 export * from './takeQuizAction';
 export * from './userStudentActions';
+export * from './userSettingAction';

@@ -6,6 +6,7 @@ import LayoutActionTypes from "./layoutActionTypes";
 import QuizStudentActionTypes from "./quizStudentActionTypes";
 import takeQuizStudentActionTypes from './takeQuizActionTypes'
 import UserStudentactiontypes from './userStudentActionTypes'
+import UserSettingActionTypes from './userSettingsActionTypes'
 
 export {
   QuizActionType,
@@ -15,6 +16,7 @@ export {
   LayoutActionTypes,
   QuizStudentActionTypes,
   takeQuizStudentActionTypes,
-  UserStudentactiontypes
+  UserStudentactiontypes,
+  UserSettingActionTypes
 };
 
