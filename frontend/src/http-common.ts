@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
 
 const axiosClient = axios.create();
 
-axiosClient.defaults.baseURL = 'http://localhost:8000/';
+axiosClient.defaults.baseURL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 axiosClient.defaults.timeout = 2000;
 

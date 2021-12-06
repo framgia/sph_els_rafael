@@ -25,7 +25,7 @@ const Profile: FC<Props> = ({
 
   const { fname,
     lname, followers,
-    followings, user_learn_words } = (userData && userData) || {};
+    followings, user_learn_words, photo } = (userData && userData) || {};
 
   useEffect(() => {
     getUser(id);
@@ -43,6 +43,7 @@ const Profile: FC<Props> = ({
             lname={lname || ""}
             followers={followers}
             following={followings}
+            photo={photo}
             totalLearnWords={user_learn_words?.length} />
           <Activities loading={activityLoading} activities={UserActivity} />
         </>

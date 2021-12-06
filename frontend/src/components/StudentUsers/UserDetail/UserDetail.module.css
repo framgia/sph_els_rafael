@@ -3,7 +3,7 @@
   max-h-60 overflow-auto py-4 px-8 
   bg-gray-900 shadow-lg rounded-lg 
   my-10 flex flex-col items-center 
-  justify-center;
+  justify-center text-white;
 }
 
 .userCardImg {

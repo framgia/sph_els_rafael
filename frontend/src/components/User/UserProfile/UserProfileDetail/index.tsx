@@ -13,10 +13,12 @@ import {
 } from '@store/actions/action-creator/';
 import { RootState } from '@store/reducers';
 import SpinnerButton from '@components/SVG/SpinnerBtn';
+import { displayImage } from '../../../../Utils';
 
 interface UserData {
   fname: string;
   lname: string;
+  photo?: string;
   followers?: FollowerModel[];
   following?: FollowingModel[];
   totalLearnWords?: number;
@@ -29,7 +31,7 @@ const Profile: FC<Props> = ({
   followers, following,
   unFollow, follow,
   loading, getUser,
-  totalLearnWords }) => {
+  totalLearnWords, photo }) => {
   let { id } = useParams<any>();
   const studentId = localStorage.getItem('userid');
 
@@ -55,7 +57,8 @@ const Profile: FC<Props> = ({
 
   return (
     <div className="flex flex-col items-center justify-center h-full w-full md:w-60 sm:w-40 mx-10">
-      <img src={`https://avatars.dicebear.com/api/bottts/:${fname}${lname}.svg?b=bbbbbb`}
+      <img
+        src={displayImage(photo, fname, lname)}
         className="w-60 rounded-xl" alt="" />
       <h2 className="mb-5 font-sans font-bold">{fname} {lname}</h2>
       <hr className="bg-white mb-5 w-full" />
