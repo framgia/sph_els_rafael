@@ -91,6 +91,8 @@ const reducer = (
         token: action.idToken,
         userRole: action.userRole,
         user: action.user,
+        userLearnWords: [],
+        quizzesTaken: [],
         registerLoading: false,
         errorMessage: null,
       }
