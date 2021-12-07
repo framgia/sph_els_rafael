@@ -19,8 +19,8 @@ class UserController extends Controller
         ];
 
         return $request->user()->tokenCan('adminAccess') ?
-            User::whereNotIn('Role', [$ROLE['STUDENT']])->get() :
-            User::whereNotIn('Role', [$ROLE['SUPER_ADMIN'], $ROLE['ADMIN']])
+            User::whereNotIn('role', [$ROLE['SUPER_ADMIN']])->get() :
+            User::with('followers', 'followings')->whereNotIn('role', [$ROLE['SUPER_ADMIN'], $ROLE['ADMIN']])
             ->whereNotIn('id', [$request->user()->id])
             ->paginate(8);
     }
