@@ -21,4 +21,14 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|confirmed|min:8'
         ];
     }
+
+    public function messages()
+    {
+
+        return [
+            'fname.required' => 'First name is required',
+            'lname.required' => 'Last name is required',
+            'mname.required' => 'Middle name is required',
+        ];
+    }
 }
