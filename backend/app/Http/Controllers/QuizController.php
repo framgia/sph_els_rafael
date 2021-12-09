@@ -14,7 +14,7 @@ class QuizController extends Controller
         return $request->user()->tokenCan('adminAccess') ?
             Quiz::all() : Quiz::withCount(['userAnswers' => function ($query) use ($user) {
                 return $query->where('user_id', $user->id);
-            }])
+            }, 'questions'])
             ->paginate(8);
     }
 
