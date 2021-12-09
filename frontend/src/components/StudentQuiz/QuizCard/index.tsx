@@ -11,7 +11,7 @@ interface Props {
 
 const QuizCard: FC<Props> = ({ quizData }) => {
 
-  const { id, title, description, user_answers_count } = quizData || {}
+  const { id, title, description, user_answers_count, questions_count } = quizData || {}
 
   const history = useHistory();
   const [DescriptionTruncate, setDescriptionTruncate] = useState(true);
@@ -59,9 +59,11 @@ const QuizCard: FC<Props> = ({ quizData }) => {
       </div>
       <div className="flex justify-end mt-4">
         <button
-          disabled={!!(user_answers_count && user_answers_count > 0)}
+          disabled={!!(!questions_count) || !!(user_answers_count && user_answers_count > 0)}
           onClick={() => alertQuiz(id)} className={classes.cardAction}>
-          {!!(user_answers_count && user_answers_count > 0) ? 'Already Done' : 'start'}
+          {
+            !!(user_answers_count && user_answers_count > 0) ?
+              'Already Done' : !!(questions_count) ? 'start' : 'Not Available'}
         </button>
       </div>
     </div>
